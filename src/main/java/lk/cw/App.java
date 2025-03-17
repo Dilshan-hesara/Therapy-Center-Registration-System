@@ -4,6 +4,7 @@ package lk.cw;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -13,14 +14,14 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/DashBoad.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/Login.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Yogurt Production");
+        stage.setTitle("Therapy Center");
         stage.setResizable(false);
 
-//        Image image = new Image(getClass().getResourceAsStream("/images/7-app_icon.png"));
-//        stage.getIcons().add(image);
+        Image image = new Image(getClass().getResourceAsStream("/style/appLogo.png"));
+        stage.getIcons().add(image);
 
         stage.setScene(scene);
         stage.show();

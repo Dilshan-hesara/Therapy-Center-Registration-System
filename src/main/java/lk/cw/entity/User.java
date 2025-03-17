@@ -10,6 +10,5 @@ public class User {
     private String Password;
     private String Role;
 
-    public User(String id, String userName, String password, String hashedPassword, String role) {
-    }
+
 }
