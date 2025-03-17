@@ -1,4 +1,4 @@
-package lk.ormcw.entity;
+package lk.cw.entity;
 
 public class TherapyProgram {
 }
