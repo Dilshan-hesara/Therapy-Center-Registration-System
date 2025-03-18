@@ -62,15 +62,21 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if ("User".equals(loggedInUser)) {
-            TherapistBtn.setDisable(true);
-            TherapyBtn.setDisable(true);
-            System.out.println("usrr");
-        }
-        else {
-            TherapistBtn.setDisable(false);
-            TherapyBtn.setDisable(false);
-            System.out.println("admin");
+        if (loggedInUser != null) {
+            if ("User".equals(loggedInUser)) {
+
+                TherapistBtn.setDisable(true);
+                TherapyBtn.setDisable(true);
+                System.out.println("User");
+            } else if ("Admin".equals(loggedInUser)) {
+
+                TherapistBtn.setDisable(false);
+                TherapyBtn.setDisable(false);
+                System.out.println("Admin.");
+            } else {
+
+                System.out.println("Unkonow" + loggedInUser);
+            }
         }
     }
 }

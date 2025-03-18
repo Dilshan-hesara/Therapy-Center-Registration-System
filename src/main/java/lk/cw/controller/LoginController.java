@@ -3,6 +3,7 @@ package lk.cw.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -14,8 +15,18 @@ import lk.cw.dao.custom.UserDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            //btndesable();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     private AnchorPane ancer;
@@ -35,6 +46,7 @@ public class LoginController {
 
     String uN;
 
+
     @FXML
     void LogingOnAction(ActionEvent event) throws Exception {
         String password = txtPassword.getText();
@@ -51,8 +63,12 @@ uN =userName;
             // Validate the password
             if (dbPassword != null && BCrypt.checkpw(password, dbPassword)) {
                 System.out.println("Login successful for user: " + userName);
+
+                String role = userBO.getRoleByUserName(uN);
+
+                loggedInUser = role;
                 dashBoad();
-               btndesable();
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Invalid Password. Try Again").show();
             }
@@ -61,17 +77,7 @@ uN =userName;
         }
     }
 
-    private void btndesable() throws Exception {
 
-
-        String role = userBO.getRoleByUserName(uN);
-
-        System.out.println(role);
-
-
-        loggedInUser =role;
-
-    }
 
 
     @FXML
