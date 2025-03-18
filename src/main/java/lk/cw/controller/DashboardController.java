@@ -2,11 +2,13 @@ package lk.cw.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -56,6 +58,17 @@ public class DashboardController implements Initializable {
     @FXML
     void UserOnAction(ActionEvent event) {
 
+    }
+
+
+    @FXML
+    private AnchorPane mainAnc;
+
+    @FXML
+    void LogOutOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        mainAnc.getChildren().clear();
+        mainAnc.getChildren().add(load);
     }
 
 
