@@ -52,7 +52,7 @@ public class RegController implements Initializable {
 
     @FXML
     void regisOnAction(ActionEvent event) throws IOException {
-        String txtid = "03";
+        String txtid = "04";
         String Id = txtid;
         String UserName = txtUsername.getText();
         String Password = txtPassword.getText();
