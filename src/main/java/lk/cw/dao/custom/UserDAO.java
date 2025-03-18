@@ -9,4 +9,5 @@ public interface UserDAO extends SuperDAO {
     public String getPasswordByUserName(String userName) throws Exception ;
     boolean save(User user) throws IOException;
 
-    }
+    String getRoleByUserName(String userName) throws Exception;
+}

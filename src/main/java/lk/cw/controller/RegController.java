@@ -52,11 +52,11 @@ public class RegController implements Initializable {
 
     @FXML
     void regisOnAction(ActionEvent event) throws IOException {
-        String txtid = "01";
+        String txtid = "03";
         String Id = txtid;
         String UserName = txtUsername.getText();
         String Password = txtPassword.getText();
-        String Role = cmbRole.getId();
+        String Role = cmbRole.getValue();
 
         try {
             boolean isRegistered = userBO.save(new UserDTO(Id,UserName,Password,Role));

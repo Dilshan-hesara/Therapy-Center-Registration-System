@@ -26,16 +26,21 @@ public class LoginController {
     @FXML
     private TextField txtUsername;
 
+    public static String loggedInUser;
+
     UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
     UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
 
+
+    String uN;
+
     @FXML
     void LogingOnAction(ActionEvent event) throws Exception {
-        String userName = txtUsername.getText();
         String password = txtPassword.getText();
+        String userName = txtUsername.getText();
 
-
+uN =userName;
 
         String dbPassword = userDAO.getPasswordByUserName(userName);
 
@@ -47,6 +52,7 @@ public class LoginController {
             if (dbPassword != null && BCrypt.checkpw(password, dbPassword)) {
                 System.out.println("Login successful for user: " + userName);
                 dashBoad();
+               btndesable();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Invalid Password. Try Again").show();
             }
@@ -55,9 +61,17 @@ public class LoginController {
         }
     }
 
+    private void btndesable() throws Exception {
 
 
+        String role = userDAO.getRoleByUserName(uN);
 
+        System.out.println(role);
+
+
+        loggedInUser =role;
+
+    }
 
 
     @FXML

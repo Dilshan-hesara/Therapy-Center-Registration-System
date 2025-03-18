@@ -58,5 +58,36 @@ public class UserDAOImpl implements UserDAO {
         return true;
     }
 
+    public String getRoleByUserName(String userName) throws Exception {
+        System.out.println("Fetching role for username: " + userName);
+        String role = null;
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            // SQL query to fetch the role based on the username
+            String sql = "SELECT Role FROM User WHERE UserName = :userName";
+            NativeQuery<String> query = session.createNativeQuery(sql, String.class);
+            query.setParameter("userName", userName); // Set the parameter
+
+            role = query.getSingleResult(); // Fetch the role
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new Exception("Error fetching role: " + e.getMessage(), e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        System.out.println("Role retrieved: " + role);
+        return role;
+    }
 
 }

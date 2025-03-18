@@ -28,12 +28,12 @@
                                 <Font name="Microsoft YaHei UI Bold" size="15.0" />
                             </font>
                         </Label>
-                        <Button layoutX="28.0" layoutY="265.0" mnemonicParsing="false" onAction="#TherapytManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Therapy Manage" textFill="WHITE">
+                        <Button fx:id="TherapyBtn" layoutX="28.0" layoutY="265.0" mnemonicParsing="false" onAction="#TherapytManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Therapy Manage" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </Button>
-                        <Button layoutX="28.0" layoutY="217.0" mnemonicParsing="false" onAction="#TherapistManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Therapist Manage" textFill="WHITE">
+                        <Button fx:id="TherapistBtn" layoutX="28.0" layoutY="217.0" mnemonicParsing="false" onAction="#TherapistManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Therapist Manage" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
