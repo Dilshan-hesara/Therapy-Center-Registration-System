@@ -42,7 +42,7 @@ public class LoginController {
 
 uN =userName;
 
-        String dbPassword = userDAO.getPasswordByUserName(userName);
+        String dbPassword = userBO.getPasswordByUserName(userName);
 
         System.out.println(dbPassword);
         try {
@@ -64,7 +64,7 @@ uN =userName;
     private void btndesable() throws Exception {
 
 
-        String role = userDAO.getRoleByUserName(uN);
+        String role = userBO.getRoleByUserName(uN);
 
         System.out.println(role);
 
