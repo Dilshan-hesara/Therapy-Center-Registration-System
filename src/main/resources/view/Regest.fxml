@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="585.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.cw.controller.RegController">
     <children>
-        <AnchorPane fx:id="ancer" prefHeight="586.0" prefWidth="950.0" style="-fx-background-color: #EEF1DA;">
+        <AnchorPane fx:id="ancer1" prefHeight="586.0" prefWidth="950.0" style="-fx-background-color: #EEF1DA;">
             <children>
                 <Button layoutX="39.0" layoutY="517.0" mnemonicParsing="false" onAction="#BackOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #D5E5D5;" text="Back" textFill="#636363">
                     <font>
@@ -31,7 +31,7 @@
                         <Image url="@../style/Logo_Final.png" />
                     </image>
                 </ImageView>
-            <ComboBox layoutX="383.0" layoutY="406.0" onAction="#roleComb" prefHeight="35.0" prefWidth="163.0" style="-fx-background-color: #443627;" />
+            <ComboBox fx:id="cmbRole" layoutX="383.0" layoutY="406.0" onAction="#roleComb" prefHeight="35.0" prefWidth="163.0" style="-fx-background-color: #443627;" />
             <Label layoutX="383.0" layoutY="226.0" prefHeight="18.0" prefWidth="163.0" text="User  ID" />
             <PasswordField fx:id="txtRePassword" layoutX="383.0" layoutY="360.0" prefHeight="35.0" prefWidth="163.0" promptText="Re Enter Password" style="-fx-background-color: #443627;" />
             </children></AnchorPane>

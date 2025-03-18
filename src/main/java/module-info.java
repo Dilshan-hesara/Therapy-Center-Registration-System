@@ -11,6 +11,7 @@ module lk.cw.ormcoursework {
     requires jakarta.persistence;
     requires java.naming;
     requires jbcrypt;
+    // requires jbcrypt;
 
     opens lk.cw.entity to org.hibernate.orm.core;
 //    opens lk.cw.config to jakarta.persistence;

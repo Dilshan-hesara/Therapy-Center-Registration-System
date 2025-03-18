@@ -1,0 +1,62 @@
+package lk.cw.dao.custom.impl;
+
+import lk.cw.config.FactoryConfiguration;
+import lk.cw.dao.custom.UserDAO;
+import lk.cw.entity.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class UserDAOImpl implements UserDAO {
+
+    public String getPasswordByUserName(String userName) throws Exception {
+        System.out.println("Fetching password for username: " + userName);
+        String password = null;
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            // SQL query to fetch the password based on the username
+            String sql = "SELECT Password FROM User WHERE UserName = :userName";
+            NativeQuery<String> query = session.createNativeQuery(sql, String.class);
+            query.setParameter("userName", userName); // Set the parameter
+
+            password = query.getSingleResult(); // Fetch the password
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new Exception("Error fetching password: " + e.getMessage(), e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        System.out.println("Password retrieved: " + password);
+        return password;
+    }
+
+    @Override
+    public boolean save(User user) throws IOException {
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(user);
+        transaction.commit();
+        session.close();
+
+        return true;
+    }
+
+
+}
