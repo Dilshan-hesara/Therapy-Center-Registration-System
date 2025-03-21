@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="584.0" prefWidth="740.0" style="-fx-background-color: #ADB2D4;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.cw.controller.TherapeySessionController">
+    <children>
+        <ImageView fitHeight="453.0" fitWidth="614.0" layoutX="48.0" layoutY="23.0" style="-fx-opacity: 0.1;">
+            <image>
+                <Image url="@../style/lo.png" />
+            </image>
+        </ImageView>
+      <Label layoutX="310.0" layoutY="14.0" prefHeight="28.0" prefWidth="192.0" text="THERAPEY SESSION">
+         <font>
+            <Font name="System Bold Italic" size="19.0" />
+         </font></Label>
+      <Label layoutX="60.0" layoutY="58.0" prefHeight="31.0" prefWidth="101.0" text="SessionID">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="102.0" prefHeight="31.0" prefWidth="101.0" text="Date">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="151.0" prefHeight="31.0" prefWidth="111.0" text="Time">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnsave" layoutX="69.0" layoutY="324.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SAVE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnupdate" layoutX="255.0" layoutY="324.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btndelete" layoutX="416.0" layoutY="324.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="582.0" layoutY="321.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TableView fx:id="SessionTable" layoutX="24.0" layoutY="373.0" onMouseClicked="#TableOnClicked" prefHeight="178.0" prefWidth="688.0" style="-fx-opacity: 0.9;">
+         <columns>
+            <TableColumn fx:id="colid" prefWidth="97.60003471374512" text="SessionID" />
+            <TableColumn fx:id="coldate" prefWidth="102.39997100830078" text="SessionDate" />
+            <TableColumn fx:id="coltime" prefWidth="110.39996337890625" text="SessionTime" />
+            <TableColumn fx:id="colstatus" prefWidth="114.40008544921875" text="status" />
+            <TableColumn fx:id="coltherapist" minWidth="0.0" prefWidth="121.59994506835938" text="TherapistId" />
+            <TableColumn fx:id="coltherapist1" minWidth="0.0" prefWidth="133.5999755859375" text="Nmae" />
+         </columns>
+      </TableView>
+      <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblstatus" layoutX="386.0" layoutY="200.0" prefHeight="31.0" prefWidth="162.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="75.0" layoutY="328.0">
+         <image>
+            <Image url="@../../../../../../Desktop/ORM-CW3/src/main/resources/view/images/save.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txttime" layoutX="209.0" layoutY="155.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
+      <Label layoutX="54.0" layoutY="198.0" prefHeight="31.0" prefWidth="111.0" text="Status">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblregister" layoutX="405.0" layoutY="271.0" prefHeight="31.0" prefWidth="146.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="240.0" prefHeight="31.0" prefWidth="111.0" text="TherapistID">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="datepicker" layoutX="209.0" layoutY="105.0" onAction="#DatePickerOnAction" style="-fx-opacity: 0.7;" />
+      <ComboBox fx:id="combostatus" layoutX="209.0" layoutY="201.0" onAction="#ComboStatusOnAction" prefWidth="150.0" style="-fx-opacity: 0.7;" />
+      <ComboBox fx:id="combotherapistId" layoutX="209.0" layoutY="243.0" onAction="#ComboTherapistIdOnAction" prefWidth="150.0" style="-fx-opacity: 0.7;" />
+      <Label fx:id="lbltherapistid" layoutX="386.0" layoutY="240.0" prefHeight="31.0" prefWidth="162.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbltherapistname" layoutX="571.0" layoutY="240.0" prefHeight="31.0" prefWidth="162.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbldate" layoutX="406.0" layoutY="102.0" prefHeight="31.0" prefWidth="162.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
