@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="584.0" prefWidth="740.0" style="-fx-background-color: #ADB2D4;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.cw.controller.PaymentController">
+    <children>
+        <ImageView fitHeight="453.0" fitWidth="614.0" layoutX="48.0" layoutY="23.0" style="-fx-opacity: 0.1;">
+            <image>
+                <Image url="@../style/lo.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="310.0" layoutY="14.0" prefHeight="18.0" prefWidth="185.0" text="PAYMENT MANAGE" />
+    </children>
+</AnchorPane>
