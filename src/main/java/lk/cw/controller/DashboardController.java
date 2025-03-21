@@ -31,29 +31,41 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    void PatientManageOnAction(ActionEvent event) {
-
+    void PatientManageOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/PatientManage.fxml"));
+        ancer.getChildren().clear();
+        ancer.getChildren().add(load);
     }
 
     @FXML
-    void PayementOnAction(ActionEvent event) {
-
+    void PayementOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/PaymentManage.fxml"));
+        ancer.getChildren().clear();
+        ancer.getChildren().add(load);
     }
 
     @FXML
-    void TherapistManageOnAction(ActionEvent event) {
-
+    void TherapistManageOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/TherapistManage.fxml"));
+        ancer.getChildren().clear();
+        ancer.getChildren().add(load);
     }
 
     @FXML
-    void TherapySessionOnAction(ActionEvent event) {
-
+    void TherapytManageOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/TherapyProgrameManage.fxml"));
+        ancer.getChildren().clear();
+        ancer.getChildren().add(load);
     }
 
     @FXML
-    void TherapytManageOnAction(ActionEvent event) {
-
+    void TherapySessionOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/TherapeySessionManage.fxml"));
+        ancer.getChildren().clear();
+        ancer.getChildren().add(load);
     }
+
+
 
     @FXML
     void UserOnAction(ActionEvent event) {
