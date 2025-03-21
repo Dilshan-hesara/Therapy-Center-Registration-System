@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Patients")
-public class Patient {
+public class Patient implements SuperEntity {
 
 
 

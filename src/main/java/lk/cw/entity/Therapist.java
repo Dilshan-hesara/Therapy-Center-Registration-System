@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Therapists")
-public class Therapist {
+public class Therapist  implements SuperEntity {
 
 
         @Id

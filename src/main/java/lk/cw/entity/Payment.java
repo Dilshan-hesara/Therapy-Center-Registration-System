@@ -8,7 +8,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "Payments")
 
-public class Payment {
+public class Payment implements SuperEntity  {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "TherapySessions")
-public class TherapySession {
+public class TherapySession  implements SuperEntity  {
 
 
         @Id

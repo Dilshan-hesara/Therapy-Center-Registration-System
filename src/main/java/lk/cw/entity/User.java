@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "User")
-public class User {
+public class User  implements SuperEntity  {
 
     @Id
     @Column(name = "UserID")

@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "TherapyPrograms")
-public class TherapyProgram {
+public class TherapyProgram implements SuperEntity  {
 
 
         @Id
