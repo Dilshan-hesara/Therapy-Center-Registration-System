@@ -57,20 +57,28 @@ public class RegController implements Initializable {
         String UserName = txtUsername.getText();
         String Password = txtPassword.getText();
         String Role = cmbRole.getValue();
+        if(Role == "Admin"){
+            new Alert(Alert.AlertType.ERROR,"CANT REG ADMIN ONLY REG USER ACC").show();
+        }else {
 
-        try {
-            boolean isRegistered = userBO.save(new UserDTO(Id,UserName,Password,Role));
-            if(isRegistered){
-                new Alert(Alert.AlertType.INFORMATION,"REGISTERED SUCCESSFULLY").show();
-                clearFeilds();
-                login();
+            try {
+                boolean isRegistered = userBO.save(new UserDTO(Id,UserName,Password,Role));
+                if(isRegistered){
+                    new Alert(Alert.AlertType.INFORMATION,"REGISTERED SUCCESSFULLY").show();
+                    clearFeilds();
+                    login();
+                }
+                else {
+                    new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN").show();
+                }
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR,"duplicate Id");
             }
-            else {
-                new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN").show();
-            }
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR,"duplicate Id");
+
+
         }
+
+
 
     }
 
