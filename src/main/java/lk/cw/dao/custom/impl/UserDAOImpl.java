@@ -11,6 +11,7 @@ import org.hibernate.query.Query;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -47,6 +48,16 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public String getNextId() throws SQLException, IOException {
+        return "";
+    }
+
+    @Override
+    public List<User> getAll() throws SQLException, IOException {
+        return List.of();
+    }
+
+    @Override
     public boolean save(User user) throws IOException {
 
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -56,6 +67,16 @@ public class UserDAOImpl implements UserDAO {
         session.close();
 
         return true;
+    }
+
+    @Override
+    public boolean update(User entity) throws SQLException, IOException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String ID) throws SQLException, IOException {
+        return false;
     }
 
     public String getRoleByUserName(String userName) throws Exception {
