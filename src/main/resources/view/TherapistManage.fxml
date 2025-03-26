@@ -12,7 +12,15 @@
 
 <AnchorPane prefHeight="584.0" prefWidth="740.0" style="-fx-background-color: #ADB2D4;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.cw.controller.TherapistController">
    <children>
-      <ImageView fitHeight="453.0" fitWidth="614.0" layoutX="48.0" layoutY="23.0" style="-fx-opacity: 0.1;">
+      <TableView fx:id="TherapistTable" layoutX="24.0" layoutY="373.0" onMouseClicked="#TableOnClicked" prefHeight="192.0" prefWidth="694.0" style="-fx-opacity: 0.9;">
+         <columns>
+            <TableColumn fx:id="colid" prefWidth="75.0" text="TherapistID" />
+            <TableColumn fx:id="colname" prefWidth="223.1999740600586" text="Name" />
+            <TableColumn fx:id="colspecail" prefWidth="188.7999267578125" text="Specialization" />
+            <TableColumn fx:id="colavailable" prefWidth="273.6000671386719" text="Availability" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="409.0" fitWidth="614.0" layoutX="48.0" layoutY="23.0" style="-fx-opacity: 0.1;">
          <image>
             <Image url="@../style/lo.png" />
          </image>
@@ -54,14 +62,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="TherapistTable" layoutX="24.0" layoutY="373.0" onMouseClicked="#TableOnClicked" prefHeight="192.0" prefWidth="694.0" style="-fx-opacity: 0.9;">
-         <columns>
-            <TableColumn fx:id="colid" prefWidth="75.0" text="TherapistID" />
-            <TableColumn fx:id="colname" prefWidth="223.1999740600586" text="Name" />
-            <TableColumn fx:id="colspecail" prefWidth="188.7999267578125" text="Specialization" />
-            <TableColumn fx:id="colavailable" prefWidth="273.6000671386719" text="Availability" />
-         </columns>
-      </TableView>
       <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
          <font>
             <Font name="System Bold" size="14.0" />
