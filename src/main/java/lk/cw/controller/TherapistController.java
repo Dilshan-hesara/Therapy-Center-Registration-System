@@ -1,18 +1,32 @@
 package lk.cw.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.cw.bo.BOFactory;
+import lk.cw.bo.custom.TherapistBO;
+import lk.cw.dto.TherapistDTO;
+import lk.cw.entity.Therapist;
+import lk.cw.tm.TherapistTM;
 
-public class TherapistController {
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+public class TherapistController implements Initializable {
+
 
     @FXML
-    private TableView<?> TherapistTable;
+    private TableView<TherapistTM> TherapistTable;
 
     @FXML
     private Button btndelete;
@@ -24,16 +38,16 @@ public class TherapistController {
     private Button btnupdate;
 
     @FXML
-    private TableColumn<?, ?> colavailable;
+    private TableColumn<TherapistTM,String> colavailable;
 
     @FXML
-    private TableColumn<?, ?> colid;
+    private TableColumn<TherapistTM,String> colid;
 
     @FXML
-    private TableColumn<?, ?> colname;
+    private TableColumn<TherapistTM,String> colname;
 
     @FXML
-    private TableColumn<?, ?> colspecail;
+    private TableColumn<TherapistTM,String> colspecail;
 
     @FXML
     private Label lblid;
@@ -47,29 +61,157 @@ public class TherapistController {
     @FXML
     private TextField txtspecail;
 
-    @FXML
-    void DeleteOnAction(ActionEvent event) {
+    TherapistBO therapistBO = (TherapistBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPIST);
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        colid.setCellValueFactory(new PropertyValueFactory<>("therapistId"));
+        colname.setCellValueFactory(new PropertyValueFactory<>("therapistName"));
+        colspecail.setCellValueFactory(new PropertyValueFactory<>("specialization"));
+        colavailable.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        try {
+            LoadNextID();
+            loadTableData();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @FXML
-    void ResetOnAction(ActionEvent event) {
 
-    }
 
     @FXML
     void SaveOnAction(ActionEvent event) {
+        String therapistId = lblid.getText();
+        String therapistName = txtname.getText();
+        String specialization = txtspecail.getText();
+        String availability = txtavailable.getText();
 
+        try {
+            boolean isRegistered = therapistBO.save(new TherapistDTO(therapistId,therapistName,specialization,availability));
+            if(isRegistered){
+                refreshPage();
+                new Alert(Alert.AlertType.INFORMATION,"User Saved SUCCESSFULLY 😎").show();
+
+            }
+            else {
+                new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN 😥").show();
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,"duplicate Id");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
-    void TableOnClicked(MouseEvent event) {
+    void ResetOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        refreshPage();
+    }
 
+
+    @FXML
+    void TableOnClicked(MouseEvent event) {
+        TherapistTM therapistTM = (TherapistTM) TherapistTable.getSelectionModel().getSelectedItem();
+        if (therapistTM != null) {
+            lblid.setText(therapistTM.getTherapistId());
+            txtname.setText(therapistTM.getTherapistName());
+            txtspecail.setText(therapistTM.getSpecialization());
+            txtavailable.setText(therapistTM.getAvailability());
+
+            btndelete.setDisable(false);
+            btnsave.setDisable(true);
+            btnupdate.setDisable(false);
+        }
     }
 
     @FXML
     void UpdateOnAction(ActionEvent event) {
+        String therapistId = lblid.getText();
+        String therapistName = txtname.getText();
+        String specialization = txtspecail.getText();
+        String availability = txtavailable.getText();
+
+        try {
+            boolean isRegistered = therapistBO.update(new TherapistDTO(therapistId,therapistName,specialization,availability));
+            if(isRegistered){
+                refreshPage();
+                new Alert(Alert.AlertType.INFORMATION,"User Saved SUCCESSFULLY 😎").show();
+
+            }
+            else {
+                new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN 😥").show();
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,"duplicate Id");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void refreshPage() throws SQLException, ClassNotFoundException, IOException {
+        LoadNextID();
+        loadTableData();
+
+        btndelete.setDisable(true);
+        btnsave.setDisable(false);
+        btnupdate.setDisable(true);
+
+        txtname.setText("");
+        txtspecail.setText("");
+        txtavailable.setText("");
 
     }
+
+    private void LoadNextID() throws SQLException, IOException {
+        String nextID = therapistBO.getNextId();
+        lblid.setText(nextID);
+    }
+
+
+    private void loadTableData() throws SQLException, ClassNotFoundException, IOException {
+        ArrayList<TherapistDTO> therapistDTOS = (ArrayList<TherapistDTO>) therapistBO.getAll();
+        ObservableList<TherapistTM> therapistTMS = FXCollections.observableArrayList();
+
+        for (TherapistDTO therapistDTO : therapistDTOS) {
+            TherapistTM therapistTM = new TherapistTM(
+                    therapistDTO.getTherapistId(),
+                    therapistDTO.getTherapistName(),
+                    therapistDTO.getSpecialization(),
+                    therapistDTO.getAvailability()
+
+
+            );
+            therapistTMS.add(therapistTM);
+        }
+        TherapistTable.setItems(therapistTMS);
+    }
+
+    @FXML
+    void DeleteOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        String ID = lblid.getText();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> optionalButtonType = alert.showAndWait();
+
+        if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
+
+            boolean isDelete = therapistBO.delete(ID);
+            if (isDelete) {
+                refreshPage();
+                new Alert(Alert.AlertType.INFORMATION, "Labor deleted...!").show();
+
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Fail to delete Labor...!").show();
+
+            }
+        }
+    }
+
+
 
 }
