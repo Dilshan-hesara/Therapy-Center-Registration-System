@@ -1,18 +1,28 @@
 package lk.cw.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.cw.bo.BOFactory;
+import lk.cw.bo.custom.TherapyProgramBO;
+import lk.cw.dto.TherapyProgramDTO;
+import lk.cw.tm.TherapyProgramTM;
 
-public class TherapyProgrameController {
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
+public class TherapyProgrameController implements Initializable {
     @FXML
-    private TableView<?> TherapistTable;
+    private TableView<TherapyProgramTM> ProgramTable;
 
     @FXML
     private Button btndelete;
@@ -24,16 +34,19 @@ public class TherapyProgrameController {
     private Button btnupdate;
 
     @FXML
-    private TableColumn<?, ?> colFee;
+    private TableColumn<TherapyProgramTM,String> colduration;
 
     @FXML
-    private TableColumn<?, ?> coldur;
+    private TableColumn<TherapyProgramTM,Double> colfee;
 
     @FXML
-    private TableColumn<?, ?> colid;
+    private TableColumn<TherapyProgramTM,String> colid;
 
     @FXML
-    private TableColumn<?, ?> colname;
+    private TableColumn<TherapyProgramTM,String> colname;
+
+    @FXML
+    private TableColumn<TherapyProgramTM,String> colfee1;
 
     @FXML
     private Label lbldate;
@@ -54,6 +67,9 @@ public class TherapyProgrameController {
     private Label lprogramid;
 
     @FXML
+    private TextField txtdes;
+
+    @FXML
     private TextField txtdure;
 
     @FXML
@@ -62,28 +78,158 @@ public class TherapyProgrameController {
     @FXML
     private TextField txtname;
 
-    @FXML
-    void DeleteOnAction(ActionEvent event) {
+    TherapyProgramBO therapyProgramBO = (TherapyProgramBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPYOROGRAM);
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colid.setCellValueFactory(new PropertyValueFactory<>("programId"));
+        colname.setCellValueFactory(new PropertyValueFactory<>("programName"));
+        colduration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        colfee.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        colfee1.setCellValueFactory(new PropertyValueFactory<>("Description"));
+
+
+        try {
+            LoadNextID();
+            loadTableData();
+            refreshPage();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
-    void ResetOnAction(ActionEvent event) {
+    void DeleteOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        String ID = lprogramid.getText();
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> optionalButtonType = alert.showAndWait();
+
+        if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.YES) {
+
+            boolean isDelete = therapyProgramBO.delete(ID);
+            if (isDelete) {
+                refreshPage();
+                new Alert(Alert.AlertType.INFORMATION, "TherapyProgram deleted...!").show();
+
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Fail to delete TherapyProgram...!").show();
+
+            }
+        }
+    }
+
+    @FXML
+    void ResetOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+        refreshPage();
     }
 
     @FXML
     void SaveOnAction(ActionEvent event) {
+        String programId = lprogramid.getText();
+        String programName = txtname.getText();
+        String duration = txtdure.getText();
+        double cost = Double.parseDouble(txtfee.getText());
+        String Description = txtdes.getText();
 
+        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(programId, programName, duration, cost, Description);
+        try {
+            boolean isSaved = therapyProgramBO.save( therapyProgramDTO);
+            if(isSaved){
+                new Alert(Alert.AlertType.INFORMATION,"Therapy Program Saved SUCCESSFULLY 😎").show();
+                refreshPage();
+            }
+            else {
+                new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN 😥").show();
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,"duplicate Id");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void TableOnClicked(MouseEvent event) {
+        TherapyProgramTM therapyProgramTM = (TherapyProgramTM) ProgramTable.getSelectionModel().getSelectedItem();
+        if (therapyProgramTM != null) {
+            lprogramid.setText(therapyProgramTM.getProgramId());
+            txtname.setText(therapyProgramTM.getProgramName());
+            txtdure.setText(therapyProgramTM.getDuration());
+            txtfee.setText(String.valueOf(therapyProgramTM.getCost()));
+            txtdes.setText(therapyProgramTM.getDescription());
 
+
+
+            btndelete.setDisable(false);
+            btnsave.setDisable(true);
+            btnupdate.setDisable(false);
+        }
     }
 
     @FXML
     void UpdateOnAction(ActionEvent event) {
+        String programId = lprogramid.getText();
+        String programName = txtname.getText();
+        String duration = txtdure.getText();
+        double cost = Double.parseDouble(txtfee.getText());
+        String Description = txtdes.getText();
+
+        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(programId, programName, duration, cost, Description);
+        try {
+            boolean isSaved = therapyProgramBO.update( therapyProgramDTO);
+            if(isSaved){
+                new Alert(Alert.AlertType.INFORMATION,"Therapy Program Saved SUCCESSFULLY 😎").show();
+                refreshPage();
+            }
+            else {
+                new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN 😥").show();
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR,"duplicate Id");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void LoadNextID() throws SQLException, IOException {
+        String nextID = therapyProgramBO.getNextId();
+        lprogramid.setText(nextID);
+    }
+    private void loadTableData() throws SQLException, ClassNotFoundException, IOException {
+        ArrayList<TherapyProgramDTO> therapyProgramDTOS = (ArrayList<TherapyProgramDTO>) therapyProgramBO.getAll();
+        ObservableList<TherapyProgramTM> therapyProgramTMS = FXCollections.observableArrayList();
+
+        for (TherapyProgramDTO therapyProgramDTO : therapyProgramDTOS) {
+            TherapyProgramTM therapyProgramTM = new TherapyProgramTM(
+                    therapyProgramDTO.getProgramId(),
+                    therapyProgramDTO.getProgramName(),
+                    therapyProgramDTO.getDuration(),
+                    therapyProgramDTO.getCost(),
+                    therapyProgramDTO.getDescription()
+
+
+            );
+            therapyProgramTMS.add(therapyProgramTM);
+        }
+        ProgramTable.setItems(therapyProgramTMS);
+    }
+    void refreshPage() throws SQLException, ClassNotFoundException, IOException {
+        LoadNextID();
+        loadTableData();
+
+        btndelete.setDisable(true);
+        btnsave.setDisable(false);
+        btnupdate.setDisable(true);
+
+        txtname.setText("");
+        txtname.setText("");
+        txtdure.setText("");
+        txtfee.setText("");
+        txtdes.setText("");
 
     }
 
