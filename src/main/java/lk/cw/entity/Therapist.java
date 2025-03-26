@@ -21,4 +21,8 @@ public class Therapist implements SuperEntity{
     private String therapistName;
     private String specialization;
     private String availability;
+
+
+
 }
+
