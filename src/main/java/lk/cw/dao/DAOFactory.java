@@ -2,6 +2,7 @@ package lk.cw.dao;
 
 import lk.cw.dao.custom.impl.PatientDAOImpl;
 import lk.cw.dao.custom.impl.TherapistDAOImpl;
+import lk.cw.dao.custom.impl.TherapyProgramDAOImpl;
 import lk.cw.dao.custom.impl.UserDAOImpl;
 
 public class DAOFactory {
@@ -15,7 +16,7 @@ public class DAOFactory {
     }
 
     public enum DAOTypes {
-       PATIENT, PAYMENT,THERAPIST,THERAPYOROGRAM,THERAPYSESSION,USER
+      USER, PATIENT,THERAPIST,THERAPYOROGRAM, THERAPYSESSION,PATIENT_REG ,PAYMENT
     }
 
     public SuperDAO getDAO(DAOTypes types) {
@@ -28,6 +29,9 @@ public class DAOFactory {
 
             case THERAPIST:
                 return new TherapistDAOImpl();
+
+            case THERAPYOROGRAM:
+                return new TherapyProgramDAOImpl();
 
             default:
                 return null;
