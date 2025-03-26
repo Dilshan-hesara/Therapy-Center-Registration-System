@@ -1,6 +1,7 @@
 package lk.cw.dao;
 
 import lk.cw.dao.custom.impl.PatientDAOImpl;
+import lk.cw.dao.custom.impl.TherapistDAOImpl;
 import lk.cw.dao.custom.impl.UserDAOImpl;
 
 public class DAOFactory {
@@ -20,10 +21,13 @@ public class DAOFactory {
     public SuperDAO getDAO(DAOTypes types) {
         switch (types) {
             case USER:
-                return (SuperDAO) new UserDAOImpl();
+                return new UserDAOImpl();
 
             case PATIENT:
-                return (SuperDAO) new PatientDAOImpl();
+                return new PatientDAOImpl();
+
+            case THERAPIST:
+                return new TherapistDAOImpl();
 
             default:
                 return null;
