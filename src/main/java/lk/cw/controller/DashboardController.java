@@ -68,8 +68,10 @@ public class DashboardController implements Initializable {
 
 
     @FXML
-    void UserOnAction(ActionEvent event) {
-
+    void UserOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/UserManage.fxml"));
+       ancer.getChildren().clear();
+        ancer.getChildren().add(load);
     }
 
 
@@ -83,6 +85,8 @@ public class DashboardController implements Initializable {
         mainAnc.getChildren().add(load);
     }
 
+    @FXML
+    private Button userbtn;
 
 
     @Override
@@ -92,8 +96,10 @@ public class DashboardController implements Initializable {
 
                 TherapistBtn.setDisable(true);
                 TherapyBtn.setDisable(true);
+                userbtn.setDisable(true);
                 System.out.println("User");
             } else if ("Admin".equals(loggedInUser)) {
+                userbtn.setDisable(false);
 
                 TherapistBtn.setDisable(false);
                 TherapyBtn.setDisable(false);
