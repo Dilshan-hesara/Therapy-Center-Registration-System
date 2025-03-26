@@ -24,5 +24,11 @@ public class TherapyProgram implements SuperEntity{
     private String Description;
 
 
-
+    public TherapyProgram(String programId, String programName, String duration, double cost, String description) {
+        this.programId = programId;
+        this.programName = programName;
+        this.duration = duration;
+        this.cost = cost;
+        Description = description;
+    }
 }
