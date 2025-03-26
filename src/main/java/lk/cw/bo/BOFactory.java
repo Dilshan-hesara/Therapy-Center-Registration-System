@@ -1,6 +1,8 @@
 package lk.cw.bo;
 
+import lk.cw.bo.custom.PatientRegBO;
 import lk.cw.bo.custom.impl.PatientBOImpl;
+import lk.cw.bo.custom.impl.PatientRegBOImpl;
 import lk.cw.bo.custom.impl.TherapistBOImpl;
 import lk.cw.bo.custom.impl.UserBOImpl;
 
@@ -32,6 +34,10 @@ public class BOFactory {
 
                 case THERAPYOROGRAM :
                     return new TherapistBOImpl();
+
+            case PATIENT_REG:
+                return  new PatientRegBOImpl();
+
             default:
                 return null;
         }
