@@ -1,9 +1,6 @@
 package lk.cw.dao;
 
-import lk.cw.dao.custom.impl.PatientDAOImpl;
-import lk.cw.dao.custom.impl.TherapistDAOImpl;
-import lk.cw.dao.custom.impl.TherapyProgramDAOImpl;
-import lk.cw.dao.custom.impl.UserDAOImpl;
+import lk.cw.dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -33,6 +30,8 @@ public class DAOFactory {
             case THERAPYOROGRAM:
                 return new TherapyProgramDAOImpl();
 
+            case PATIENT_REG:
+                return new PatientRegDAOImpl();
             default:
                 return null;
         }
