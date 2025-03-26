@@ -30,4 +30,11 @@ public class Patient_Registration implements SuperEntity{
     private int sessionCount;
 
 
+    public Patient_Registration(String registrationId, Patient patient, TherapyProgram therapyProgram, Date registrationDate) {
+        this.registrationId = registrationId;
+        this.patient = patient;
+        this.therapyProgram = therapyProgram;
+        this.registrationDate = registrationDate;
+
+    }
 }
