@@ -61,12 +61,11 @@
       </Button>
       <TableView fx:id="PatientTable" layoutX="24.0" layoutY="373.0" onMouseClicked="#TableOnClicked" prefHeight="202.0" prefWidth="701.0" style="-fx-opacity: 0.9;">
          <columns>
-            <TableColumn fx:id="colid" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="colname" prefWidth="115.1999740600586" text="Name" />
-            <TableColumn fx:id="colbirthday" prefWidth="112.79998779296875" text="Birthday" />
-            <TableColumn fx:id="colcontact" prefWidth="136.800048828125" text="Contact Number" />
-            <TableColumn fx:id="colmedical" minWidth="0.0" prefWidth="136.80001831054688" text="Medical history" />
-            <TableColumn fx:id="colregister" prefWidth="122.4000244140625" text="Regiser Date" />
+            <TableColumn fx:id="colid" prefWidth="90.40002632141113" text="ID" />
+            <TableColumn fx:id="colname" prefWidth="123.99999237060547" text="Name" />
+            <TableColumn fx:id="colbirthday" prefWidth="136.00006103515625" text="Birthday" />
+            <TableColumn fx:id="colcontact" prefWidth="183.99996948242188" text="Contact Number" />
+            <TableColumn fx:id="colmedical" minWidth="0.0" prefWidth="164.79995117187502" text="Medical history" />
          </columns>
       </TableView>
       <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
@@ -91,20 +90,9 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="52.0" layoutY="269.0" prefHeight="31.0" prefWidth="123.0" text="Registration Date">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
       <DatePicker fx:id="birthdatepicker" layoutX="209.0" layoutY="149.0" onAction="#BirthDatePickerOnAction" />
-      <DatePicker fx:id="registerdatepicker" layoutX="209.0" layoutY="274.0" onAction="#RegisterDatePickerOnAction" />
       <TextField fx:id="txtsearch" layoutX="404.0" layoutY="32.0" prefHeight="25.0" prefWidth="192.0" promptText="Search" style="-fx-opacity: 0.7;" />
       <Button layoutX="600.0" layoutY="29.0" mnemonicParsing="false" onAction="#SearchOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SEARCH">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button layoutX="561.0" layoutY="102.0" mnemonicParsing="false" onAction="#AppointmentOnAction" prefHeight="31.0" prefWidth="175.0" style="-fx-background-color: #A5158C;" text="Book Appointment" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -124,5 +112,10 @@
             <Font name="System Bold Italic" size="19.0" />
          </font>
       </Label>
+      <Button fx:id="register" layoutX="592.0" layoutY="86.0" mnemonicParsing="false" onAction="#PatientRegistrationsOnAction" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #A5158C;" text="Patient Registrations" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

@@ -57,9 +57,9 @@
       <TableView fx:id="TherapistTable" layoutX="24.0" layoutY="373.0" onMouseClicked="#TableOnClicked" prefHeight="192.0" prefWidth="694.0" style="-fx-opacity: 0.9;">
          <columns>
             <TableColumn fx:id="colid" prefWidth="75.0" text="TherapistID" />
-            <TableColumn fx:id="colname" prefWidth="297.9999771118164" text="Name" />
-            <TableColumn fx:id="colspecail" prefWidth="266.66673278808594" text="Specialization" />
-            <TableColumn fx:id="colavailable" prefWidth="119.33331298828125" text="Availability" />
+            <TableColumn fx:id="colname" prefWidth="223.1999740600586" text="Name" />
+            <TableColumn fx:id="colspecail" prefWidth="188.7999267578125" text="Specialization" />
+            <TableColumn fx:id="colavailable" prefWidth="273.6000671386719" text="Availability" />
          </columns>
       </TableView>
       <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">

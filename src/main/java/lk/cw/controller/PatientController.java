@@ -43,9 +43,6 @@ public class PatientController {
     private TableColumn<?, ?> colname;
 
     @FXML
-    private TableColumn<?, ?> colregister;
-
-    @FXML
     private Label lblbirthday;
 
     @FXML
@@ -58,7 +55,7 @@ public class PatientController {
     private Label lblrole;
 
     @FXML
-    private DatePicker registerdatepicker;
+    private Button register;
 
     @FXML
     private TextField txtcontactnumber;
@@ -73,11 +70,6 @@ public class PatientController {
     private TextField txtsearch;
 
     @FXML
-    void AppointmentOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void BirthDatePickerOnAction(ActionEvent event) {
 
     }
@@ -88,7 +80,7 @@ public class PatientController {
     }
 
     @FXML
-    void RegisterDatePickerOnAction(ActionEvent event) {
+    void PatientRegistrationsOnAction(ActionEvent event) {
 
     }
 
