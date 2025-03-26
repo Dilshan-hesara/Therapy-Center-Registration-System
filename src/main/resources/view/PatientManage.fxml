@@ -59,15 +59,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="PatientTable" layoutX="24.0" layoutY="373.0" onMouseClicked="#TableOnClicked" prefHeight="202.0" prefWidth="701.0" style="-fx-opacity: 0.9;">
-         <columns>
-            <TableColumn fx:id="colid" prefWidth="90.40002632141113" text="ID" />
-            <TableColumn fx:id="colname" prefWidth="123.99999237060547" text="Name" />
-            <TableColumn fx:id="colbirthday" prefWidth="136.00006103515625" text="Birthday" />
-            <TableColumn fx:id="colcontact" prefWidth="183.99996948242188" text="Contact Number" />
-            <TableColumn fx:id="colmedical" minWidth="0.0" prefWidth="164.79995117187502" text="Medical history" />
-         </columns>
-      </TableView>
       <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -78,11 +69,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="75.0" layoutY="328.0">
-         <image>
-            <Image url="@../../../../../../Desktop/ORM-CW2/src/main/resources/view/images/save.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="txtcontactnumber" layoutX="209.0" layoutY="192.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
       <TextField fx:id="txtmedical" layoutX="209.0" layoutY="234.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
       <Label layoutX="54.0" layoutY="228.0" prefHeight="31.0" prefWidth="111.0" text="Medical History">
@@ -117,5 +103,14 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <TableView fx:id="PatientTable" layoutX="42.0" layoutY="365.0" onMouseClicked="#TableOnClicked" prefHeight="193.0" prefWidth="684.0" style="-fx-opacity: 0.9;">
+         <columns>
+            <TableColumn fx:id="colid" prefWidth="75.0" text="patientId" />
+            <TableColumn fx:id="colname" prefWidth="165.33334350585938" text="Name" />
+            <TableColumn fx:id="colbirthday" prefWidth="132.0" text="Birthday" />
+            <TableColumn fx:id="colcontact" prefWidth="156.00003051757812" text="ContactNumber" />
+            <TableColumn fx:id="colmedical" prefWidth="153.5999755859375" text="MedicalHistory" />
+         </columns>
+      </TableView>
     </children>
 </AnchorPane>
