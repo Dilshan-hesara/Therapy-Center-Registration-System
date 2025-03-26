@@ -32,16 +32,19 @@ public class TherapeySessionController {
     private TableColumn<?, ?> colid;
 
     @FXML
+    private TableColumn<?, ?> colpatientid;
+
+    @FXML
     private TableColumn<?, ?> colstatus;
 
     @FXML
     private TableColumn<?, ?> coltherapist;
 
     @FXML
-    private TableColumn<?, ?> coltherapist1;
+    private TableColumn<?, ?> coltime;
 
     @FXML
-    private TableColumn<?, ?> coltime;
+    private ComboBox<?> combopatientid;
 
     @FXML
     private ComboBox<?> combostatus;
@@ -59,19 +62,21 @@ public class TherapeySessionController {
     private Label lblid;
 
     @FXML
-    private Label lblregister;
+    private Label lblpatientname;
 
     @FXML
     private Label lblstatus;
-
-    @FXML
-    private Label lbltherapistid;
 
     @FXML
     private Label lbltherapistname;
 
     @FXML
     private TextField txttime;
+
+    @FXML
+    void ComboPatientIdOnAction(ActionEvent event) {
+
+    }
 
     @FXML
     void ComboStatusOnAction(ActionEvent event) {
