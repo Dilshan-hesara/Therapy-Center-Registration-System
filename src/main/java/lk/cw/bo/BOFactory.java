@@ -1,5 +1,6 @@
 package lk.cw.bo;
 
+import lk.cw.bo.custom.impl.PatientBOImpl;
 import lk.cw.bo.custom.impl.UserBOImpl;
 
 public class BOFactory {
@@ -19,6 +20,9 @@ public class BOFactory {
 
             case USER:
                 return (SuperBO) new UserBOImpl();
+
+            case PATIENT:
+                return (SuperBO) new PatientBOImpl();
 
 
 
