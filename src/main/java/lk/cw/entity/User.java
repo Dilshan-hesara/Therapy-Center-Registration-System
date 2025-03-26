@@ -1,6 +1,5 @@
 package lk.cw.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,18 +14,13 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "User")
-public class User  implements SuperEntity  {
-
+public class User {
     @Id
     @Column(name = "UserID")
     private String Id;
     private String UserName;
     private String Password;
     private String Role;
-
-
-
-
 
 
 }

@@ -1,35 +1,24 @@
 package lk.cw.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import jakarta.persistence.*;
-
-import java.util.Set;
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 
 @Entity
-@Table(name = "Therapists")
-public class Therapist  implements SuperEntity {
-
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "therapist_id")
-        private int therapistId;
-
-        private String name;
-
-        private String email;
-
-
-        private String phone;
-
-
-        private String specialization;
-
-
-        private String availability;
-
-
-    @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL)
-    private Set<TherapySession> therapySessions;
-
-    }
+@Table(name = "Therapist")
+public class Therapist implements SuperEntity{
+    @Id
+    private String therapistId;
+    private String therapistName;
+    private String specialization;
+    private String availability;
+}

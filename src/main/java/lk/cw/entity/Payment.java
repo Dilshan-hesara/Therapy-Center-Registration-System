@@ -1,35 +1,30 @@
 package lk.cw.entity;
 
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+
 @Entity
-@Table(name = "Payments")
+@Table(name = "Payment")
+public class Payment implements SuperEntity{
+    @Id
+    private String paymentId;
+    private double amount;
+    private Date paymentDate;
+    private String Status;
 
-public class Payment implements SuperEntity  {
+    @ManyToOne
+    @JoinColumn(name = "patientId")
+    private Patient patient;
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "payment_id")
-        private int paymentId;
 
-        @ManyToOne
-        @JoinColumn(name = "patient_id", nullable = false)
-        private Patient patient;
 
-        @ManyToOne
-        @JoinColumn(name = "program_id", nullable = false)
-        private TherapyProgram therapyProgram;
 
-        @Column(name = "amount", nullable = false)
-        private double amount;
-
-        @Column(name = "payment_date", nullable = false)
-        private Date paymentDate;
-
-        @Column(name = "status", nullable = false)
-        private String status;
-
-    }
+}
