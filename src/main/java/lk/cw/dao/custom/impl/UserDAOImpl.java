@@ -49,7 +49,23 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public String getNextId() throws SQLException, IOException {
-        return "";
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "SELECT u.Id FROM User u ORDER BY u.Id DESC";
+        Query<String> query = session.createQuery(hql);
+        query.setMaxResults(1);
+        String lastId = query.uniqueResult();
+        transaction.commit();
+        session.close();
+
+        if (lastId != null) {
+            String substring = lastId.substring(1);
+            int i = Integer.parseInt(substring);
+            int newIdIndex = i + 1;
+            return String.format("U%03d", newIdIndex);
+        }
+
+        return "U001";
     }
 
     @Override

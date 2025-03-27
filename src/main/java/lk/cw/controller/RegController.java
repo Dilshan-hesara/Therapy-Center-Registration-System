@@ -1,27 +1,29 @@
 package lk.cw.controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.UserBO;
 import lk.cw.dto.UserDTO;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class RegController implements Initializable {
+    @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadcmb();
+        LoadNextID();
     }
 
     @FXML
@@ -50,9 +52,10 @@ public class RegController implements Initializable {
         login();
     }
 
+    String ID;
     @FXML
     void regisOnAction(ActionEvent event) throws IOException {
-        String txtid = "04";
+        String txtid = ID;
         String Id = txtid;
         String UserName = txtUsername.getText();
         String Password = txtPassword.getText();
@@ -82,6 +85,16 @@ public class RegController implements Initializable {
 
     }
 
+    @FXML
+    private Label UserIDlbl;
+
+    private void LoadNextID() throws SQLException, IOException {
+
+        String uis = userBO.getNextId();
+
+        ID = uis;
+        UserIDlbl.setText(uis);
+    }
 
 
     @FXML

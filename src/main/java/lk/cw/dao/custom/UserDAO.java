@@ -5,6 +5,7 @@ import lk.cw.dao.SuperDAO;
 import lk.cw.entity.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public interface UserDAO extends CrudDAO<User> {
     public String getPasswordByUserName(String userName) throws Exception ;

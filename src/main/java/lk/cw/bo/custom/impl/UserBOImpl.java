@@ -13,6 +13,8 @@ import org.hibernate.query.NativeQuery;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class UserBOImpl implements UserBO {
     UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
@@ -32,5 +34,10 @@ public class UserBOImpl implements UserBO {
     @Override
     public String getRoleByUserName(String userName) throws Exception {
         return userDAO.getRoleByUserName(userName);
+    }
+
+    @Override
+    public String getNextId() throws SQLException, IOException {
+        return userDAO.getNextId();
     }
 }
