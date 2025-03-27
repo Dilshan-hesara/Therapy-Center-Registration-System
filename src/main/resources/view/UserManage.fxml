@@ -61,10 +61,9 @@
       </Button>
       <TableView fx:id="UserTable" layoutX="64.0" layoutY="379.0" onMouseClicked="#TableOnClicked" prefHeight="179.0" prefWidth="631.0" style="-fx-opacity: 0.9;">
          <columns>
-            <TableColumn fx:id="colid" prefWidth="75.0" text="UserID" />
-            <TableColumn fx:id="colname" prefWidth="297.9999771118164" text="UserName" />
-            <TableColumn fx:id="colpassword" prefWidth="266.66673278808594" text="Password" />
-            <TableColumn fx:id="colrole" prefWidth="119.33331298828125" text="Role" />
+            <TableColumn fx:id="colid" prefWidth="133.60003662109375" text="UserID" />
+            <TableColumn fx:id="colname" prefWidth="278.3999481201172" text="UserName" />
+            <TableColumn fx:id="colrole" prefWidth="217.60002441406255" text="Role" />
          </columns>
       </TableView>
       <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
