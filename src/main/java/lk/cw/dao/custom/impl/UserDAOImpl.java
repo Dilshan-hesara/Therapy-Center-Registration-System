@@ -68,10 +68,6 @@ public class UserDAOImpl implements UserDAO {
         return "U001";
     }
 
-    @Override
-    public List<User> getAll() throws SQLException, IOException {
-        return List.of();
-    }
 
     @Override
     public boolean save(User user) throws IOException {
@@ -86,8 +82,29 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean update(User entity) throws SQLException, IOException {
-        return false;
+    public List<User> getAll() throws SQLException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query<User> query = session.createQuery("SELECT c FROM User c", User.class);
+        List<User> customers = query.list();
+
+        transaction.commit();
+        session.close();
+        return customers;
+    }
+
+    @Override
+    public boolean update(User user) throws SQLException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.update(user);
+
+        transaction.commit();
+        session.close();
+
+        return true;
     }
 
     @Override

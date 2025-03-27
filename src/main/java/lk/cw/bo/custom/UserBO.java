@@ -12,6 +12,7 @@ public interface UserBO extends SuperBO {
     public String getPasswordByUserName(String userName) throws Exception ;
     public String getRoleByUserName(String userName) throws Exception;
     public String getNextId() throws SQLException, IOException ;
-
+    public List<UserDTO> getAll() throws SQLException, IOException;
+    public boolean update(UserDTO userDTO) throws IOException, SQLException;
 
 }
