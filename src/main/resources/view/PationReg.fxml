@@ -18,7 +18,7 @@
                 <Image url="@../style/lo.png" />
             </image>
         </ImageView>
-        <Label layoutX="310.0" layoutY="14.0" prefHeight="18.0" prefWidth="185.0" text="PAYMENT MANAGE">
+        <Label layoutX="310.0" layoutY="14.0" prefHeight="27.0" prefWidth="226.0" text="REG   MANAGE">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font></Label>
