@@ -124,7 +124,7 @@ public class PatientRegController implements Initializable {
             boolean isRegistered = patientRegistrationBO.save(patientRegistrationDTO);
 
             if (isRegistered) {
-                refreshPage();  // UI එක refresh කරන්න
+                refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "PatientRegistration Saved SUCCESSFULLY 😎").show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
