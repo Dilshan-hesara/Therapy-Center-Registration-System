@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -114,5 +115,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <TextField fx:id="txtSessCount" layoutX="294.0" layoutY="279.0" promptText="Enter S count" />
     </children>
 </AnchorPane>

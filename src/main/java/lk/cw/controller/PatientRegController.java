@@ -87,6 +87,11 @@ public class PatientRegController implements Initializable {
     @FXML
     private Label lbltherapistname;
 
+
+    @FXML
+    private TextField txtSessCount;
+
+
     PatientRegBO patientRegistrationBO = (PatientRegBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PATIENT_REG);
     PatientBO patientBO = (PatientBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PATIENT);
     TherapyProgramBO therapyProgramBO = (TherapyProgramBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPYOROGRAM);
