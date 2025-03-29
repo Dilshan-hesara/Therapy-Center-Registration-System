@@ -32,6 +32,9 @@ public class DAOFactory {
 
             case PATIENT_REG:
                 return new PatientRegDAOImpl();
+
+            case THERAPYSESSION:
+                return new TherapySessionDAOImpl();
             default:
                 return null;
         }
