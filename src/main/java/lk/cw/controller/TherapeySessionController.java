@@ -90,6 +90,18 @@ public class TherapeySessionController implements Initializable {
     @FXML
     private Label txtAvSessions;
 
+
+    @FXML
+    private Button btnInvoice;
+
+    @FXML
+    private Label txtAvBlance;
+
+
+    @FXML
+    private TextField txtPay;
+
+
     TherapistBO therapistBO = (TherapistBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPIST);
     TherapySessionBO therapySessionBO = (TherapySessionBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPYSESSION);
     PatientBO patientBO = (PatientBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PATIENT);

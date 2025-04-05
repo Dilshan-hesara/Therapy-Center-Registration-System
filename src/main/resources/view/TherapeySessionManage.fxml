@@ -129,5 +129,26 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <TextField fx:id="txtPay" layoutX="570.0" layoutY="90.0" />
+      <Label layoutX="568.0" layoutY="58.0" prefHeight="31.0" prefWidth="81.0" text="PayMent ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtAvBlance" layoutX="660.0" layoutY="124.0" prefHeight="18.0" prefWidth="49.0" text="000.00">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="568.0" layoutY="115.0" prefHeight="31.0" prefWidth="81.0" text="Balanace">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnInvoice" layoutX="568.0" layoutY="152.0" mnemonicParsing="false" onAction="#InvoiecOnAction" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
