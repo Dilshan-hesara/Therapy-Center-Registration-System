@@ -109,6 +109,11 @@ public class TherapeySessionController implements Initializable {
     TherapySessionBO therapySessionBO = (TherapySessionBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPYSESSION);
     PatientBO patientBO = (PatientBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PATIENT);
 
+    @FXML
+    void InvoiecOnAction(ActionEvent event) {
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
