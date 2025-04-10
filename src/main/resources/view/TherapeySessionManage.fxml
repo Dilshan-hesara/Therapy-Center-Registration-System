@@ -39,12 +39,17 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btndelete" layoutX="405.0" layoutY="321.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
+      <Button fx:id="btndelete" layoutX="397.0" layoutY="325.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
       <Button layoutX="568.0" layoutY="321.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnInvoice" layoutX="204.0" layoutY="325.0" mnemonicParsing="false" onAction="#InvoiecOnAction" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -145,10 +150,5 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnInvoice" layoutX="568.0" layoutY="152.0" mnemonicParsing="false" onAction="#InvoiecOnAction" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
     </children>
 </AnchorPane>
