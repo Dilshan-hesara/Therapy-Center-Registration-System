@@ -34,12 +34,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnsave" layoutX="69.0" layoutY="324.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SAVE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnupdate" layoutX="235.0" layoutY="324.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
+      <Button fx:id="btnsave" layoutX="35.0" layoutY="324.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="ADD">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -64,6 +59,11 @@
             <TableColumn fx:id="coltherapist" prefWidth="78.666748046875" text="TherapistId" />
          </columns>
       </TableView>
+      <Button fx:id="btnupdate" layoutX="-164.0" layoutY="253.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
       <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -74,7 +74,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="75.0" layoutY="328.0">
+      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="41.0" layoutY="328.0">
          <image>
             <Image url="@../../../../../../Desktop/ORM-CW6/src/main/resources/view/images/save.png" />
          </image>
