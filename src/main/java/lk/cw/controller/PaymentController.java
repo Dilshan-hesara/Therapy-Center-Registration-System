@@ -118,4 +118,10 @@ public class PaymentController implements Initializable {
         //}
     }
 
+    @FXML
+    void addPayOnAction(ActionEvent event) {
+
+    }
+
+
 }
