@@ -39,6 +39,9 @@ public class BOFactory {
             case THERAPYSESSION:
                 return  new TherapySessionBOImpl();
 
+            case PAYMENT:
+                return  new PaymentBOImpl();
+
             default:
                 return null;
         }
