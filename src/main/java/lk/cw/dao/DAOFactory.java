@@ -35,6 +35,9 @@ public class DAOFactory {
 
             case THERAPYSESSION:
                 return new TherapySessionDAOImpl();
+
+                case PAYMENT:
+                    return new PaymentDAOImpl();
             default:
                 return null;
         }
