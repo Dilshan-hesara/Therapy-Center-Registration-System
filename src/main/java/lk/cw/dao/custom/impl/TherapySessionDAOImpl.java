@@ -59,13 +59,14 @@ public class TherapySessionDAOImpl implements TherapySessionDAO {
             // Therapy Session එක save කරනවා
             session.save(therapySession);
 
-            // Patient Registration එක update කරන HQL Query
             String hql = "UPDATE Patient_Registration pr " +
                     "SET pr.sessionCount = pr.sessionCount + 1 " +
                     "WHERE pr.patient.patientId = :patientId ";
 
             Query query = session.createQuery(hql);
             query.setParameter("patientId", therapySession.getPatient().getPatientId());
+
+
 //            query.setParameter("programId", therapySession.getPatient().getProgram().getProgramId());
             query.executeUpdate();
 
