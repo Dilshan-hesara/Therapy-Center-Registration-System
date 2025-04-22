@@ -14,6 +14,7 @@ import lk.cw.bo.custom.PatientRegBO;
 import lk.cw.bo.custom.TherapistBO;
 import lk.cw.bo.custom.TherapySessionBO;
 import lk.cw.bo.custom.impl.PatientRegBOImpl;
+import lk.cw.bo.custom.impl.TherapySessionBOImpl;
 import lk.cw.config.FactoryConfiguration;
 import lk.cw.dao.custom.PatientRegDAO;
 import lk.cw.dao.custom.impl.PatientRegDAOImpl;
@@ -115,7 +116,7 @@ public class TherapeySessionController implements Initializable {
 
 
     TherapistBO therapistBO = (TherapistBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPIST);
-    TherapySessionBO therapySessionBO = (TherapySessionBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPYSESSION);
+ TherapySessionBO therapySessionBO = (TherapySessionBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPYSESSION);
     PatientBO patientBO = (PatientBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PATIENT);
 
     @FXML
@@ -163,7 +164,7 @@ public class TherapeySessionController implements Initializable {
             double balance = patientRegBO.getBalanceByPatientId(selectedID);
             txtAvBlance.setText(String.format("%.2f", balance));
 
-            checkStates();
+            //checkStates();
         }
     }
 
@@ -254,9 +255,11 @@ public class TherapeySessionController implements Initializable {
 
 
         // i want save  payment table payment
-        String payid  = "P001";
+        String payid  = "P004";
         String amount = txtPay.getText();
         String payDate = lbldate.getText();
+//        String payDate = "22";
+//        String payPatient = combopatientid.getValue();
         String payPatient = combopatientid.getValue();
         String States = states;
 
@@ -265,7 +268,8 @@ public class TherapeySessionController implements Initializable {
         PaymentDTO paymentDTO = new PaymentDTO(
                 payid,
                  amount,
-                Double.parseDouble(payDate),
+
+                payDate,
                    payPatient ,
                   States
 
@@ -273,11 +277,11 @@ public class TherapeySessionController implements Initializable {
         );
         paymentDTOS.add(paymentDTO);
 
-//        System.out.println(payid);
-//        System.out.println(payDate);
-//        System.out.println(payPatient);
-//        System.out.println(amount);
-//        System.out.println(States);
+        System.out.println(payid);
+        System.out.println(payDate);
+        System.out.println(payPatient);
+        System.out.println(amount);
+        System.out.println(States);
 
         try {
             TherapySessionDTO therapySessionDTO = new TherapySessionDTO(
