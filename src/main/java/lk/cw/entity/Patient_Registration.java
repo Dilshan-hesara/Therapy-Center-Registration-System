@@ -28,13 +28,18 @@ public class Patient_Registration implements SuperEntity{
 
     private Date registrationDate;
     private int sessionCount;
+    private double registerFee;
+    private double balance;
 
 
-    public Patient_Registration(String registrationId, Patient patient, TherapyProgram therapyProgram, Date registrationDate) {
+    public Patient_Registration(String registrationId, Patient patient, TherapyProgram therapyProgram, Date registrationDate, double registerFee, double balance) {
+
         this.registrationId = registrationId;
         this.patient = patient;
         this.therapyProgram = therapyProgram;
         this.registrationDate = registrationDate;
+        this.registerFee = registerFee;
+        this.balance = balance;
 
     }
 }
