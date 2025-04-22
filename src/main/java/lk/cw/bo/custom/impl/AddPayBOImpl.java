@@ -80,20 +80,22 @@ public class AddPayBOImpl implements AddPayBO {
 
     @Override
     public boolean update(PaymentDTO paymentDTO) throws IOException, SQLException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-
-        Patient patient = session.get(Patient.class, paymentDTO.getPatientId());
-        if (patient == null) {
-            return false;
-        }
-        Payment payment = new Payment(
-                paymentDTO.getPaymentId(),
-                patient,
-                paymentDTO.getAmount(),
-                paymentDTO.getPaymentDate(),
-                paymentDTO.getStatus()
-        );
-        return paymentDAO.update(payment);    }
+//        Session session = FactoryConfiguration.getInstance().getSession();
+//
+//        Patient patient = session.get(Patient.class, paymentDTO.getPatientId());
+//        if (patient == null) {
+//            return false;
+//        }
+//        Payment payment = new Payment(
+//                paymentDTO.getPaymentId(),
+//                patient,
+//                paymentDTO.getAmount(),
+//                paymentDTO.getPaymentDate(),
+//                paymentDTO.getStatus()
+//        );
+//        return paymentDAO.update(payment);    }
+        return false;
+    }
 
     @Override
     public boolean delete(String ID) throws SQLException, IOException {
