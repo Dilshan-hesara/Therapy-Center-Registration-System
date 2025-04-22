@@ -4,11 +4,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.PatientBO;
 import lk.cw.bo.custom.PatientRegBO;
@@ -119,7 +125,24 @@ public class PaymentController implements Initializable {
     }
 
     @FXML
-    void addPayOnAction(ActionEvent event) {
+    private Button btnAddpay;
+
+    @FXML
+    void addPayOnAction(ActionEvent event) throws IOException {
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddPaymentFrom.fxml"));
+        Parent load = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(load));
+        stage.setTitle("Payment From");
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        Window underWindow = btnAddpay.getScene().getWindow();
+        stage.initOwner(underWindow);
+
+        stage.showAndWait();
 
     }
 
