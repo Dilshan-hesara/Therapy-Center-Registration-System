@@ -84,14 +84,29 @@ public class AddPayDAOImpl implements AddPayDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
+
         try {
+//            if (paymentDTOS != null) {
+//            for (int i = 0; i < paymentDTOS.size(); i++) {
+//                PaymentDTO dto = paymentDTOS.get(i);
+//                System.out.println("\nPayment #" + (i + 1) + ":");
+//                System.out.println("ID: " + dto.getPaymentId());
+//                System.out.println("Amount: " + dto.getAmount());
+//                System.out.println("Date: " + dto.getPaymentDate());
+//                System.out.println("Status: " + dto.getStatus());
+//                System.out.println("Pation: " + dto.getPatientId());
+//                // Add any other fields you want to print
+//            }
+
             for (PaymentDTO dto : paymentDTOS) {
                 Payment payment = new Payment(
                         dto.getPaymentId(),
-                        dto.getPatientId(),
+                        dto.getStatus(),
                         dto.getAmount(),
+
                         dto.getPaymentDate(),
-                        dto.getStatus()
+
+                        dto.getPatientId()
                 );
                 session.save(payment);
             }
