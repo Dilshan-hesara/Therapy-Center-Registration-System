@@ -64,11 +64,6 @@
             <TableColumn fx:id="coltherapist" prefWidth="78.666748046875" text="TherapistId" />
          </columns>
       </TableView>
-      <Button fx:id="btnupdate" layoutX="-164.0" layoutY="253.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
       <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -145,6 +140,11 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Label>
+      <Button fx:id="btnupdate" layoutX="467.0" layoutY="215.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0; -fx-opacity: 0;" text="UPDATE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
       <Label layoutX="568.0" layoutY="115.0" prefHeight="31.0" prefWidth="81.0" text="Balanace">
          <font>
             <Font name="System Bold" size="14.0" />
