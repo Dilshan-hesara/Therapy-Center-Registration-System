@@ -2,13 +2,17 @@ package lk.cw.dao.custom.impl;
 
 import lk.cw.config.FactoryConfiguration;
 import lk.cw.dao.custom.AddPayDAO;
+import lk.cw.dto.PaymentDTO;
+import lk.cw.entity.Patient;
 import lk.cw.entity.Payment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddPayDAOImpl implements AddPayDAO {
@@ -75,5 +79,81 @@ public class AddPayDAOImpl implements AddPayDAO {
 
         return true;
     }
+
+    public boolean save(ArrayList<PaymentDTO> paymentDTOS) throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            for (PaymentDTO dto : paymentDTOS) {
+                Payment payment = new Payment(
+                        dto.getPaymentId(),
+                        dto.getPatientId(),
+                        dto.getAmount(),
+                        dto.getPaymentDate(),
+                        dto.getStatus()
+                );
+                session.save(payment);
+            }
+
+            transaction.commit();
+            return true;
+
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
+
+//    @Override
+//    public boolean save(ArrayList<PaymentDTO> paymentDTOS) throws IOException {
+////        saved(paymentDTOS)
+//        return false;
+//    }
+
+//
+//    @Override
+//    public boolean save(ArrayList<PaymentDTO> paymentDTOS) throws IOException {
+//
+//        // Print all payment DTOs
+//        System.out.println("\n==== Printing Payment DTOs ====");
+//        System.out.println("Number of payments: " + (paymentDTOS == null ? 0 : paymentDTOS.size()));
+//
+//        if (paymentDTOS != null) {
+//            for (int i = 0; i < paymentDTOS.size(); i++) {
+//                PaymentDTO dto = paymentDTOS.get(i);
+//                System.out.println("\nPayment #" + (i + 1) + ":");
+//                System.out.println("ID: " + dto.getPaymentId());
+//                System.out.println("Amount: " + dto.getAmount());
+//                System.out.println("Date: " + dto.getPaymentDate());
+//                System.out.println("Status: " + dto.getStatus());
+//                System.out.println("Pation: " + dto.getPatientId());
+//                // Add any other fields you want to print
+//            }
+//        }
+//        System.out.println("==== End of Payment DTOs ====\n");
+//        return false;
+//    }
+
+
+//    private Payment convertToEntity(PaymentDTO dto) {
+//        Payment payment = new Payment();
+//
+//        payment.setPaymentId(dto.getPaymentId());
+//        payment.setAmount(dto.getAmount());
+//        payment.setPaymentDate(dto.getPaymentDate());
+//        payment.setStatus(dto.getStatus());
+//
+//        if (dto.getPatientId() != null) {
+//            Patient patient = new Patient();
+//            patient.setPatientId(dto.getPatientId());
+//            payment.setPatient(patient);
+//        }
+//
+//        return payment;
+//    }
 
 }
