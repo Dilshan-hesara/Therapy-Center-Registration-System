@@ -10,12 +10,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.PatientBO;
+import lk.cw.bo.custom.PatientRegBO;
 import lk.cw.bo.custom.TherapistBO;
 import lk.cw.bo.custom.TherapySessionBO;
+import lk.cw.bo.custom.impl.PatientRegBOImpl;
+import lk.cw.config.FactoryConfiguration;
+import lk.cw.dao.custom.PatientRegDAO;
+import lk.cw.dao.custom.impl.PatientRegDAOImpl;
 import lk.cw.dto.PatientDTO;
+import lk.cw.dto.PaymentDTO;
 import lk.cw.dto.TherapistDTO;
 import lk.cw.dto.TherapySessionDTO;
+import lk.cw.entity.Payment;
 import lk.cw.tm.TherapySessionTM;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
@@ -140,15 +149,25 @@ public class TherapeySessionController implements Initializable {
     }
     private final String[] Status = {"Scheduled", "Completed", "Cancelled"};
 
+    PatientRegDAO patientRegBO = new PatientRegDAOImpl();
     @FXML
-    void ComboPatientIdOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void ComboPatientIdOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
         String selectedID = combopatientid.getValue();
         PatientDTO patientDTO = patientBO.findById(selectedID);
 
         if (patientDTO != null) {
             lblpatientname.setText(patientDTO.getName());
         }
+
+        if (selectedID != null) {
+            double balance = patientRegBO.getBalanceByPatientId(selectedID);
+            txtAvBlance.setText(String.format("%.2f", balance));
+
+            checkStates();
+        }
     }
+
+
 
     @FXML
     void ComboStatusOnAction(ActionEvent event) {
@@ -156,6 +175,7 @@ public class TherapeySessionController implements Initializable {
         lblstatus.setText(SelectedValue);
 
     }
+
 
     @FXML
     void ComboTherapistIdOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
@@ -180,6 +200,7 @@ public class TherapeySessionController implements Initializable {
     @FXML
     void DeleteOnAction(ActionEvent event) {
 
+        checkStates();
     }
 
     @FXML
@@ -187,8 +208,43 @@ public class TherapeySessionController implements Initializable {
         refreshPage();
     }
 
+    String states;
+
+//    private void checkStates() {
+//        String avPy = txtAvBlance.getText();
+//        if (avPy == "0") {
+//            states = "PAY COMPLETED";
+//        }else{
+//            states = "PAY PANDING";
+//        }
+//    }
+
+    private void checkStates() {
+        String avPyStr = txtAvBlance.getText().trim();
+        String amountStr = txtPay.getText().trim();
+
+        double avPy = Double.parseDouble(avPyStr);
+        double amount = Double.parseDouble(amountStr);
+
+        double redu = avPy - amount; // Now this is numeric subtraction
+
+        if (redu == 0 ) {
+            states = "PAY COMPLETED";
+            System.out.println("C");
+        } else {
+            states = "PAY PENDING";
+            System.out.println("B");
+        }
+    }
+
+
     @FXML
     void SaveOnAction(ActionEvent event) {
+        checkStates();
+
+
+
+        //this is TAERAPEY Sesion table
         String sessionId = lblid.getText();
         String sessionDate = lbldate.getText();
         String sessionTime = txttime.getText();
@@ -196,10 +252,36 @@ public class TherapeySessionController implements Initializable {
         String therapistId = combotherapistId.getValue();
         String patientId = combopatientid.getValue();
 
-        
+
+        // i want save  payment table payment
+        String payid  = "P001";
+        String amount = txtPay.getText();
+        String payDate = lbldate.getText();
+        String payPatient = combopatientid.getValue();
+        String States = states;
+
+        ArrayList<PaymentDTO> paymentDTOS =new ArrayList<>();
+
+        PaymentDTO paymentDTO = new PaymentDTO(
+                payid,
+                 amount,
+                Double.parseDouble(payDate),
+                   payPatient ,
+                  States
+
+
+        );
+        paymentDTOS.add(paymentDTO);
+
+//        System.out.println(payid);
+//        System.out.println(payDate);
+//        System.out.println(payPatient);
+//        System.out.println(amount);
+//        System.out.println(States);
+
         try {
             TherapySessionDTO therapySessionDTO = new TherapySessionDTO(
-                    sessionId, sessionDate, sessionTime, status, therapistId, patientId
+                    sessionId, sessionDate, sessionTime, status, therapistId, patientId,paymentDTOS
             );
 
             boolean isRegistered = therapySessionBO.save(therapySessionDTO);
@@ -233,9 +315,7 @@ public class TherapeySessionController implements Initializable {
 
 
 
-            btndelete.setDisable(false);
             btnsave.setDisable(true);
-            btnupdate.setDisable(false);
         }
 
     }
@@ -244,33 +324,35 @@ public class TherapeySessionController implements Initializable {
 
     @FXML
     void UpdateOnAction(ActionEvent event) {
-        String sessionId = lblid.getText();
-        String sessionDate = lbldate.getText();
-        String sessionTime = txttime.getText();
-        String status = combostatus.getValue();
-        String therapistId = combotherapistId.getValue();
-        String patientId = combopatientid.getValue();
+//        String sessionId = lblid.getText();
+//        String sessionDate = lbldate.getText();
+//        String sessionTime = txttime.getText();
+//        String status = combostatus.getValue();
+//        String therapistId = combotherapistId.getValue();
+//        String patientId = combopatientid.getValue();
+//
+//        try {
+//            TherapySessionDTO therapySessionDTO = new TherapySessionDTO(
+//                    sessionId, sessionDate, sessionTime, status, therapistId, patientId
+//            );
+//
+//            boolean isRegistered = therapySessionBO.update(therapySessionDTO);
+//
+//            if (isRegistered) {
+//                refreshPage();
+//                new Alert(Alert.AlertType.INFORMATION, "User Saved SUCCESSFULLY 😎").show();
+//            } else {
+//                new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
+//            }
+//        } catch (IOException e) {
+//            new Alert(Alert.AlertType.ERROR, "Duplicate ID").show();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
 
-        try {
-            TherapySessionDTO therapySessionDTO = new TherapySessionDTO(
-                    sessionId, sessionDate, sessionTime, status, therapistId, patientId
-            );
-
-            boolean isRegistered = therapySessionBO.update(therapySessionDTO);
-
-            if (isRegistered) {
-                refreshPage();
-                new Alert(Alert.AlertType.INFORMATION, "User Saved SUCCESSFULLY 😎").show();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
-            }
-        } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Duplicate ID").show();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        checkStates();
     }
     private void loadTherapistIDs() throws SQLException, ClassNotFoundException, IOException {
         ArrayList<String> therapistIds = therapistBO.getAllTherapistIDs();
@@ -307,9 +389,7 @@ public class TherapeySessionController implements Initializable {
         LoadNextID();
         loadTableData();
 
-        btndelete.setDisable(true);
         btnsave.setDisable(false);
-        btnupdate.setDisable(true);
 
         txttime.setText("");
         lbldate.setText("");
