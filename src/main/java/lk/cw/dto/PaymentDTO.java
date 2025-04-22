@@ -12,19 +12,21 @@ import java.sql.Date;
 
 
     public class PaymentDTO {
-        private String paymentId;
-        private String patientId;
-        private double amount;
-        private Date paymentDate;
-        private String Status;
+    private String paymentId;
+    private String status;
+    private double amount;
+    private String paymentDate;
+    private String patientId;
 
-        public PaymentDTO(String paymentId, String patientId, double amount, String paymentDate, String status) {
-            this.paymentId = paymentId;
-            this.patientId = patientId;
-            this.amount = amount;
-            this.paymentDate = Date.valueOf(paymentDate);
-            this.Status = status;
-        }
+
+    public PaymentDTO(String payid, String amount, String payDate, String payPatient, String states) {
+        this.paymentId = payid;
+        this.amount = Double.parseDouble(amount);
+        this.paymentDate = payDate;
+        this.patientId = payPatient;
+        this.status = states;
+
     }
+}
 
 
