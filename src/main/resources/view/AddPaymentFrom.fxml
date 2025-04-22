@@ -1,14 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.cw.controller.AddPaymentConteoller"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="490.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.cw.controller.AddPaymentConteoller">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="636.0" layoutX="54.0" layoutY="38.0" style="-fx-opacity: 0.4;">
+         <image>
+            <Image url="@../style/lo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="34.0" layoutY="89.0" prefHeight="31.0" prefWidth="101.0" text="Payment">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="242.0" prefHeight="31.0" prefWidth="123.0" text="Payment Date">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnsave" layoutX="70.0" layoutY="393.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SAVE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btndelete" layoutX="314.0" layoutY="393.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="550.0" layoutY="393.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblid" layoutX="183.0" layoutY="89.0" prefHeight="31.0" prefWidth="320.0" text="1">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="76.0" layoutY="397.0">
+         <image>
+            <Image url="@../../../../../../Desktop/ORM-CW%209/src/main/resources/view/images/save.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="29.0" layoutY="189.0" prefHeight="31.0" prefWidth="111.0" text="Amount">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="datepicker" layoutX="183.0" layoutY="245.0" onAction="#DatePickerOnAction" style="-fx-opacity: 0.7;" />
+      <Label fx:id="lbldate" layoutX="380.0" layoutY="242.0" prefHeight="31.0" prefWidth="162.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="combopatientid" layoutX="183.0" layoutY="139.0" onAction="#ComboPatientIdOnAction" prefWidth="150.0" style="-fx-opacity: 0.7;" />
+      <Label layoutX="29.0" layoutY="140.0" prefHeight="31.0" prefWidth="111.0" text="PatientID">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtamount" layoutX="184.0" layoutY="196.0" style="-fx-opacity: 0.7;" />
+      <Label layoutX="26.0" layoutY="290.0" prefHeight="31.0" prefWidth="101.0" text="Status">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPatientid" layoutX="352.0" layoutY="136.0" prefHeight="31.0" prefWidth="150.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPatientid1" layoutX="519.0" layoutY="136.0" prefHeight="31.0" prefWidth="69.0" text="Balance :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblbalance" layoutX="594.0" layoutY="137.0" prefHeight="31.0" prefWidth="111.0" text="00.00">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboStatus" layoutX="183.0" layoutY="293.0" onAction="#StatusComboOnAction" prefHeight="25.0" prefWidth="175.0" style="-fx-opacity: 0.7;" />
+      <Label fx:id="lblstatus" layoutX="393.0" layoutY="290.0" prefHeight="31.0" prefWidth="193.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="320.0" layoutY="24.0" prefHeight="18.0" prefWidth="185.0" text="ADD     PAYMENT ">
+         <font>
+            <Font name="System Bold Italic" size="17.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
