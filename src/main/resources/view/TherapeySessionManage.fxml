@@ -34,22 +34,17 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnsave" layoutX="35.0" layoutY="324.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="ADD">
+      <Button fx:id="btnsave" layoutX="78.0" layoutY="324.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="ADD">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btndelete" layoutX="397.0" layoutY="325.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
+      <Button layoutX="528.0" layoutY="325.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="568.0" layoutY="321.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnInvoice" layoutX="204.0" layoutY="325.0" mnemonicParsing="false" onAction="#InvoiecOnAction" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
+      <Button fx:id="btnInvoice" layoutX="280.0" layoutY="324.0" mnemonicParsing="false" onAction="#InvoiecOnAction" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -74,7 +69,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="41.0" layoutY="328.0">
+      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="84.0" layoutY="328.0">
          <image>
             <Image url="@../../../../../../Desktop/ORM-CW6/src/main/resources/view/images/save.png" />
          </image>
@@ -136,6 +131,16 @@
          </font>
       </Button>
       <Label layoutX="568.0" layoutY="115.0" prefHeight="31.0" prefWidth="81.0" text="Balanace">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblsesCount" layoutX="678.0" layoutY="240.0" prefHeight="31.0" prefWidth="50.0" text="  00">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="609.0" layoutY="240.0" prefHeight="31.0" prefWidth="62.0" text="Se Count">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

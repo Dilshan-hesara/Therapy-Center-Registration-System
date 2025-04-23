@@ -28,7 +28,7 @@
             <Image url="@../../../../../../Desktop/ORM-CW6/src/main/resources/view/images/save.png" />
          </image>
       </ImageView>
-      <Label layoutX="60.0" layoutY="58.0" prefHeight="31.0" prefWidth="101.0" text="RegistrationID">
+      <Label layoutX="48.0" layoutY="58.0" prefHeight="31.0" prefWidth="101.0" text="RegistrationID">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -38,35 +38,29 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnsave" layoutX="69.0" layoutY="324.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SAVE">
+      <Button fx:id="btnsave" layoutX="52.0" layoutY="276.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="309.0" style="-fx-background-color: #FFB8E0;" text="REGISTOR PATITENT">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnupdate" layoutX="255.0" layoutY="324.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
+      <Button fx:id="btndelete" layoutX="438.0" layoutY="321.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0; -fx-opacity: 0;" text="DELETE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btndelete" layoutX="438.0" layoutY="321.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
+      <Button layoutX="574.0" layoutY="321.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0; -fx-opacity: 0;" text="RESET">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="574.0" layoutY="321.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <TableView fx:id="RegistrationTable" layoutX="16.0" layoutY="371.0" onMouseClicked="#TableOnClicked" prefHeight="182.0" prefWidth="719.0" style="-fx-opacity: 0.9;">
+      <TableView fx:id="RegistrationTable" layoutX="16.0" layoutY="319.0" onMouseClicked="#TableOnClicked" prefHeight="234.0" prefWidth="706.0" style="-fx-opacity: 0.9;">
          <columns>
             <TableColumn fx:id="colregid" prefWidth="93.99997234344482" text="RegistrationID" />
-            <TableColumn fx:id="colpatid" prefWidth="96.0000228881836" text="PatientID" />
-            <TableColumn fx:id="colproid" prefWidth="79.33331298828125" text="ProgramID" />
-            <TableColumn fx:id="coldate" prefWidth="118.0" text="RegistrationDate" />
-            <TableColumn fx:id="colfee" prefWidth="122.0" text="RegisterFee" />
-            <TableColumn fx:id="colbalance" prefWidth="104.79998779296875" text="Balance" />
-            <TableColumn fx:id="colcount" prefWidth="148.800048828125" text="SessionCount" />
+            <TableColumn fx:id="colpatid" prefWidth="120.79998016357422" text="PatientID" />
+            <TableColumn fx:id="colproid" prefWidth="91.20001220703125" text="ProgramID" />
+            <TableColumn fx:id="coldate" prefWidth="128.79998779296875" text="RegistrationDate" />
+            <TableColumn fx:id="colfee" prefWidth="136.00003051757812" text="RegisterFee" />
+            <TableColumn fx:id="colbalance" prefWidth="149.60003662109375" text="Balance" />
          </columns>
       </TableView>
       <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
@@ -98,16 +92,6 @@
          </font>
       </Label>
       <Label fx:id="lbldate" layoutX="394.0" layoutY="179.0" prefHeight="31.0" prefWidth="225.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="54.0" layoutY="281.0" prefHeight="31.0" prefWidth="123.0" text="Session Count">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblcount" layoutX="209.0" layoutY="281.0" prefHeight="31.0" prefWidth="320.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
