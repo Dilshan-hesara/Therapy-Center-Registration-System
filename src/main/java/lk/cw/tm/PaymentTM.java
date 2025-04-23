@@ -13,7 +13,7 @@ public class PaymentTM {
     private String paymentId;
     private String patientId;
     private double amount;
-    private Date paymentDate;
+    private String paymentDate;
     private String Status;
 
 
