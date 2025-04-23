@@ -255,7 +255,7 @@ public class TherapeySessionController implements Initializable {
 
 
         // i want save  payment table payment
-        String payid  = "P005";
+        String payid  = "P008";
         String amount = txtPay.getText();
         String payDate = lbldate.getText();
 //        String payDate = "22";
