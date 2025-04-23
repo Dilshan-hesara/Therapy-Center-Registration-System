@@ -38,6 +38,9 @@ public class DAOFactory {
 
                 case PAYMENT:
                     return new PaymentDAOImpl();
+
+                    case ADDPAYMENT:
+                        return new AddPayDAOImpl();
             default:
                 return null;
         }

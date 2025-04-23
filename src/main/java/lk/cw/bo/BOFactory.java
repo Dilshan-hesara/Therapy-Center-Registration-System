@@ -42,6 +42,9 @@ public class BOFactory {
             case PAYMENT:
                 return  new PaymentBOImpl();
 
+                case ADDPAYMENT:
+                    return new AddPayBOImpl();
+
             default:
                 return null;
         }
