@@ -3,6 +3,7 @@ package lk.cw.bo.custom.impl;
 import lk.cw.bo.custom.TherapySessionBO;
 import lk.cw.config.FactoryConfiguration;
 import lk.cw.dao.DAOFactory;
+import lk.cw.dao.custom.AddPayDAO;
 import lk.cw.dao.custom.TherapySessionDAO;
 import lk.cw.dto.TherapySessionDTO;
 import lk.cw.entity.Patient;
@@ -21,6 +22,56 @@ public class TherapySessionBOImpl implements TherapySessionBO {
 
     TherapySessionDAO therapySessionDAO = (TherapySessionDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.THERAPYSESSION);
 
+   AddPayDAO addPayDAO =(AddPayDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ADDPAYMENT);
+//    @Override
+//    public boolean save(TherapySessionDTO therapySessionDTO) throws IOException {
+//
+//        Session session = FactoryConfiguration.getInstance().getSession();
+//        Transaction transaction = session.beginTransaction();
+//
+//
+//        try {
+//            // Therapist සහ Patient entity objects ලබා ගන්නවා
+//            Therapist therapist = session.get(Therapist.class, therapySessionDTO.getTherapistId());
+//            Patient patient = session.get(Patient.class, therapySessionDTO.getPatientId());
+//            if (therapist == null || patient == null) {
+//                return false;
+//            }
+//
+//            // Therapy_Session entity එක create කරනවා
+//            Therapy_Session therapySession = new Therapy_Session(
+//                    therapySessionDTO.getSessionId(),
+//                    Date.valueOf(therapySessionDTO.getSessionDate().toLocalDate()),
+//                    therapySessionDTO.getSessionTime(),
+//                    therapySessionDTO.getStatus(),
+//                    therapist,
+//                    patient
+//            );
+//
+//            boolean isSaved = therapySessionDAO.save(therapySession);
+//            if (!isSaved) {
+//                transaction.rollback();
+//                return false;
+//            }
+//            boolean isSaved2 = addPayDAO.save(therapySession.paymentDTOS());
+//            if (!isSaved2) {
+//                transaction.rollback();
+//                return false;
+//            }
+//
+//            transaction.commit();
+//            return true;
+//        } catch (Exception e) {
+//            transaction.rollback();
+//            e.printStackTrace();
+//            return false;
+//        } finally {
+//            session.close();
+//        }
+//
+//        return isSaved;
+//    }
+//
     @Override
     public boolean save(TherapySessionDTO therapySessionDTO) throws IOException, SQLException {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -50,6 +101,16 @@ public class TherapySessionBOImpl implements TherapySessionBO {
                 transaction.rollback();
                 return false;
             }
+            boolean isSaved2 = addPayDAO.save(therapySessionDTO.getPaymentDTOS());
+
+            if (!isSaved2) {
+                System.out.println("wdfege");
+
+                transaction.rollback();
+                return false;
+            }
+            System.out.println("wdfege");
+
 
             transaction.commit();
             return true;
@@ -122,4 +183,6 @@ public class TherapySessionBOImpl implements TherapySessionBO {
     public boolean delete(String ID) throws SQLException, IOException {
         return therapySessionDAO.delete(ID);
     }
+
+
 }
