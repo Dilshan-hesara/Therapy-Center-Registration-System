@@ -15,6 +15,7 @@ public class PatientRegistrationTM {
     private String programId;
     private Date registrationDate;
     private int sessionCount;
-
+    private double registerFee;
+    private double balance;
 
 }

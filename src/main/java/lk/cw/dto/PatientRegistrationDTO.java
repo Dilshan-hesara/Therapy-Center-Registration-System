@@ -15,6 +15,8 @@ public class PatientRegistrationDTO {
     private String programId;
     private Date registrationDate;
     private int sessionCount;
+    private double registerFee;
+    private double balance;
 
 
     public PatientRegistrationDTO(String registrationId, String patientId, String programId, String registrationDate) {
@@ -22,6 +24,17 @@ public class PatientRegistrationDTO {
         this.patientId = patientId;
         this.programId = programId;
         this.registrationDate = Date.valueOf(registrationDate);
+
+    }
+
+    public PatientRegistrationDTO(String registrationId, String patientId, String programId, String registrationDate, double registerFee, double balance) {
+
+        this.registrationId = registrationId;
+        this.patientId = patientId;
+        this.programId = programId;
+        this.registrationDate = Date.valueOf(registrationDate);
+        this.registerFee = registerFee;
+        this.balance = balance;
 
     }
 }
