@@ -113,6 +113,35 @@ public class PatientRegDAOImpl implements PatientRegDAO {
 
         return update > 0;
     }
+
+    @Override
+    public int getSessionCount(String patientId) throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        int count = 0;
+
+        try {
+            Query<Integer> query = session.createQuery(
+                    "SELECT pr.sessionCount FROM Patient_Registration pr WHERE pr.patient.id = :pid",
+                    Integer.class
+            );
+            query.setParameter("pid", patientId);
+
+            Integer result = query.uniqueResult();
+            count = result != null ? result : 0;
+
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return count;
+    }
+
+
     @Override
     public double getBalanceByPatientId(String patientId) throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();

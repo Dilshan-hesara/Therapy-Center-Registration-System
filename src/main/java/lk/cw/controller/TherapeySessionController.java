@@ -156,6 +156,7 @@ public class TherapeySessionController implements Initializable {
         String selectedID = combopatientid.getValue();
         PatientDTO patientDTO = patientBO.findById(selectedID);
 
+        getSessionCount(selectedID);
         if (patientDTO != null) {
             lblpatientname.setText(patientDTO.getName());
         }
@@ -166,8 +167,16 @@ public class TherapeySessionController implements Initializable {
 
             //checkStates();
         }
+
     }
 
+    PatientRegDAO patientRegDAO = new PatientRegDAOImpl();
+    private void getSessionCount(String selectedID) throws IOException {
+        String patienid = selectedID;
+       String sc = String.valueOf(patientRegDAO.getSessionCount(patienid));
+        System.out.println(sc);
+
+    }
 
 
     @FXML
