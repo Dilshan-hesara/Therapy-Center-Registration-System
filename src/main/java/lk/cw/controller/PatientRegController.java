@@ -13,6 +13,8 @@ import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.PatientBO;
 import lk.cw.bo.custom.PatientRegBO;
 import lk.cw.bo.custom.TherapyProgramBO;
+import lk.cw.dao.custom.PatientRegDAO;
+import lk.cw.dao.custom.impl.PatientRegDAOImpl;
 import lk.cw.dto.PatientDTO;
 import lk.cw.dto.PatientRegistrationDTO;
 import lk.cw.dto.TherapyProgramDTO;
@@ -125,6 +127,8 @@ public class PatientRegController implements Initializable {
             lblpatientid.setText(patientDTO.getName());
         }
     }
+
+
 
     @FXML
     void ComboProgramIdOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
@@ -256,6 +260,8 @@ public class PatientRegController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+
     private void loadProgramIDs() throws SQLException, ClassNotFoundException, IOException {
         ArrayList<String> programIds = therapyProgramBO.getAllProgramIDs();
         comboprogramId.getItems().addAll(programIds);
