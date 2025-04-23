@@ -139,6 +139,11 @@ public class AddPayDAOImpl implements AddPayDAO {
         }
     }
 
+    @Override
+    public boolean saved(PaymentDTO paymentDTO) {
+        return false;
+    }
+
 //    @Override
 //    public boolean save(ArrayList<PaymentDTO> paymentDTOS) throws IOException {
 ////        saved(paymentDTOS)

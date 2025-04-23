@@ -102,7 +102,7 @@ public class PatientRegController implements Initializable {
         colpatid.setCellValueFactory(new PropertyValueFactory<>("patientId"));
         colproid.setCellValueFactory(new PropertyValueFactory<>("programId"));
         coldate.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
-        colcount.setCellValueFactory(new PropertyValueFactory<>("sessionCount"));
+       // colcount.setCellValueFactory(new PropertyValueFactory<>("sessionCount"));
         colfee.setCellValueFactory(new PropertyValueFactory<>("registerFee"));
         colbalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
 
@@ -217,7 +217,7 @@ public class PatientRegController implements Initializable {
             combopatientid.setValue(patientRegistrationTM.getPatientId());
             comboprogramId.setValue(patientRegistrationTM.getProgramId());
             lbldate.setText(String.valueOf(patientRegistrationTM.getRegistrationDate()));
-            lblcount.setText(String.valueOf(patientRegistrationTM.getSessionCount()));
+            //lblcount.setText(String.valueOf(patientRegistrationTM.getSessionCount()));
             txtfee.setText(String.valueOf(patientRegistrationTM.getRegisterFee()));
 
 
@@ -312,12 +312,12 @@ public class PatientRegController implements Initializable {
 
         btndelete.setDisable(true);
         btnsave.setDisable(false);
-        btnupdate.setDisable(true);
+        //btnupdate.setDisable(true);
 
         lblpatientid.setText("");
         lblprogramid.setText("");
         lbldate.setText("");
-        lblcount.setText("");
+        //lblcount.setText("");
 
 
     }

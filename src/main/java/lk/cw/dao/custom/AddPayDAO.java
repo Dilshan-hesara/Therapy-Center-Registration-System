@@ -9,4 +9,6 @@ import java.util.ArrayList;
 
 public interface AddPayDAO extends CrudDAO<Payment> {
     boolean save(ArrayList<PaymentDTO> paymentDTOS) throws IOException;
+
+    boolean saved(PaymentDTO paymentDTO);
 }

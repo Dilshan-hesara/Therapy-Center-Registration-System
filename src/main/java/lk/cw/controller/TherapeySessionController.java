@@ -16,7 +16,9 @@ import lk.cw.bo.custom.TherapySessionBO;
 import lk.cw.bo.custom.impl.PatientRegBOImpl;
 import lk.cw.bo.custom.impl.TherapySessionBOImpl;
 import lk.cw.config.FactoryConfiguration;
+import lk.cw.dao.custom.AddPayDAO;
 import lk.cw.dao.custom.PatientRegDAO;
+import lk.cw.dao.custom.impl.AddPayDAOImpl;
 import lk.cw.dao.custom.impl.PatientRegDAOImpl;
 import lk.cw.dto.PatientDTO;
 import lk.cw.dto.PaymentDTO;
@@ -142,6 +144,7 @@ public class TherapeySessionController implements Initializable {
             loadPatientIDs();
             loadTableData();
             refreshPage();
+            LoadPayNextID();
         } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Fail to load LeaveID").show();
@@ -169,14 +172,26 @@ public class TherapeySessionController implements Initializable {
         }
 
     }
+    AddPayDAO payDAO = new AddPayDAOImpl();
+
+    String PAYID;
+    private void LoadPayNextID() throws SQLException, IOException {
+        String nextID = payDAO.getNextId();
+        PAYID = nextID;
+    }
+
+    @FXML
+    private Label lblsesCount;
 
     PatientRegDAO patientRegDAO = new PatientRegDAOImpl();
     private void getSessionCount(String selectedID) throws IOException {
         String patienid = selectedID;
        String sc = String.valueOf(patientRegDAO.getSessionCount(patienid));
         System.out.println(sc);
+        lblsesCount.setText(sc);
 
     }
+
 
 
     @FXML
@@ -264,7 +279,7 @@ public class TherapeySessionController implements Initializable {
 
 
         // i want save  payment table payment
-        String payid  = "P008";
+        String payid  = PAYID;
         String amount = txtPay.getText();
         String payDate = lbldate.getText();
 //        String payDate = "22";

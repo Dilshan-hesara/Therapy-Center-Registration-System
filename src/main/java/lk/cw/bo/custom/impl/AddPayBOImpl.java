@@ -4,10 +4,13 @@ import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.AddPayBO;
 import lk.cw.config.FactoryConfiguration;
 import lk.cw.dao.DAOFactory;
+import lk.cw.dao.custom.AddPayDAO;
 import lk.cw.dao.custom.PatientRegDAO;
 import lk.cw.dao.custom.PaymentDAO;
+import lk.cw.dao.custom.impl.AddPayDAOImpl;
 import lk.cw.dto.PaymentDTO;
 import lk.cw.entity.Patient;
+import lk.cw.entity.Patient_Registration;
 import lk.cw.entity.Payment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,6 +22,7 @@ import java.util.List;
 
 public class AddPayBOImpl implements AddPayBO {
 
+    AddPayDAO addPayDAO = new AddPayDAOImpl();
     PaymentDAO paymentDAO = (PaymentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PAYMENT);
  //   PatientRegistrationBO patientRegistrationBO = (PatientRegistrationBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PATIENT_REGISTRATION);
    // TherapySessionBO therapySessionBO = (TherapySessionBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPY_SESSION);
