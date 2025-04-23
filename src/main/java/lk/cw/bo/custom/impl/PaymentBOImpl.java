@@ -52,7 +52,7 @@ public class PaymentBOImpl implements PaymentBO {
             //    paymentDTO.setPatientId("N/A");
            // }
             paymentDTO.setAmount(payment.getAmount());
-            paymentDTO.setPaymentDate(payment.getPaymentDate());
+            paymentDTO.setPaymentDate(String.valueOf(payment.getPaymentDate()));
             paymentDTO.setStatus(payment.getStatus());
             paymentDTOS.add(paymentDTO);
         }
