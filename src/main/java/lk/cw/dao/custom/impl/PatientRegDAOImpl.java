@@ -84,18 +84,48 @@ public class PatientRegDAOImpl implements PatientRegDAO {
     }
 
     @Override
-    public Patient_Registration findById(String patientId) throws SQLException, ClassNotFoundException {
-        Patient_Registration patient_registration = null;
+    public Patient_Registration findById(String patientId ) throws SQLException, ClassNotFoundException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
 
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            // Fetch the Student entity using the primary key
-            patient_registration = session.get(Patient_Registration.class, patientId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to fetch the student by ID: " + patientId);
-        }
+        Query<Patient_Registration> query = session.createNativeQuery(
+                "SELECT * FROM Patient_Registration WHERE patientId = :pid", Patient_Registration.class);
+        query.setParameter("pid", patientId);
 
-        return patient_registration;
+        Patient_Registration registration = query.uniqueResult();
+
+        transaction.commit();
+        session.close();
+        return registration;
+
     }
+    //
+    @Override
+    public boolean updateBalance(String patientId) throws SQLException, ClassNotFoundException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("UPDATE Patient_Registration pr SET pr.balance = 0 WHERE pr.patient.patientId = :patientId");
+        query.setParameter("patientId", patientId);
+        int update = query.executeUpdate();
+        transaction.commit();
+        session.close();
+
+        return update > 0;
+    }
+    @Override
+    public double getBalanceByPatientId(String patientId) throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Double balance = session.createQuery("SELECT pr.balance FROM Patient_Registration pr WHERE pr.patient.patientId = :patientId", Double.class)
+                .setParameter("patientId", patientId).uniqueResult();
+
+        transaction.commit();
+        session.close();
+        return balance != null ? balance : 0.00;
+    }
+
+
 
 }
