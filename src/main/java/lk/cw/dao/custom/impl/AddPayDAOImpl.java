@@ -98,16 +98,32 @@ public class AddPayDAOImpl implements AddPayDAO {
 //                // Add any other fields you want to print
 //            }
 
+//            for (PaymentDTO dto : paymentDTOS) {
+//                Payment payment = new Payment(
+//                        dto.getPaymentId(),//P005
+//                        dto.getStatus(),//PAY PENDING
+//                        dto.getAmount(),//23
+//
+//                        dto.getPaymentDate(),//
+//
+//                        dto.getPatientId() //P001
+//                );
+//                session.save(payment);
+//            }
+
             for (PaymentDTO dto : paymentDTOS) {
+                System.out.println("patientId = " + dto.getPatientId()); // DEBUG
+
+                Patient patient = session.get(Patient.class, dto.getPatientId());
+
                 Payment payment = new Payment(
                         dto.getPaymentId(),
                         dto.getStatus(),
                         dto.getAmount(),
-
                         dto.getPaymentDate(),
-
-                        dto.getPatientId()
+                        patient
                 );
+
                 session.save(payment);
             }
 
