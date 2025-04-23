@@ -21,6 +21,9 @@ public class PatientRegBOImpl implements PatientRegBO {
 
     PatientRegDAO patientRegistrationDAO = (PatientRegDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PATIENT_REG);
 
+
+   // PatientRegistrationDAO patientRegistrationDAO = (PatientRegistrationDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PATIENT_REGISTRATION);
+
     @Override
     public boolean save(PatientRegistrationDTO patientRegistrationDTO) throws IOException, SQLException {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -36,7 +39,9 @@ public class PatientRegBOImpl implements PatientRegBO {
                 patientRegistrationDTO.getRegistrationId(),
                 patient,
                 therapyProgram,
-                patientRegistrationDTO.getRegistrationDate()
+                patientRegistrationDTO.getRegistrationDate(),
+                patientRegistrationDTO.getRegisterFee(),
+                patientRegistrationDTO.getBalance()
         );
         return patientRegistrationDAO.save(patient_registration);
     }
@@ -53,33 +58,18 @@ public class PatientRegBOImpl implements PatientRegBO {
 
         for (Patient_Registration patientRegistration : patientRegistrations) {
             PatientRegistrationDTO patientRegistrationDTO = new PatientRegistrationDTO();
+
             patientRegistrationDTO.setRegistrationId(patientRegistration.getRegistrationId());
-            if (patientRegistration.getPatient() != null) {
                 patientRegistrationDTO.setPatientId(patientRegistration.getPatient().getPatientId());
-            } else {
-                patientRegistrationDTO.setPatientId("N/A");
-            }
-            if (patientRegistration.getTherapyProgram() != null) {
                 patientRegistrationDTO.setProgramId(patientRegistration.getTherapyProgram().getProgramId());
-            } else {
-                patientRegistrationDTO.setProgramId("N/A");
-            }
             patientRegistrationDTO.setRegistrationDate(patientRegistration.getRegistrationDate());
+            patientRegistrationDTO.setRegisterFee(patientRegistration.getRegisterFee());
+            patientRegistrationDTO.setBalance(patientRegistration.getBalance());
+            patientRegistrationDTO.setSessionCount(patientRegistration.getSessionCount());
             patientRegistrationDTOs.add(patientRegistrationDTO);
         }
         return patientRegistrationDTOs;
     }
-    @Override
-    public ArrayList<String> getAllProgramIDs() throws SQLException, ClassNotFoundException, IOException {
-        ArrayList<String> allIds = new ArrayList<>();
-        ArrayList<String>all = therapyProgramDAO.getAllProgramIDs();
-        for(String p: all){
-            allIds.add(p);
-
-        }
-        return allIds;
-    }
-
 
     @Override
     public boolean update(PatientRegistrationDTO patientRegistrationDTO) throws IOException, SQLException {
@@ -97,7 +87,9 @@ public class PatientRegBOImpl implements PatientRegBO {
                 patientRegistrationDTO.getRegistrationId(),
                 patient,
                 therapyProgram,
-                patientRegistrationDTO.getRegistrationDate()
+                patientRegistrationDTO.getRegistrationDate(),
+                patientRegistrationDTO.getRegisterFee(),
+                patientRegistrationDTO.getBalance()
         );
         return patientRegistrationDAO.update(patient_registration);    }
 
@@ -106,13 +98,16 @@ public class PatientRegBOImpl implements PatientRegBO {
         return patientRegistrationDAO.delete(ID);
     }
 
+
+
+
     @Override
-    public Patient_Registration findById(String patientId) throws SQLException, ClassNotFoundException {
-        return patientRegistrationDAO.findById(patientId);
+    public boolean updateBalance(String patientId) throws SQLException, ClassNotFoundException, IOException {
+        return patientRegistrationDAO.updateBalance(patientId);
     }
 
-    TherapyProgramDAO therapyProgramDAO = (TherapyProgramDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.THERAPYOROGRAM);
-
-
-
+    @Override
+    public double getBalanceByPatientId(String patientId) throws IOException {
+        return patientRegistrationDAO.getBalanceByPatientId(patientId);
+    }
 }

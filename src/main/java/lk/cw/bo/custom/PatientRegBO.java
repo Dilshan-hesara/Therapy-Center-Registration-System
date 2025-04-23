@@ -10,15 +10,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface PatientRegBO extends SuperBO {
-
     public boolean save(PatientRegistrationDTO patientRegistrationDTO) throws IOException, SQLException;
     public String getNextId() throws SQLException, IOException;
     public List<PatientRegistrationDTO> getAll() throws SQLException, IOException;
     public boolean update(PatientRegistrationDTO patientRegistrationDTO) throws IOException, SQLException;
     public boolean delete(String ID) throws SQLException, IOException;
-    public Patient_Registration findById(String patientId) throws SQLException, ClassNotFoundException;
-
-
-    public List<String> getAllProgramIDs() throws SQLException, ClassNotFoundException, IOException;
+    public boolean updateBalance(String patientId) throws SQLException, ClassNotFoundException, IOException;
+    public double getBalanceByPatientId(String patientId) throws IOException;
 
 }
