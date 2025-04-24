@@ -2,13 +2,17 @@ package lk.cw.dao.custom.impl;
 
 import lk.cw.config.FactoryConfiguration;
 import lk.cw.dao.custom.PatientRegDAO;
+import lk.cw.dto.PaymentDTO;
+import lk.cw.entity.Patient;
 import lk.cw.entity.Patient_Registration;
+import lk.cw.entity.Payment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PatientRegDAOImpl implements PatientRegDAO {
@@ -140,6 +144,59 @@ public class PatientRegDAOImpl implements PatientRegDAO {
 
         return count;
     }
+
+    @Override
+    public boolean reduesBal(ArrayList<PaymentDTO> paymentDTOS) throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            for (PaymentDTO dto : paymentDTOS) {
+
+                Patient_Registration registration = session.createQuery(
+                                "FROM Patient_Registration pr WHERE pr.patient.patientId = :pid", Patient_Registration.class)
+                        .setParameter("pid", dto.getPatientId())
+                        .uniqueResult();
+
+                if (registration != null) {
+                    double oldBalance = registration.getBalance();
+                    double newBalance = oldBalance - dto.getAmount();
+                    registration.setBalance(newBalance);
+
+                    System.out.println("Old" + oldBalance + ", New " + newBalance);
+
+                    session.update(registration);
+                } else {
+                    transaction.rollback();
+                    session.close();
+                    return false;
+                }
+            }
+
+            transaction.commit();
+            return true;
+
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
+
+    double getBalancePatientId(String patientId) throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Double balance = session.createQuery("SELECT pr.balance FROM Patient_Registration pr WHERE pr.patient.patientId = :patientId", Double.class)
+                .setParameter("patientId", patientId).uniqueResult();
+
+        transaction.commit();
+        session.close();
+        return balance != null ? balance : 0.00;
+    }
+
 
 
     @Override
