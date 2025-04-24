@@ -4,9 +4,11 @@ import lk.cw.bo.custom.TherapySessionBO;
 import lk.cw.config.FactoryConfiguration;
 import lk.cw.dao.DAOFactory;
 import lk.cw.dao.custom.AddPayDAO;
+import lk.cw.dao.custom.PatientRegDAO;
 import lk.cw.dao.custom.TherapySessionDAO;
 import lk.cw.dto.TherapySessionDTO;
 import lk.cw.entity.Patient;
+import lk.cw.entity.Patient_Registration;
 import lk.cw.entity.Therapist;
 import lk.cw.entity.Therapy_Session;
 import org.hibernate.Session;
@@ -22,8 +24,11 @@ public class TherapySessionBOImpl implements TherapySessionBO {
 
     TherapySessionDAO therapySessionDAO = (TherapySessionDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.THERAPYSESSION);
 
+
    AddPayDAO addPayDAO =(AddPayDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ADDPAYMENT);
-//    @Override
+
+
+   //    @Override
 //    public boolean save(TherapySessionDTO therapySessionDTO) throws IOException {
 //
 //        Session session = FactoryConfiguration.getInstance().getSession();
@@ -72,6 +77,8 @@ public class TherapySessionBOImpl implements TherapySessionBO {
 //        return isSaved;
 //    }
 //
+PatientRegDAO patientRegistrationDAO = (PatientRegDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PATIENT_REG);
+
     @Override
     public boolean save(TherapySessionDTO therapySessionDTO) throws IOException, SQLException {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -112,8 +119,19 @@ public class TherapySessionBOImpl implements TherapySessionBO {
             System.out.println("wdfege");
 
 
+            boolean isSaved3 = patientRegistrationDAO.reduesBal(therapySessionDTO.getPaymentDTOS());
+            if (!isSaved3) {
+                transaction.rollback();
+                return false;
+            }
+
             transaction.commit();
             return true;
+
+        //    Patient patient = session.get(Patient.class, dto.getPatientId());
+
+
+
         } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
