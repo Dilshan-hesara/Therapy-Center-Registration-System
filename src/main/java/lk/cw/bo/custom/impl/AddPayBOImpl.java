@@ -30,7 +30,10 @@ public class AddPayBOImpl implements AddPayBO {
 
     @Override
     public boolean save(PaymentDTO paymentDTO) throws IOException, SQLException, ClassNotFoundException {
+
+
         Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             Patient patient = session.get(Patient.class, paymentDTO.getPatientId());
 
@@ -48,7 +51,24 @@ public class AddPayBOImpl implements AddPayBO {
             );
 
             addPayDAO.save(payment);
+
+            Patient_Registration patient_registration = patientRegistrationDAO.findById(paymentDTO.getPatientId());
+            if(patient_registration == null) {
+                transaction.rollback();
+                return false;
+            }
+            double currentBalance = patient_registration.getBalance();
+            double newBalance = currentBalance - paymentDTO.getAmount();
+            if(newBalance < 0) {
+                transaction.rollback();
+                return false;
+            }
+            patient_registration.setBalance(newBalance);
+            session.update(patient_registration);
+
+            transaction.commit();
             return true;
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
