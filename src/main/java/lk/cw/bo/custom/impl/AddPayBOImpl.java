@@ -30,49 +30,33 @@ public class AddPayBOImpl implements AddPayBO {
 
     @Override
     public boolean save(PaymentDTO paymentDTO) throws IOException, SQLException, ClassNotFoundException {
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction = session.beginTransaction();
-//        try{
-//            Patient patient = session.get(Patient.class, paymentDTO.getPatientId());
-//            if (patient == null) {
-//                return false;
-//            }
-//            Payment payment = new Payment(
-//                    paymentDTO.getPaymentId(),
-//                    patient,
-//                    paymentDTO.getAmount(),
-//                    paymentDTO.getPaymentDate(),
-//                    paymentDTO.getStatus()
-//            );
-//            session.save(payment);
-//
-//            Patient_Registration patient_registration = patientRegistrationDAO.findById(paymentDTO.getPatientId());
-//            if(patient_registration == null) {
-//                transaction.rollback();
-//                return false;
-//            }
-//            double currentBalance = patient_registration.getBalance();
-//            double newBalance = currentBalance - paymentDTO.getAmount();
-//            if(newBalance < 0) {
-//                transaction.rollback();
-//                return false;
-//            }
-//            patient_registration.setBalance(newBalance);
-//            session.update(patient_registration);
-//
-//            transaction.commit();
-//            return true;
-//
-//        }catch (Exception e){
-//            transaction.rollback();
-//            e.printStackTrace();
-//            return false;
-//        }finally {
-//            session.close();
-//        }
+        Session session = FactoryConfiguration.getInstance().getSession();
+        try {
+            Patient patient = session.get(Patient.class, paymentDTO.getPatientId());
 
-        return false;
+            if (patient == null) {
+                System.out.println("Patient not found for PatientID: " + paymentDTO.getPatientId());
+                return false;
+            }
+
+            Payment payment = new Payment(
+                    paymentDTO.getPaymentId(),
+                    patient, // Patient object
+                    paymentDTO.getAmount(),
+                    paymentDTO.getPaymentDate(),
+                    paymentDTO.getStatus()
+            );
+
+            addPayDAO.save(payment);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
+
+
 
 
     @Override

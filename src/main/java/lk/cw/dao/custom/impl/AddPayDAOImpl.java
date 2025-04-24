@@ -44,15 +44,47 @@ public class AddPayDAOImpl implements AddPayDAO {
         return List.of();
     }
 
+//    @Override
+//    public boolean save(Payment payment) throws SQLException, IOException {
+//        Session session = FactoryConfiguration.getInstance().getSession();
+//        Transaction transaction = session.beginTransaction();
+//        session.save(payment);
+//        transaction.commit();
+//        session.close();
+//        return true;
+//    }
+
     @Override
     public boolean save(Payment payment) throws SQLException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        session.save(payment);
-        transaction.commit();
-        session.close();
-        return true;
+
+        try {
+         //    DB එකෙන් Patient object එක load කරනවා
+            Patient patient = session.get(Patient.class, payment.getPatient().getPatientId());
+
+            if (patient == null) {
+                System.out.println("❌ Patient not found for ID: " + payment.getPatient().getPatientId());
+                return false;
+            }
+
+           ///  DB එකෙන් load කල Patient object එක Payment එකට set කරනවා
+            payment.setPatient(patient);
+
+            session.save(payment);
+            transaction.commit();
+            return true;
+
+        } catch (Exception e) {
+            transaction.rollback(); // error එකක් ආවොත් rollback
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close(); // session එක close කරන්න අමතක කරන්න එපා
+        }
     }
+
+
 
     @Override
     public boolean update(Payment payment) throws SQLException, IOException {
