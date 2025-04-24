@@ -121,25 +121,38 @@ public class AddPaymentConteoller implements Initializable {
     @FXML
     void SaveOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         String paymentId = lblid.getText();
-        String patientId = combopatientid.getValue();
+      //  String patientId = combopatientid.getValue(); // Ensure this returns a valid PatientID
+        String patientId = lblstatus.getText();// Ensure this returns a valid PatientID
         String paymentDate = lbldate.getText();
-        String status = lblstatus.getText();
-        String amount = txtamount.getText();
+     //   String status = lblstatus.getText();
+        String status = combopatientid.getValue();
+        double amount = Double.parseDouble(txtamount.getText());
 
-        System.out.println(paymentId);
-        System.out.println(patientId);
-        System.out.println(paymentDate);
-        System.out.println(status);
-        System.out.println(amount);
+        System.out.println("Payment ID: " + paymentId);
+        System.out.println("Patient ID: " + patientId);
+        System.out.println("Payment Date: " + paymentDate);
+        System.out.println("Status: " + status);
+        System.out.println("Amount: " + amount);
 
-        //PaymentDTO paymentDTO = new PaymentDTO(paymentId, patientId, amount, paymentDate, status);
+        if (patientId == null || patientId.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a valid patient.").show();
+            return;
+        }
 
- //       boolean isSaved = addPayBO.save(paymentDTO);
-//        if (isSaved) {
-//            new Alert(Alert.AlertType.INFORMATION, "Payment Saved SUCCESSFULLY 😎").show();
-//        } else {
-//            new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
-//        }
+        PaymentDTO paymentDTO = new PaymentDTO(paymentId, patientId, amount, paymentDate, status);
+        System.out.println("PaymentDTO Created:");
+        System.out.println("Payment ID: " + paymentDTO.getPaymentId());
+        System.out.println("Patient ID: " + paymentDTO.getPatientId());
+        System.out.println("Amount: " + paymentDTO.getAmount());
+        System.out.println("Payment Date: " + paymentDTO.getPaymentDate());
+        System.out.println("Status: " + paymentDTO.getStatus());
+
+        boolean isSaved = addPayBO.save(paymentDTO);
+        if (isSaved) {
+            new Alert(Alert.AlertType.INFORMATION, "Payment Saved SUCCESSFULLY 😎").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
+        }
     }
 
 

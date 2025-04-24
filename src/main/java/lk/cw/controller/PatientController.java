@@ -267,6 +267,7 @@ public class PatientController implements Initializable {
         stage.setScene(new Scene(load));
         stage.setTitle("Registration From");
 
+
         stage.initModality(Modality.APPLICATION_MODAL);
 
         Window underWindow = register.getScene().getWindow();
