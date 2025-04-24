@@ -44,6 +44,9 @@ public class Payment implements SuperEntity{
 
     }
 
+
+
+
     public Payment(String paymentId, String status, double amount, Date paymentDate, Patient patient) {
         this.paymentId = paymentId;
         this.amount = amount;

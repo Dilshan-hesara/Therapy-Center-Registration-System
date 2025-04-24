@@ -46,11 +46,11 @@ public class PaymentBOImpl implements PaymentBO {
         for (Payment payment : payments) {
             PaymentDTO paymentDTO = new PaymentDTO();
             paymentDTO.setPaymentId(payment.getPaymentId());
-          //  if (payment.getPatient() != null) {
+            if (payment.getPatient() != null) {
                 paymentDTO.setPatientId(payment.getPatient().getPatientId());
-         //   }else {
-            //    paymentDTO.setPatientId("N/A");
-           // }
+            }else {
+                paymentDTO.setPatientId("N/A");
+            }
             paymentDTO.setAmount(payment.getAmount());
             paymentDTO.setPaymentDate(String.valueOf(payment.getPaymentDate()));
             paymentDTO.setStatus(payment.getStatus());

@@ -18,7 +18,6 @@ import java.sql.Date;
     private String paymentDate;
     private String patientId;
 
-
     public PaymentDTO(String payid, String amount, String payDate, String payPatient, String states) {
         this.paymentId = payid;
         this.amount = Double.parseDouble(amount);
@@ -27,6 +26,18 @@ import java.sql.Date;
         this.status = states;
 
     }
+
+
+//    public PaymentDTO(String payid, String amount, String payDate, String payPatient, String states) {
+//        this.paymentId = payid;
+//        this.amount = Double.parseDouble(amount);
+//        this.paymentDate = payDate;
+//        this.patientId = payPatient;
+//        this.status = states;
+//
+//    }
+
+
 }
 
 
