@@ -10,15 +10,17 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+//import java.sql.SQLException;
 import java.sql.Date;
-import java.sql.SQLException;
+import lk.cw.bo.exception.SQLException;
+//import lk.cw.bo.exception.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddPayDAOImpl implements AddPayDAO {
 
     @Override
-    public String getNextId() throws SQLException, IOException {
+    public String getNextId() throws SQLException, IOException, java.io.IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         String hql = "SELECT l.paymentId FROM Payment l ORDER BY l.paymentId DESC";
