@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,6 +36,19 @@ public class PatientRegistrationDTO {
         this.registrationDate = Date.valueOf(registrationDate);
         this.registerFee = registerFee;
         this.balance = balance;
+
+    }
+    private ArrayList<PaymentDTO>paymentDTOS;
+
+    public PatientRegistrationDTO(String registrationId, String patientId, String programId, String registrationDate, double registerFee, double balance, ArrayList<PaymentDTO> paymentDTOS) {
+
+        this.registrationId = registrationId;
+        this.patientId = patientId;
+        this.programId = programId;
+        this.registrationDate = Date.valueOf(registrationDate);
+        this.registerFee = registerFee;
+        this.balance = balance;
+        this.paymentDTOS = paymentDTOS;
 
     }
 }
