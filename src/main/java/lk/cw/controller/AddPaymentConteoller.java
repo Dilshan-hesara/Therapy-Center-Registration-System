@@ -61,7 +61,7 @@ public class AddPaymentConteoller implements Initializable {
     @FXML
     private TextField txtamount;
 
-    private final String[] Status = {"Payment Completed","Incomplete"};
+    private final String[] Status = {"PAY-Completed","PAY-Incomplete"};
 
 
     @Override

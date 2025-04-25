@@ -254,10 +254,10 @@ public class TherapeySessionController implements Initializable {
         double redu = avPy - amount; // Now this is numeric subtraction
 
         if (redu == 0 ) {
-            states = "PAY COMPLETED";
+            states = "PAY-for Session[Completed]";
             System.out.println("C");
         } else {
-            states = "PAY PENDING";
+            states = "PAY-for Session";
             System.out.println("B");
         }
     }
@@ -269,7 +269,7 @@ public class TherapeySessionController implements Initializable {
 
 
 
-        //this is TAERAPEY Sesion table
+        // TAERAPEY Sesion table
         String sessionId = lblid.getText();
         String sessionDate = lbldate.getText();
         String sessionTime = txttime.getText();
@@ -278,7 +278,7 @@ public class TherapeySessionController implements Initializable {
         String patientId = combopatientid.getValue();
 
 
-        // i want save  payment table payment
+        //  payment table payment
         String payid  = PAYID;
         String amount = txtPay.getText();
         String payDate = lbldate.getText();
