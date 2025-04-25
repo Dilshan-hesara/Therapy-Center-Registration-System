@@ -85,14 +85,12 @@ PatientRegDAO patientRegistrationDAO = (PatientRegDAO) DAOFactory.getDaoFactory(
         Transaction transaction = session.beginTransaction();
 
         try {
-            // Therapist සහ Patient entity objects ලබා ගන්නවා
             Therapist therapist = session.get(Therapist.class, therapySessionDTO.getTherapistId());
             Patient patient = session.get(Patient.class, therapySessionDTO.getPatientId());
             if (therapist == null || patient == null) {
                 return false;
             }
 
-            // Therapy_Session entity එක create කරනවා
             Therapy_Session therapySession = new Therapy_Session(
                     therapySessionDTO.getSessionId(),
                     Date.valueOf(therapySessionDTO.getSessionDate().toLocalDate()),
@@ -102,7 +100,6 @@ PatientRegDAO patientRegistrationDAO = (PatientRegDAO) DAOFactory.getDaoFactory(
                     patient
             );
 
-            // Therapy Session save කරන DAO method එක call කරන්න
             boolean isSaved = therapySessionDAO.save(therapySession);
             if (!isSaved) {
                 transaction.rollback();

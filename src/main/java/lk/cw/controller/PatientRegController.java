@@ -306,7 +306,6 @@ public class PatientRegController implements Initializable {
     }
     private void loadTableData() {
         try {
-            // Fetch all Patient Registration records from database
             List<PatientRegistrationDTO> patientRegistrations = patientRegistrationBO.getAll();
             ObservableList<PatientRegistrationTM> registrationList = FXCollections.observableArrayList();
 
@@ -323,9 +322,8 @@ public class PatientRegController implements Initializable {
                 ));
             }
 
-            // Set the data to the TableView
             Platform.runLater(() -> {
-                RegistrationTable.setItems(registrationList);  // Refresh TableView data
+                RegistrationTable.setItems(registrationList);
             });
 
         } catch (SQLException e) {

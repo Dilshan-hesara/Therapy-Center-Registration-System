@@ -44,7 +44,7 @@ public class AddPayBOImpl implements AddPayBO {
 
             Payment payment = new Payment(
                     paymentDTO.getPaymentId(),
-                    patient, // Patient object
+                    patient,
                     paymentDTO.getAmount(),
                     paymentDTO.getPaymentDate(),
                     paymentDTO.getStatus()

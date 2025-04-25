@@ -251,7 +251,7 @@ public class TherapeySessionController implements Initializable {
         double avPy = Double.parseDouble(avPyStr);
         double amount = Double.parseDouble(amountStr);
 
-        double redu = avPy - amount; // Now this is numeric subtraction
+        double redu = avPy - amount;
 
         if (redu == 0 ) {
             states = "PAY-for Session[Completed]";

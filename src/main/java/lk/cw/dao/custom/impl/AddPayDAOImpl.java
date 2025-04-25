@@ -60,15 +60,13 @@ public class AddPayDAOImpl implements AddPayDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-         //    DB එකෙන් Patient object එක load කරනවා
             Patient patient = session.get(Patient.class, payment.getPatient().getPatientId());
 
             if (patient == null) {
-                System.out.println("❌ Patient not found for ID: " + payment.getPatient().getPatientId());
+             //   System.out.println("Patient  " + payment.getPatient().getPatientId());
                 return false;
             }
 
-           ///  DB එකෙන් load කල Patient object එක Payment එකට set කරනවා
             payment.setPatient(patient);
 
             session.save(payment);
@@ -76,11 +74,11 @@ public class AddPayDAOImpl implements AddPayDAO {
             return true;
 
         } catch (Exception e) {
-            transaction.rollback(); // error එකක් ආවොත් rollback
+            transaction.rollback();
             e.printStackTrace();
             return false;
         } finally {
-            session.close(); // session එක close කරන්න අමතක කරන්න එපා
+            session.close();
         }
     }
 

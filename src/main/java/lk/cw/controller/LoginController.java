@@ -58,9 +58,7 @@ uN =userName;
 
         System.out.println(dbPassword);
         try {
-            // Fetch the password for the given username
 
-            // Validate the password
             if (dbPassword != null && BCrypt.checkpw(password, dbPassword)) {
                 System.out.println("Login successful for user: " + userName);
 

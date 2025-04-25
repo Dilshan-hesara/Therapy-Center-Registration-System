@@ -108,7 +108,7 @@ public class PatientDAOImpl implements PatientDAO {
         Patient patient = null;
 
         try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            // Fetch the Student entity using the primary key
+
             patient = session.get(Patient.class, patientId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,7 +153,7 @@ public class PatientDAOImpl implements PatientDAO {
         return session.createQuery(
                         "SELECT p.id, p.name, ts.sessionDate, ts.sessionTime " +
                                 "FROM Patient p " +
-                                "JOIN p.therapySessions ts " + // `Therapy_Session` -> `therapySessions` (Correct field name)
+                                "JOIN p.therapySessions ts " +
                                 "WHERE ts.id = :sessionId", Object[].class)
                 .setParameter("sessionId", sessionId)
                 .list();

@@ -25,12 +25,11 @@ public class UserDAOImpl implements UserDAO {
         try {
             transaction = session.beginTransaction();
 
-            // SQL query to fetch the password based on the username
             String sql = "SELECT Password FROM User WHERE UserName = :userName";
             NativeQuery<String> query = session.createNativeQuery(sql, String.class);
-            query.setParameter("userName", userName); // Set the parameter
+            query.setParameter("userName", userName);
 
-            password = query.getSingleResult(); // Fetch the password
+            password = query.getSingleResult();
 
             transaction.commit();
         } catch (Exception e) {
@@ -122,12 +121,11 @@ public class UserDAOImpl implements UserDAO {
         try {
             transaction = session.beginTransaction();
 
-            // SQL query to fetch the role based on the username
             String sql = "SELECT Role FROM User WHERE UserName = :userName";
             NativeQuery<String> query = session.createNativeQuery(sql, String.class);
-            query.setParameter("userName", userName); // Set the parameter
+            query.setParameter("userName", userName);
 
-            role = query.getSingleResult(); // Fetch the role
+            role = query.getSingleResult();
 
             transaction.commit();
         } catch (Exception e) {
