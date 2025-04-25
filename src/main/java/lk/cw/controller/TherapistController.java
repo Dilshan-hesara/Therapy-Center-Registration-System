@@ -1,5 +1,6 @@
 package lk.cw.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.TherapistBO;
+import lk.cw.dao.custom.TherapyProgramDAO;
+import lk.cw.dao.custom.impl.TherapyProgramDAOImpl;
 import lk.cw.dto.TherapistDTO;
 import lk.cw.entity.Therapist;
 import lk.cw.tm.TherapistTM;
@@ -61,15 +64,34 @@ public class TherapistController implements Initializable {
     @FXML
     private TextField txtspecail;
 
+    @FXML
+    private ComboBox<String> txtspec;
+
+
     TherapistBO therapistBO = (TherapistBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPIST);
 
+    @FXML
+    void speciaOnAction(ActionEvent event) {
+        String selectedID = txtspec.getValue();
 
+        System.out.println(selectedID);
+
+    }
+
+
+    TherapyProgramDAO therapyProgramDAO = new TherapyProgramDAOImpl();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colid.setCellValueFactory(new PropertyValueFactory<>("therapistId"));
         colname.setCellValueFactory(new PropertyValueFactory<>("therapistName"));
         colspecail.setCellValueFactory(new PropertyValueFactory<>("specialization"));
         colavailable.setCellValueFactory(new PropertyValueFactory<>("availability"));
+
+
+        ArrayList<String> programList = therapyProgramDAO.getProgramList();
+        System.out.println(programList);
+        txtspec.getItems().addAll(programList);
+
         try {
             LoadNextID();
             loadTableData();
@@ -84,7 +106,8 @@ public class TherapistController implements Initializable {
     void SaveOnAction(ActionEvent event) {
         String therapistId = lblid.getText();
         String therapistName = txtname.getText();
-        String specialization = txtspecail.getText();
+//        String specialization = txtspecail.getText();
+        String specialization = txtspec.getValue();
         String availability = txtavailable.getText();
 
         try {
