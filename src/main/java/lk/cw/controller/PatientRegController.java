@@ -17,6 +17,7 @@ import lk.cw.dao.custom.PatientRegDAO;
 import lk.cw.dao.custom.impl.PatientRegDAOImpl;
 import lk.cw.dto.PatientDTO;
 import lk.cw.dto.PatientRegistrationDTO;
+import lk.cw.dto.PaymentDTO;
 import lk.cw.dto.TherapyProgramDTO;
 import lk.cw.tm.PatientRegistrationTM;
 
@@ -177,6 +178,8 @@ public class PatientRegController implements Initializable {
 
     @FXML
     void SaveOnAction(ActionEvent event) {
+
+
         String registrationId = lblid.getText();
         String patientId = combopatientid.getValue();
         String programId = comboprogramId.getValue();
@@ -187,14 +190,41 @@ public class PatientRegController implements Initializable {
 
         double balance = amount-registerFee;
 
+        ArrayList<PaymentDTO> paymentDTOS =new ArrayList<>();
+
+        String payid = "P003";
+
+//        String am = "200.00" ;
+        String am = String.valueOf(amount);
+        String States = "PAY-Registration";
+        String payDate = lbldate.getText();
+        String payPatient =combopatientid.getValue();
+
+        PaymentDTO paymentDTO = new PaymentDTO(
+                payid,
+                am,
+                payDate,
+                payPatient ,
+                States
+
+
+        );
+        paymentDTOS.add(paymentDTO);
+
+        System.out.println(payid);
+        System.out.println(payDate);
+        System.out.println(payPatient);
+        System.out.println(amount);
+        System.out.println(am);
+
         try{
             PatientRegistrationDTO patientRegistrationDTO = new PatientRegistrationDTO(
-                    registrationId,patientId,programId,registrationDate,registerFee,balance
+                    registrationId,patientId,programId,registrationDate,registerFee,balance,paymentDTOS
             );
-            boolean isRegistered = patientRegistrationBO.save(patientRegistrationDTO);
+            boolean isRegistered = patientRegistrationBO.saved(patientRegistrationDTO);
 
             if (isRegistered) {
-                refreshPage();  // UI එක refresh කරන්න
+                refreshPage();
                 new Alert(Alert.AlertType.INFORMATION, "PatientRegistration Saved SUCCESSFULLY 😎").show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
