@@ -45,6 +45,20 @@ public class TherapyProgramDAOImpl implements TherapyProgramDAO {
     }
 
     @Override
+    public ArrayList<String> getProgramList() {
+        ArrayList<String> programNames = new ArrayList<>();
+
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            List<String> names = session.createQuery("SELECT tp.programName FROM TherapyProgram tp", String.class).list();
+            programNames.addAll(names);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return programNames;
+    }
+
+    @Override
     public String getNextId() throws SQLException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();

@@ -14,4 +14,6 @@ public interface TherapyProgramDAO extends CrudDAO<TherapyProgram> {
 
     public TherapyProgram findById(String programId) throws SQLException, ClassNotFoundException ;
     public ArrayList<String> getAllProgramIDs() throws SQLException, ClassNotFoundException, IOException ;
+
+    ArrayList<String> getProgramList();
 }
