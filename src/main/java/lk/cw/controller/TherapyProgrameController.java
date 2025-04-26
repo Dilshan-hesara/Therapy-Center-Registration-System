@@ -1,5 +1,6 @@
 package lk.cw.controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -124,31 +125,247 @@ public class TherapyProgrameController implements Initializable {
         refreshPage();
     }
 
+//    @FXML
+//    void SaveOnAction(ActionEvent event) {
+//        String programId = lprogramid.getText();
+//        String programName = txtname.getText();
+//        String duration = txtdure.getText();
+//        double cost = Double.parseDouble(txtfee.getText());
+//        String Description = txtdes.getText();
+//
+//        if (programName.isEmpty()) {
+//            showAlert("Program name is required!");
+//            txtname.requestFocus();
+//            return;
+//        }
+//
+//// Check for letters only (including spaces, apostrophes, and hyphens)
+//        if (!programName.matches("^[a-zA-Z\\s'-]+$")) {
+//            showAlert("Program name can only contain letters, spaces, apostrophes, and hyphens!");
+//            txtname.requestFocus();
+//            return;
+//        }
+//
+//        // Validate Program ID
+//        if (programId.isEmpty()) {
+//            showAlert("Program ID is required!");
+//            lprogramid.requestFocus();
+//            return;
+//        }
+//
+//        // Validate Program Name
+//        if (programName.isEmpty()) {
+//            showAlert("Program name is required!");
+//            txtname.requestFocus();
+//            return;
+//        }
+//        if (programName.length() > 100) {
+//            showAlert("Program name cannot exceed 100 characters!");
+//            txtname.requestFocus();
+//            return;
+//        }
+//
+//        // Validate Duration
+//        if (duration.isEmpty()) {
+//            showAlert("Duration is required!");
+//            txtdure.requestFocus();
+//            return;
+//        }
+//        if (!duration.matches("^\\d+\\s*(weeks?|months?|years?)$")) {
+//            showAlert("Duration format invalid (e.g., '4 weeks', '6 months')");
+//            txtdure.requestFocus();
+//            return;
+//        }
+//
+//        // Validate Fee
+//        if (feeText.isEmpty()) {
+//            showAlert("Fee is required!");
+//            txtfee.requestFocus();
+//            return;
+//        }
+//        double cost;
+//        try {
+//            cost = Double.parseDouble(feeText);
+//            if (cost <= 0) {
+//                showAlert("Fee must be greater than 0!");
+//                txtfee.requestFocus();
+//                return;
+//            }
+//            if (cost > 999999.99) {
+//                showAlert("Fee cannot exceed 999,999.99!");
+//                txtfee.requestFocus();
+//                return;
+//            }
+//        } catch (NumberFormatException e) {
+//            showAlert("Fee must be a valid number!");
+//            txtfee.requestFocus();
+//            return;
+//        }
+//
+//        // Validate Description
+//        if (description.isEmpty()) {
+//            showAlert("Description is required!");
+//            txtdes.requestFocus();
+//            return;
+//        }
+//        if (description.length() > 500) {
+//            showAlert("Description cannot exceed 500 characters!");
+//            txtdes.requestFocus();
+//            return;
+//        }
+//
+//
+//        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(programId, programName, duration, cost, Description);
+//        try {
+//            boolean isSaved = therapyProgramBO.save( therapyProgramDTO);
+//            if(isSaved){
+//                new Alert(Alert.AlertType.INFORMATION,"Therapy Program Saved SUCCESSFULLY 😎").show();
+//                refreshPage();
+//                clearForm();
+//            }
+//            else {
+//                new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN 😥").show();
+//            }
+//        } catch (IOException e) {
+//            new Alert(Alert.AlertType.ERROR,"duplicate Id");
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    private void showAlert(String message, Alert.AlertType alertType) {
+//        Platform.runLater(() -> {
+//            Alert alert = new Alert(alertType);
+//            alert.setContentText(message);
+//            alert.showAndWait();
+//        });
+//    }
+
     @FXML
     void SaveOnAction(ActionEvent event) {
-        String programId = lprogramid.getText();
-        String programName = txtname.getText();
-        String duration = txtdure.getText();
-        double cost = Double.parseDouble(txtfee.getText());
-        String Description = txtdes.getText();
-
-        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(programId, programName, duration, cost, Description);
         try {
-            boolean isSaved = therapyProgramBO.save( therapyProgramDTO);
-            if(isSaved){
-                new Alert(Alert.AlertType.INFORMATION,"Therapy Program Saved SUCCESSFULLY 😎").show();
+            String programId = lprogramid.getText().trim();
+            String programName = txtname.getText().trim();
+            String duration = txtdure.getText().trim();
+            String feeText = txtfee.getText().trim();
+            String description = txtdes.getText().trim();
+
+            if (programId.isEmpty()) {
+                showAlert("Program ID is required!", Alert.AlertType.ERROR);
+                lprogramid.requestFocus();
+                return;
+            }
+
+            if (programName.isEmpty()) {
+                showAlert("Program name is required!", Alert.AlertType.ERROR);
+                txtname.requestFocus();
+                return;
+            }
+
+            if (!programName.matches("^[a-zA-Z\\s'-]+$")) {
+                showAlert("Program name can only contain letters, spaces, apostrophes, and hyphens!", Alert.AlertType.ERROR);
+                txtname.requestFocus();
+                return;
+            }
+
+            if (programName.length() > 100) {
+                showAlert("Program name cannot exceed 100 characters!", Alert.AlertType.ERROR);
+                txtname.requestFocus();
+                return;
+            }
+
+            if (duration.isEmpty()) {
+                showAlert("Duration is required!", Alert.AlertType.ERROR);
+                txtdure.requestFocus();
+                return;
+            }
+
+            if (!duration.matches("^\\d+\\s*(weeks?|months?|years?)$")) {
+                showAlert("Duration format invalid (e.g., '4 weeks', '6 months')", Alert.AlertType.ERROR);
+                txtdure.requestFocus();
+                return;
+            }
+
+            if (feeText.isEmpty()) {
+                showAlert("Fee is required!", Alert.AlertType.ERROR);
+                txtfee.requestFocus();
+                return;
+            }
+
+            double cost;
+            try {
+                cost = Double.parseDouble(feeText);
+                if (cost <= 0) {
+                    showAlert("Fee must be greater than 0!", Alert.AlertType.ERROR);
+                    txtfee.requestFocus();
+                    return;
+                }
+                if (cost > 999999.99) {
+                    showAlert("Fee cannot exceed 999,999.99!", Alert.AlertType.ERROR);
+                    txtfee.requestFocus();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Fee must be a valid number!", Alert.AlertType.ERROR);
+                txtfee.requestFocus();
+                return;
+            }
+
+            if (description.isEmpty()) {
+                showAlert("Description is required!", Alert.AlertType.ERROR);
+                txtdes.requestFocus();
+                return;
+            }
+
+            if (description.length() > 500) {
+                showAlert("Description cannot exceed 500 characters!", Alert.AlertType.ERROR);
+                txtdes.requestFocus();
+                return;
+            }
+
+            TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(
+                    programId, programName, duration, cost, description
+            );
+
+            boolean isSaved = therapyProgramBO.save(therapyProgramDTO);
+
+            if (isSaved) {
+                showAlert("Therapy Program Saved SUCCESSFULLY 😎", Alert.AlertType.INFORMATION);
                 refreshPage();
+                clearForm();
+            } else {
+                showAlert("PLEASE TRY AGAIN 😥", Alert.AlertType.ERROR);
             }
-            else {
-                new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN 😥").show();
-            }
+
         } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR,"duplicate Id");
+            showAlert("Duplicate ID detected", Alert.AlertType.ERROR);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            showAlert("Database error: " + e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            showAlert("Configuration error: " + e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+        } catch (Exception e) {
+            showAlert("An unexpected error occurred: " + e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
         }
+    }
+
+    private void showAlert(String message, Alert.AlertType alertType) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+    }
+
+    private void clearForm() {
+        txtname.clear();
+        txtdure.clear();
+        txtfee.clear();
+        txtdes.clear();
     }
 
     @FXML
