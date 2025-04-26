@@ -6,6 +6,7 @@ import lk.cw.bo.custom.PaymentBO;
 import lk.cw.bo.custom.TherapySessionBO;
 import lk.cw.config.FactoryConfiguration;
 import lk.cw.dao.DAOFactory;
+import lk.cw.dao.custom.PatientDAO;
 import lk.cw.dao.custom.PatientRegDAO;
 import lk.cw.dao.custom.PaymentDAO;
 import lk.cw.dto.PaymentDTO;
@@ -21,12 +22,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentBOImpl implements PaymentBO {
+    PatientDAO patientDAO = (PatientDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PATIENT);
 
     PaymentDAO paymentDAO = (PaymentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PAYMENT);
 //    PatientBO patientRegistrationBO = (PatientBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PATIENT_REG);
 //    TherapySessionBO therapySessionBO = (TherapySessionBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.THERAPYSESSION);
 //    PatientRegDAO patientRegistrationDAO = (PatientRegDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PATIENT_REG);
 //
+
+    @Override
+    public List<Payment> searchPayment(String name) throws SQLException, IOException, ClassNotFoundException {
+        Patient patient = patientDAO.getPatientByName(name);
+
+        if(patient != null) {
+            return paymentDAO.searchPayment(patient.getPatientId());
+        }else {
+            return null;
+        }
+    }
 
 //    @Override
 //    public boolean save(PaymentDTO paymentDTO) throws IOException, SQLException, ClassNotFoundException {
