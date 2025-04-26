@@ -39,22 +39,22 @@
          </font>
       </Label>
       <TextField fx:id="txtname" layoutX="209.0" layoutY="104.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
-      <Button fx:id="btnsave" layoutX="69.0" layoutY="324.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SAVE">
+      <Button fx:id="btnsave" layoutX="55.0" layoutY="326.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SAVE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnupdate" layoutX="255.0" layoutY="324.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
+      <Button fx:id="btnupdate" layoutX="241.0" layoutY="326.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btndelete" layoutX="438.0" layoutY="321.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
+      <Button fx:id="btndelete" layoutX="424.0" layoutY="323.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="587.0" layoutY="321.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
+      <Button layoutX="573.0" layoutY="323.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -77,12 +77,6 @@
          </font>
       </Label>
       <DatePicker fx:id="birthdatepicker" layoutX="209.0" layoutY="149.0" onAction="#BirthDatePickerOnAction" />
-      <TextField fx:id="txtsearch" layoutX="404.0" layoutY="32.0" prefHeight="25.0" prefWidth="192.0" promptText="Search" style="-fx-opacity: 0.7;" />
-      <Button layoutX="600.0" layoutY="29.0" mnemonicParsing="false" onAction="#SearchOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SEARCH">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
       <Label fx:id="lblbirthday" layoutX="405.0" layoutY="146.0" prefHeight="31.0" prefWidth="146.0">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -98,12 +92,12 @@
             <Font name="System Bold Italic" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="register" layoutX="592.0" layoutY="86.0" mnemonicParsing="false" onAction="#PatientRegistrationsOnAction" prefHeight="31.0" prefWidth="138.0" style="-fx-background-color: #A5158C;" text="Patient Registrations" textFill="WHITE">
+      <Button fx:id="register" layoutX="421.0" layoutY="278.0" mnemonicParsing="false" onAction="#PatientRegistrationsOnAction" prefHeight="31.0" prefWidth="277.0" style="-fx-background-color: #A5158C;" text="Patient Registrations" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="PatientTable" layoutX="42.0" layoutY="365.0" onMouseClicked="#TableOnClicked" prefHeight="193.0" prefWidth="684.0" style="-fx-opacity: 0.9;">
+      <TableView fx:id="PatientTable" layoutX="35.0" layoutY="365.0" onMouseClicked="#TableOnClicked" prefHeight="202.0" prefWidth="684.0" style="-fx-opacity: 0.9;">
          <columns>
             <TableColumn fx:id="colid" prefWidth="75.0" text="patientId" />
             <TableColumn fx:id="colname" prefWidth="165.33334350585938" text="Name" />
@@ -112,5 +106,10 @@
             <TableColumn fx:id="colmedical" prefWidth="153.5999755859375" text="MedicalHistory" />
          </columns>
       </TableView>
+      <Button fx:id="btnenrolled" layoutX="55.0" layoutY="278.0" mnemonicParsing="false" onAction="#PatientProgramEnrolledOnAction" prefHeight="31.0" prefWidth="308.0" style="-fx-background-color: #A5158C;" text=" Program Enrolled" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

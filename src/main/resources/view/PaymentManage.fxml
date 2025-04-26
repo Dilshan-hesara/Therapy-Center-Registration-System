@@ -45,7 +45,7 @@
             <TableColumn fx:id="colstatus" prefWidth="209.60003662109375" text="Status" />
          </columns>
       </TableView>
-      <Button layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#InvoiceOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
+      <Button fx:id="invoisbtn" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#InvoiceOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
