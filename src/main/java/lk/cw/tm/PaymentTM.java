@@ -17,6 +17,24 @@ public class PaymentTM {
     private String Status;
 
 
+    public PaymentTM(String paymentId, double amount, String paymentDate, String status, String patientId, Object o, int i) {
+        this.paymentId = paymentId;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.Status = status;
+        this.patientId = patientId;
+
+    }
+
+    public PaymentTM(String paymentId, double amount, String paymentDate, String status, String patientId) {
+
+        this.paymentId = paymentId;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.Status = status;
+        this.patientId = patientId;
+
+    }
 }
 
 

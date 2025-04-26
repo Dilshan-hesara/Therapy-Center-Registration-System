@@ -67,6 +67,7 @@ public class DashboardController implements Initializable {
 
 
 
+
     @FXML
     void UserOnAction(ActionEvent event) throws IOException {
         AnchorPane load = FXMLLoader.load(getClass().getResource("/view/UserManage.fxml"));
