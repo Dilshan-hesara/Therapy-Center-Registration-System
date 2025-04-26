@@ -47,7 +47,6 @@ module lk.cw.ormcoursework {
     opens lk.cw.config to jakarta.persistence, org.hibernate.orm.core;
     opens lk.cw.controller to javafx.fxml;
     opens lk.cw.tm to javafx.base;
-
     // Exports
     exports lk.cw;
     exports lk.cw.controller;
