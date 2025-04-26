@@ -145,5 +145,11 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <TextField fx:id="txtsearch" layoutX="380.0" layoutY="46.0" prefHeight="25.0" prefWidth="192.0" promptText="Search" style="-fx-opacity: 0.7;" />
+      <Button fx:id="btnsearch" layoutX="592.0" layoutY="42.0" mnemonicParsing="false" onAction="#SearchOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SEARCH">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
