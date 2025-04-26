@@ -10,5 +10,5 @@ import java.util.ArrayList;
 public interface TherapistDAO extends CrudDAO<Therapist> {
     public Therapist findById(String therapistId) throws SQLException, ClassNotFoundException;
     public ArrayList<String> getAllTherapistIDs() throws SQLException, ClassNotFoundException, IOException;
-
+    public Therapist getTherapistById(String therapistId) throws SQLException, ClassNotFoundException, IOException ;
 }

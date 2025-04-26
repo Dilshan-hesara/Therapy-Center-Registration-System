@@ -4,10 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.PatientBO;
 import lk.cw.bo.custom.PatientRegBO;
@@ -25,6 +30,7 @@ import lk.cw.dto.PaymentDTO;
 import lk.cw.dto.TherapistDTO;
 import lk.cw.dto.TherapySessionDTO;
 import lk.cw.entity.Payment;
+import lk.cw.entity.Therapy_Session;
 import lk.cw.tm.TherapySessionTM;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -35,6 +41,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TherapeySessionController implements Initializable {
@@ -125,8 +132,77 @@ public class TherapeySessionController implements Initializable {
     void InvoiecOnAction(ActionEvent event) {
 
     }
+    @FXML
+    private Button btnsearch;
+
+    @FXML
+    private TextField txtsearch;
+
+    public void SearchOnAction(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        String input = txtsearch.getText().trim();
+
+        try {
+            List<Therapy_Session> sessionList = null;
 
 
+            if (input.matches("T\\d+")) {
+                sessionList = therapySessionBO.searchTherapistTherapySession(input);
+            }
+
+
+            if (sessionList == null || sessionList.isEmpty()) {
+                sessionList = therapySessionBO.searchTherapySession(input);
+            }
+
+
+            if (sessionList == null || sessionList.isEmpty()) {
+                new Alert(Alert.AlertType.INFORMATION, "No sessions found for: " + input).show();
+                return;
+            }
+
+            ObservableList<TherapySessionDTO> observableList = FXCollections.observableArrayList();
+
+            for (Therapy_Session session : sessionList) {
+                observableList.add(new TherapySessionDTO(
+                        session.getSessionId(),
+                        String.valueOf(session.getSessionDate()),
+                        session.getSessionTime(),
+                        session.getStatus(),
+                        session.getTherapist().getTherapistId(),
+                        session.getPatient().getPatientId()
+
+
+                ));
+            }
+
+
+            String fxmlPath = input.matches("T\\d+")
+                    ? "/view/TherapistSearch.fxml"
+                    : "/view/Search.fxml";
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent load = loader.load();
+
+            if (fxmlPath.contains("TherapistSearch")) {
+                TherapistSearchController controller = loader.getController();
+                controller.setSessionList(observableList);
+            } else {
+                SearchController controller = loader.getController();
+                controller.setSessionList(observableList);
+            }
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(load));
+            stage.setTitle("Therapy Session Search");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(btnsearch.getScene().getWindow());
+            stage.showAndWait();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Search failed due to a database error.").show();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         combostatus.getItems().addAll(Status);
