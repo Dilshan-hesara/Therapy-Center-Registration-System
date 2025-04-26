@@ -47,35 +47,83 @@ public class LoginController implements Initializable {
     String uN;
 
 
+//    @FXML
+//    void LogingOnAction(ActionEvent event) throws Exception {
+//        String password = txtPassword.getText();
+//        String userName = txtUsername.getText();
+//
+//        if (userName == null || userName.trim().isEmpty()) {
+//            new Alert(Alert.AlertType.ERROR, "Username is required!").show();
+//            return;
+//        }
+//
+//        if (password == null || password.trim().isEmpty()) {
+//            new Alert(Alert.AlertType.ERROR, "Password is required!").show();
+//            return;
+//        }
+//
+//
+//        uN =userName;
+//
+//        String dbPassword = userBO.getPasswordByUserName(userName);
+//
+//        System.out.println(dbPassword);
+//        try {
+//
+//            if (dbPassword != null && BCrypt.checkpw(password, dbPassword)) {
+//                System.out.println("Login successful for user: " + userName);
+//
+//                String role = userBO.getRoleByUserName(uN);
+//
+//                loggedInUser = role;
+//                dashBoad();
+//
+//            } else {
+//                new Alert(Alert.AlertType.ERROR, "Invalid Password & User . Try Again").show();
+//            }
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, "Error during login: " + e.getMessage()).show();
+//        }
+//    }
+
+
     @FXML
     void LogingOnAction(ActionEvent event) throws Exception {
         String password = txtPassword.getText();
         String userName = txtUsername.getText();
 
-uN =userName;
+        if (userName == null | userName.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Username is required!").show();
+            return;
+        }
+
+        if (password == null || password.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Password is required!").show();
+            return;
+        }
+
+        uN = userName;
 
         String dbPassword = userBO.getPasswordByUserName(userName);
 
-        System.out.println(dbPassword);
-        try {
+        System.out.println("Password from DB: " + dbPassword);
 
-            if (dbPassword != null && BCrypt.checkpw(password, dbPassword)) {
-                System.out.println("Login successful for user: " + userName);
-
-                String role = userBO.getRoleByUserName(uN);
-
-                loggedInUser = role;
-                dashBoad();
-
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Invalid Password. Try Again").show();
-            }
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Error during login: " + e.getMessage()).show();
+        if (dbPassword == null) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Username!").show();
+            return;
         }
+
+        if (!BCrypt.checkpw(password, dbPassword)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Password!").show();
+            return;
+        }
+
+        // If username and password correct
+        System.out.println("Login successful for user: " + userName);
+        String role = userBO.getRoleByUserName(uN);
+        loggedInUser = role;
+        dashBoad();
     }
-
-
 
 
     @FXML

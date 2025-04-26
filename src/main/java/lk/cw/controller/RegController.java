@@ -53,37 +53,95 @@ public class RegController implements Initializable {
     }
 
     String ID;
-    @FXML
-    void regisOnAction(ActionEvent event) throws IOException {
-        String txtid = ID;
-        String Id = txtid;
-        String UserName = txtUsername.getText();
-        String Password = txtPassword.getText();
-        String Role = cmbRole.getValue();
-        if(Role == "Admin"){
-            new Alert(Alert.AlertType.ERROR,"CANT REG ADMIN ONLY REG USER ACC").show();
-        }else {
+//    @FXML
+//    void regisOnAction(ActionEvent event) throws IOException {
+//        String txtid = ID;
+//        String Id = txtid;
+//        String UserName = txtUsername.getText();
+//        String Password = txtPassword.getText();
+//        String pasworRePassword = txtRePassword.getText();
+//
+//        String Role = cmbRole.getValue();
+//        if(Role == "Admin"){
+//            new Alert(Alert.AlertType.ERROR,"CANT REG ADMIN ONLY REG USER ACC").show();
+//        }else {
+//
+//            try {
+//                boolean isRegistered = userBO.save(new UserDTO(Id,UserName,Password,Role));
+//                if(isRegistered){
+//                    new Alert(Alert.AlertType.INFORMATION,"REGISTERED SUCCESSFULLY").show();
+//                    clearFeilds();
+//                    login();
+//                }
+//                else {
+//                    new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN").show();
+//                }
+//            } catch (IOException e) {
+//                new Alert(Alert.AlertType.ERROR,"duplicate Id");
+//            }
+//
+//
+//        }
+//
+//
+//
+//    }
+@FXML
+void regisOnAction(ActionEvent event) throws IOException {
+    String txtid = ID;
+    String Id = txtid;
+    String UserName = txtUsername.getText();
+    String Password = txtPassword.getText();
+    String pasworRePassword = txtRePassword.getText();
+    String Role = cmbRole.getValue();
 
-            try {
-                boolean isRegistered = userBO.save(new UserDTO(Id,UserName,Password,Role));
-                if(isRegistered){
-                    new Alert(Alert.AlertType.INFORMATION,"REGISTERED SUCCESSFULLY").show();
-                    clearFeilds();
-                    login();
-                }
-                else {
-                    new Alert(Alert.AlertType.ERROR,"PLEASE TRY AGAIN").show();
-                }
-            } catch (IOException e) {
-                new Alert(Alert.AlertType.ERROR,"duplicate Id");
-            }
+    // Validation start
 
-
-        }
-
-
-
+    if (UserName == null || UserName.trim().isEmpty()) {
+        new Alert(Alert.AlertType.ERROR, "Username is required!").show();
+        return;
     }
+
+    if (Password == null || Password.trim().isEmpty()) {
+        new Alert(Alert.AlertType.ERROR, "Password is required!").show();
+        return;
+    }
+
+    if (pasworRePassword == null || pasworRePassword.trim().isEmpty()) {
+        new Alert(Alert.AlertType.ERROR, "Re-enter Password is required!").show();
+        return;
+    }
+
+    if (!Password.equals(pasworRePassword)) {
+        new Alert(Alert.AlertType.ERROR, "Passwords do not match!").show();
+        return;
+    }
+
+    if (Role == null || Role.trim().isEmpty()) {
+        new Alert(Alert.AlertType.ERROR, "Role must be selected!").show();
+        return;
+    }
+
+    if (Role.equals("Admin")) {
+        new Alert(Alert.AlertType.ERROR, "Cannot register an Admin. Only User accounts allowed!").show();
+        return;
+    }
+
+    // Validation End ✅
+
+    try {
+        boolean isRegistered = userBO.save(new UserDTO(Id, UserName, Password, Role));
+        if (isRegistered) {
+            new Alert(Alert.AlertType.INFORMATION, "REGISTERED SUCCESSFULLY").show();
+            clearFeilds();
+            login();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN").show();
+        }
+    } catch (IOException e) {
+        new Alert(Alert.AlertType.ERROR, "Duplicate ID detected!").show();
+    }
+}
 
     @FXML
     private Label UserIDlbl;
