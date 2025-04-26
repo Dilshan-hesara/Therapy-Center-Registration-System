@@ -109,6 +109,21 @@ public class UserController implements Initializable {
         String Password = txtpassword.getText();
         String Role = rolecombo.getValue();
 
+        if (UserName == null || UserName.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Username is required!").show();
+            return;
+        }
+
+        if (Password == null || Password.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Password is required!").show();
+            return;
+        }
+
+        if (Role == null || Role.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Role selection is required!").show();
+            return;
+        }
+
         try {
             boolean isRegistered = userBO.save(new UserDTO(Id,UserName,Password,Role));
             if(isRegistered){
@@ -196,7 +211,7 @@ public class UserController implements Initializable {
     void refreshPage() throws SQLException, ClassNotFoundException, IOException {
         LoadNextID();
         loadTableData();
-
+        rolecombo.getSelectionModel().clearSelection();
         btndelete.setDisable(true);
         btnsave.setDisable(false);
         btnupdate.setDisable(true);

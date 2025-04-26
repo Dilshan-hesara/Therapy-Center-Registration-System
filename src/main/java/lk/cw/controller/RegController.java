@@ -103,7 +103,7 @@ public class RegController implements Initializable {
 
     private void loadcmb() {
 
-        cmbRole.setItems(FXCollections.observableArrayList("Admin", "User").sorted());
+        cmbRole.setItems(FXCollections.observableArrayList("Admin", "Receptionist").sorted());
 
     }
 

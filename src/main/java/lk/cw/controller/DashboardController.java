@@ -93,7 +93,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (loggedInUser != null) {
-            if ("User".equals(loggedInUser)) {
+            if ("Receptionist".equals(loggedInUser)) {
 
                 TherapistBtn.setDisable(true);
                 TherapyBtn.setDisable(true);
@@ -107,7 +107,7 @@ public class DashboardController implements Initializable {
                 System.out.println("Admin.");
             } else {
 
-                System.out.println("Unkonow" + loggedInUser);
+                System.out.println("uno" + loggedInUser);
             }
         }
     }
