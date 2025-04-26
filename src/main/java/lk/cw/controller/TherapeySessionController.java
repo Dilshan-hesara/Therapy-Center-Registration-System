@@ -358,6 +358,7 @@ public class TherapeySessionController implements Initializable {
 //        }
 //    }
 
+    String AVBL;
     private void checkStates() {
         String avPyStr = txtAvBlance.getText().trim();
         String amountStr = txtPay.getText().trim();
@@ -365,6 +366,7 @@ public class TherapeySessionController implements Initializable {
         double avPy = Double.parseDouble(avPyStr);
         double amount = Double.parseDouble(amountStr);
 
+        AVBL =avPyStr;
         double redu = avPy - amount;
 
         if (redu == 0 ) {
@@ -379,7 +381,7 @@ public class TherapeySessionController implements Initializable {
 
     @FXML
     void SaveOnAction(ActionEvent event) {
-        checkStates();
+        //checkStates();
 
 
 
@@ -401,6 +403,112 @@ public class TherapeySessionController implements Initializable {
         String payPatient = combopatientid.getValue();
         String States = states;
 
+        if (patientId == null || patientId.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Patient ID is required!").show();
+            return;
+        }
+
+
+
+
+// Debug output
+        System.out.println("Amount: '" + amount + "'");
+
+// Check for null, empty, or whitespace-only
+        if (amount == null || amount.trim().isEmpty()) {
+            System.out.println("Validation failed: Amount is empty or null");
+            new Alert(Alert.AlertType.ERROR, "Payment amount is required!").showAndWait(); // Use showAndWait()
+            return;
+        }
+
+        String Avalablablance = AVBL;
+
+
+        checkStates();
+
+        double availableBalance = Double.parseDouble(Avalablablance);
+        double enteredAmount = Double.parseDouble(amount);
+
+        if (enteredAmount > availableBalance) {
+            new Alert(Alert.AlertType.ERROR, "Entered amount cannot be greater than available balance!").show();
+            return;
+        }
+
+
+// Check if amount is a valid number
+        try {
+            double amountValue = Double.parseDouble(amount.trim());
+            if (amountValue <= 0) {
+                new Alert(Alert.AlertType.ERROR, "Amount must be greater than 0!").showAndWait();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Amount must be a valid number (e.g., 100 or 100.50)!").showAndWait();
+            return;
+        }
+
+        if (sessionId == null || sessionId.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Session ID is required!").show();
+            return;
+        }
+        if (sessionDate == null || sessionDate.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Session date is required!").show();
+            return;
+        }
+        if (sessionTime == null || sessionTime.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Session time is required!").show();
+            return;
+        }
+        if (status == null || status.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Status is required!").show();
+            return;
+        }
+        if (combotherapistId.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "No therapists available. Please add a therapist first!").show();
+            return;
+        }
+        if (combopatientid.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "No patients available. Please add a patient first!").show();
+            return;
+        }
+
+        //String therapistId = combotherapistId.getValue();
+ //       String patientId = combopatientid.getValue();
+
+
+
+        if (therapistId == null || therapistId.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Therapist ID is required!").show();
+            return;
+        }
+        if (patientId == null || patientId.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Patient ID is required!").show();
+            return;
+        }
+
+
+
+        // Validate amount format
+        if (!amount.matches("^\\d+(\\.\\d{1,2})?$")) {
+            new Alert(Alert.AlertType.ERROR, "Amount must be a valid number (Example: 100 or 100.50)!").show();
+            return;
+        }
+
+        // Validate amount value
+        try {
+            double amountValue = Double.parseDouble(amount);
+            if (amountValue <= 0) {
+                new Alert(Alert.AlertType.ERROR, "Amount must be greater than 0!").show();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid amount format!").show();
+            return;
+        }
+
+
+
+
         ArrayList<PaymentDTO> paymentDTOS =new ArrayList<>();
 
         PaymentDTO paymentDTO = new PaymentDTO(
@@ -421,7 +529,41 @@ public class TherapeySessionController implements Initializable {
         System.out.println(amount);
         System.out.println(States);
 
+
         try {
+            if (sessionId == null || sessionId.trim().isEmpty() ||
+                    sessionDate == null || sessionDate.trim().isEmpty() ||
+                    sessionTime == null || sessionTime.trim().isEmpty() ||
+                    status == null || status.trim().isEmpty() ||
+                    therapistId == null || therapistId.trim().isEmpty() ||
+                    patientId == null || patientId.trim().isEmpty()) {
+
+                new Alert(Alert.AlertType.ERROR, "All session fields must be selected and filled!").show();
+                return;
+            }
+
+// Validate payment fields
+            if (payid == null || payid.trim().isEmpty() ||
+                    amount == null || amount.trim().isEmpty() ||
+                    payDate == null || payDate.trim().isEmpty() ||
+                    payPatient == null || payPatient.trim().isEmpty()) {
+
+                new Alert(Alert.AlertType.ERROR, "All payment fields must be selected and filled!").show();
+                return;
+            }
+
+// Validate amount is a valid number
+            if (!amount.matches("\\d+(\\.\\d{1,2})?")) {
+                new Alert(Alert.AlertType.ERROR, "Amount must be a valid number (Example: 100 or 100.50)!").show();
+                return;
+            }
+
+// Validate amount is positive
+            if (Double.parseDouble(amount) <= 0) {
+                new Alert(Alert.AlertType.ERROR, "Amount must be greater than 0!").show();
+                return;
+            }
+
             TherapySessionDTO therapySessionDTO = new TherapySessionDTO(
                     sessionId, sessionDate, sessionTime, status, therapistId, patientId,paymentDTOS
             );
@@ -442,8 +584,143 @@ public class TherapeySessionController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-
+//
+//    @FXML
+//    void SaveOnAction(ActionEvent event) {
+//        try {
+//
+//
+//            // Get all values first
+//            String sessionId = lblid.getText();
+//            String sessionDate = lbldate.getText();
+//            String sessionTime = selectTime.getValue();
+//            String status = combostatus.getValue();
+//            String therapistId =combotherapistId.getValue();
+//            String patientId = combopatientid.getValue();
+//            String amount = txtPay.getText();
+//            String payPatient = combopatientid.getValue();
+//            String States = states;
+//
+//            // Validate session fields
+//
+//            // Validate payment fields
+//            // Get amount from TextField
+////            String amount = txtPay.getText();
+//
+//            if (patientId == null || patientId.trim().isEmpty()) {
+//                new Alert(Alert.AlertType.ERROR, "Patient ID is required!").show();
+//                return;
+//            }
+//
+//
+//
+//
+//// Debug output
+//            System.out.println("Amount: '" + amount + "'");
+//
+//// Check for null, empty, or whitespace-only
+//            if (amount == null || amount.trim().isEmpty()) {
+//                System.out.println("Validation failed: Amount is empty or null");
+//                new Alert(Alert.AlertType.ERROR, "Payment amount is required!").showAndWait(); // Use showAndWait()
+//                return;
+//            }
+//
+//            checkStates();
+//
+//
+//// Check if amount is a valid number
+//            try {
+//                double amountValue = Double.parseDouble(amount.trim());
+//                if (amountValue <= 0) {
+//                    new Alert(Alert.AlertType.ERROR, "Amount must be greater than 0!").showAndWait();
+//                    return;
+//                }
+//            } catch (NumberFormatException e) {
+//                new Alert(Alert.AlertType.ERROR, "Amount must be a valid number (e.g., 100 or 100.50)!").showAndWait();
+//                return;
+//            }
+//
+//            if (sessionId == null || sessionId.trim().isEmpty()) {
+//                new Alert(Alert.AlertType.ERROR, "Session ID is required!").show();
+//                return;
+//            }
+//            if (sessionDate == null || sessionDate.trim().isEmpty()) {
+//                new Alert(Alert.AlertType.ERROR, "Session date is required!").show();
+//                return;
+//            }
+//            if (sessionTime == null || sessionTime.trim().isEmpty()) {
+//                new Alert(Alert.AlertType.ERROR, "Session time is required!").show();
+//                return;
+//            }
+//            if (status == null || status.trim().isEmpty()) {
+//                new Alert(Alert.AlertType.ERROR, "Status is required!").show();
+//                return;
+//            }
+//            if (therapistId == null || therapistId.trim().isEmpty()) {
+//                new Alert(Alert.AlertType.ERROR, "Therapist ID is required!").show();
+//                return;
+//            }
+//            if (patientId == null || patientId.trim().isEmpty()) {
+//                new Alert(Alert.AlertType.ERROR, "Patient ID is required!").show();
+//                return;
+//            }
+//
+//
+//
+//            // Validate amount format
+//            if (!amount.matches("^\\d+(\\.\\d{1,2})?$")) {
+//                new Alert(Alert.AlertType.ERROR, "Amount must be a valid number (Example: 100 or 100.50)!").show();
+//                return;
+//            }
+//
+//            // Validate amount value
+//            try {
+//                double amountValue = Double.parseDouble(amount);
+//                if (amountValue <= 0) {
+//                    new Alert(Alert.AlertType.ERROR, "Amount must be greater than 0!").show();
+//                    return;
+//                }
+//            } catch (NumberFormatException e) {
+//                new Alert(Alert.AlertType.ERROR, "Invalid amount format!").show();
+//                return;
+//            }
+//
+//            // Create DTOs
+//            PaymentDTO paymentDTO = new PaymentDTO(
+//                    PAYID,
+//                    amount,
+//                    sessionDate, // Using same date as session
+//                    payPatient,
+//                    States
+//            );
+//
+//            ArrayList<PaymentDTO> paymentDTOS = new ArrayList<>();
+//            paymentDTOS.add(paymentDTO);
+//
+//            TherapySessionDTO therapySessionDTO = new TherapySessionDTO(
+//                    sessionId, sessionDate, sessionTime, status, therapistId, patientId, paymentDTOS
+//            );
+//
+//            // Save to database
+//            boolean isRegistered = therapySessionBO.save(therapySessionDTO);
+//
+//            if (isRegistered) {
+//                refreshPage();
+//                new Alert(Alert.AlertType.INFORMATION, "Session Saved Successfully!").show();
+//            } else {
+//                new Alert(Alert.AlertType.ERROR, "Failed to save session. Please try again.").show();
+//            }
+//        } catch (IOException e) {
+//            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
+//            e.printStackTrace();
+//        } catch (SQLException | ClassNotFoundException e) {
+//            new Alert(Alert.AlertType.ERROR, "Database error occurred: " + e.getMessage()).show();
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, "An unexpected error occurred: " + e.getMessage()).show();
+//            e.printStackTrace();
+//        }
+//    }
     @FXML
     void TableOnClicked(MouseEvent event) {
         TherapySessionTM therapySessionTM = SessionTable.getSelectionModel().getSelectedItem();
