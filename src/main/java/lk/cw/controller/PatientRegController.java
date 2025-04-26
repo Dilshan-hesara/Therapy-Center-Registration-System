@@ -13,7 +13,9 @@ import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.PatientBO;
 import lk.cw.bo.custom.PatientRegBO;
 import lk.cw.bo.custom.TherapyProgramBO;
+import lk.cw.dao.custom.AddPayDAO;
 import lk.cw.dao.custom.PatientRegDAO;
+import lk.cw.dao.custom.impl.AddPayDAOImpl;
 import lk.cw.dao.custom.impl.PatientRegDAOImpl;
 import lk.cw.dto.PatientDTO;
 import lk.cw.dto.PatientRegistrationDTO;
@@ -177,8 +179,9 @@ public class PatientRegController implements Initializable {
     }
 
     @FXML
-    void SaveOnAction(ActionEvent event) {
+    void SaveOnAction(ActionEvent event) throws SQLException, IOException {
 
+        LoadPayNextID();
 
         String registrationId = lblid.getText();
         String patientId = combopatientid.getValue();
@@ -192,7 +195,8 @@ public class PatientRegController implements Initializable {
 
         ArrayList<PaymentDTO> paymentDTOS =new ArrayList<>();
 
-        String payid = "P003";
+//        String payid = "P003";
+        String payid = PAYID;
 
 //        String am = "200.00" ;
         String am = String.valueOf(amount);
@@ -237,6 +241,14 @@ public class PatientRegController implements Initializable {
             throw new RuntimeException(e);
         }
 
+    }
+
+    AddPayDAO payDAO = new AddPayDAOImpl();
+
+    String PAYID;
+    private void LoadPayNextID() throws SQLException, IOException {
+        String nextID = payDAO.getNextId();
+        PAYID = nextID;
     }
 
     @FXML
