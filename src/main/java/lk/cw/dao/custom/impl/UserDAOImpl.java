@@ -141,5 +141,14 @@ public class UserDAOImpl implements UserDAO {
         System.out.println("Role retrieved: " + role);
         return role;
     }
+    public boolean existsByUsername(String username) throws IOException {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            String hql = "SELECT 1 FROM User u WHERE u.UserName = :username";
+            Query query = session.createQuery(hql);
+            query.setParameter("username", username);
+            return query.uniqueResult() != null;
+        }
+    }
+
 
 }

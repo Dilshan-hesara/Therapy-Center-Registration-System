@@ -12,4 +12,6 @@ public interface UserDAO extends CrudDAO<User> {
     boolean save(User user) throws IOException;
 
     String getRoleByUserName(String userName) throws Exception;
-}
+
+    public boolean existsByUsername(String username) throws IOException ;
+    }

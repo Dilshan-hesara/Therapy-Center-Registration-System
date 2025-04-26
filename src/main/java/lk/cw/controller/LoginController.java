@@ -12,6 +12,7 @@ import lk.cw.bo.BOFactory;
 import lk.cw.bo.custom.UserBO;
 import lk.cw.dao.DAOFactory;
 import lk.cw.dao.custom.UserDAO;
+import lk.cw.dao.custom.impl.UserDAOImpl;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class LoginController implements Initializable {
 
     UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
 
-    UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
+    //UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
 
 
     String uN;
@@ -86,13 +87,52 @@ public class LoginController implements Initializable {
 //        }
 //    }
 
+//
+//    @FXML
+//    void LogingOnAction(ActionEvent event) throws Exception {
+//        String password = txtPassword.getText();
+//        String userName = txtUsername.getText();
+//
+//        if (userName == null | userName.trim().isEmpty()) {
+//            new Alert(Alert.AlertType.ERROR, "Username is required!").show();
+//            return;
+//        }
+//
+//        if (password == null || password.trim().isEmpty()) {
+//            new Alert(Alert.AlertType.ERROR, "Password is required!").show();
+//            return;
+//        }
+//
+//        uN = userName;
+//
+//        String dbPassword = userBO.getPasswordByUserName(userName);
+//
+//        System.out.println("Password from DB: " + dbPassword);
+//
+//        if (dbPassword == null) {
+//            new Alert(Alert.AlertType.ERROR, "Invalid Username!").show();
+//            return;
+//        }
+//
+//        if (!BCrypt.checkpw(password, dbPassword)) {
+//            new Alert(Alert.AlertType.ERROR, "Invalid Password!").show();
+//            return;
+//        }
+//
+//        // If username and password correct
+//        System.out.println("Login successful for user: " + userName);
+//        String role = userBO.getRoleByUserName(uN);
+//        loggedInUser = role;
+//        dashBoad();
+//    }
+
 
     @FXML
     void LogingOnAction(ActionEvent event) throws Exception {
         String password = txtPassword.getText();
         String userName = txtUsername.getText();
 
-        if (userName == null | userName.trim().isEmpty()) {
+        if (userName == null || userName.trim().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Username is required!").show();
             return;
         }
@@ -104,14 +144,16 @@ public class LoginController implements Initializable {
 
         uN = userName;
 
-        String dbPassword = userBO.getPasswordByUserName(userName);
+        // New: First check whether username exists
+        boolean isExist = userDAO.existsByUsername(userName);
 
-        System.out.println("Password from DB: " + dbPassword);
-
-        if (dbPassword == null) {
+        if (!isExist) {
             new Alert(Alert.AlertType.ERROR, "Invalid Username!").show();
             return;
         }
+
+        String dbPassword = userBO.getPasswordByUserName(userName);
+        System.out.println("Password from DB: " + dbPassword);
 
         if (!BCrypt.checkpw(password, dbPassword)) {
             new Alert(Alert.AlertType.ERROR, "Invalid Password!").show();
@@ -125,6 +167,8 @@ public class LoginController implements Initializable {
         dashBoad();
     }
 
+
+    UserDAO userDAO = new UserDAOImpl();
 
     @FXML
     void regisOnAction(ActionEvent event) throws IOException {
