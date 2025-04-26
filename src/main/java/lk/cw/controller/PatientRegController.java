@@ -105,7 +105,7 @@ public class PatientRegController implements Initializable {
         colpatid.setCellValueFactory(new PropertyValueFactory<>("patientId"));
         colproid.setCellValueFactory(new PropertyValueFactory<>("programId"));
         coldate.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
-       // colcount.setCellValueFactory(new PropertyValueFactory<>("sessionCount"));
+        // colcount.setCellValueFactory(new PropertyValueFactory<>("sessionCount"));
         colfee.setCellValueFactory(new PropertyValueFactory<>("registerFee"));
         colbalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
 
@@ -178,6 +178,75 @@ public class PatientRegController implements Initializable {
         refreshPage();
     }
 
+//    @FXML
+//    void SaveOnAction(ActionEvent event) throws SQLException, IOException {
+//
+//        LoadPayNextID();
+//
+//        String registrationId = lblid.getText();
+//        String patientId = combopatientid.getValue();
+//        String programId = comboprogramId.getValue();
+//        String registrationDate = lbldate.getText();
+//        double registerFee = Double.parseDouble(txtfee.getText());
+//
+//        double amount = Double.parseDouble(lblamount.getText());
+//
+//        double balance = amount-registerFee;
+//
+//
+//
+//
+//
+//        ArrayList<PaymentDTO> paymentDTOS =new ArrayList<>();
+//
+////        String payid = "P003";
+//        String payid = PAYID;
+//
+////        String am = "200.00" ;
+//        String am = String.valueOf(amount);
+//        String States = "PAY-Registration";
+//        String payDate = lbldate.getText();
+//        String payPatient =combopatientid.getValue();
+//
+//        PaymentDTO paymentDTO = new PaymentDTO(
+//                payid,
+//                am,
+//                payDate,
+//                payPatient ,
+//                States
+//
+//
+//        );
+//        paymentDTOS.add(paymentDTO);
+//
+//        System.out.println(payid);
+//        System.out.println(payDate);
+//        System.out.println(payPatient);
+//        System.out.println(amount);
+//        System.out.println(am);
+//
+//        try{
+//            PatientRegistrationDTO patientRegistrationDTO = new PatientRegistrationDTO(
+//                    registrationId,patientId,programId,registrationDate,registerFee,balance,paymentDTOS
+//            );
+//            boolean isRegistered = patientRegistrationBO.saved(patientRegistrationDTO);
+//
+//            if (isRegistered) {
+//                refreshPage();
+//                new Alert(Alert.AlertType.INFORMATION, "PatientRegistration Saved SUCCESSFULLY 😎").show();
+//            } else {
+//                new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
+//            }
+//        } catch (IOException e) {
+//            new Alert(Alert.AlertType.ERROR, "Duplicate ID").show();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+
     @FXML
     void SaveOnAction(ActionEvent event) throws SQLException, IOException {
 
@@ -187,62 +256,103 @@ public class PatientRegController implements Initializable {
         String patientId = combopatientid.getValue();
         String programId = comboprogramId.getValue();
         String registrationDate = lbldate.getText();
-        double registerFee = Double.parseDouble(txtfee.getText());
+        String feeText = txtfee.getText();
+
+
+        if (patientId == null || patientId.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Patient ID is required!").show();
+            return;
+        }
+
+        if (programId == null || programId.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Program ID is required!").show();
+            return;
+        }
+
+        if (registrationDate == null || registrationDate.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Registration Date is required!").show();
+            return;
+        }
+
+        if (feeText == null || feeText.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Registration Fee is required!").show();
+            return;
+        }
+
+        if (!feeText.matches("\\d+(\\.\\d{1,2})?")) {
+            new Alert(Alert.AlertType.ERROR, "Registration Fee must be a valid number!").show();
+            return;
+        }
+
+
+        double registerFee = Double.parseDouble(feeText);
 
         double amount = Double.parseDouble(lblamount.getText());
+        double balance = amount - registerFee;
 
-        double balance = amount-registerFee;
-
-        ArrayList<PaymentDTO> paymentDTOS =new ArrayList<>();
-
-//        String payid = "P003";
+        ArrayList<PaymentDTO> paymentDTOS = new ArrayList<>();
         String payid = PAYID;
-
-//        String am = "200.00" ;
         String am = String.valueOf(amount);
         String States = "PAY-Registration";
         String payDate = lbldate.getText();
-        String payPatient =combopatientid.getValue();
+        String payPatient = combopatientid.getValue();
 
-        PaymentDTO paymentDTO = new PaymentDTO(
-                payid,
-                am,
-                payDate,
-                payPatient ,
-                States
-
-
-        );
+        PaymentDTO paymentDTO = new PaymentDTO(payid, am, payDate, payPatient, States);
         paymentDTOS.add(paymentDTO);
 
-        System.out.println(payid);
-        System.out.println(payDate);
-        System.out.println(payPatient);
-        System.out.println(amount);
-        System.out.println(am);
-
-        try{
+        try {
             PatientRegistrationDTO patientRegistrationDTO = new PatientRegistrationDTO(
-                    registrationId,patientId,programId,registrationDate,registerFee,balance,paymentDTOS
+                    registrationId, patientId, programId, registrationDate, registerFee, balance, paymentDTOS
             );
             boolean isRegistered = patientRegistrationBO.saved(patientRegistrationDTO);
 
             if (isRegistered) {
                 refreshPage();
-                new Alert(Alert.AlertType.INFORMATION, "PatientRegistration Saved SUCCESSFULLY 😎").show();
+                clearFields();
+                new Alert(Alert.AlertType.INFORMATION, "Patient Registration Saved SUCCESSFULLY 😎").show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
             }
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, "Duplicate ID").show();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
 
+//    private void clearFields() {
+////        combopatientid.setValue(null);
+////        comboprogramId.setValue(null);
+//        txtfee.clear();
+//        lblamount.setText("0.00");
+//    }
+
+    private void clearFields() {
+//        if (combopatientid != null) {
+//            combopatientid.getSelectionModel().clearSelection();
+//        }
+//        if (comboprogramId != null) {
+//            comboprogramId.getSelectionModel().clearSelection();
+//        }
+        if (txtfee != null) {
+            txtfee.clear();
+        }
+        if (lblamount != null) {
+            lblamount.setText("0.00");
+        }
+        if (lblid != null) {
+            lblid.setText("");
+        }
+        if (lbldate != null) {
+            lbldate.setText("");
+        }
+    }
+
+    private void clearForm() {
+        combopatientid.setValue(null);
+//        comboprogramId.setValue(null);
+        txtfee.clear();
+    }
     AddPayDAO payDAO = new AddPayDAOImpl();
 
     String PAYID;
