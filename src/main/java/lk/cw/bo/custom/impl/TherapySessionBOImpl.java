@@ -3,9 +3,7 @@ package lk.cw.bo.custom.impl;
 import lk.cw.bo.custom.TherapySessionBO;
 import lk.cw.config.FactoryConfiguration;
 import lk.cw.dao.DAOFactory;
-import lk.cw.dao.custom.AddPayDAO;
-import lk.cw.dao.custom.PatientRegDAO;
-import lk.cw.dao.custom.TherapySessionDAO;
+import lk.cw.dao.custom.*;
 import lk.cw.dto.TherapySessionDTO;
 import lk.cw.entity.Patient;
 import lk.cw.entity.Patient_Registration;
@@ -198,6 +196,29 @@ PatientRegDAO patientRegistrationDAO = (PatientRegDAO) DAOFactory.getDaoFactory(
     public boolean delete(String ID) throws SQLException, IOException {
         return therapySessionDAO.delete(ID);
     }
+    PatientDAO patientDAO = (PatientDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PATIENT);
 
+    @Override
+    public List<Therapy_Session> searchTherapySession(String name) throws SQLException, IOException, ClassNotFoundException {
+        Patient patient = patientDAO.getPatientByName(name);
 
+        if (patient != null) {
+            return therapySessionDAO.getSessionByPatientId(patient.getPatientId());
+        }else {
+            return null;
+        }
+    }
+
+    TherapistDAO therapistDAO = (TherapistDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.THERAPIST);
+
+    @Override
+    public List<Therapy_Session> searchTherapistTherapySession(String therapistId) throws SQLException, IOException, ClassNotFoundException {
+
+        Therapist therapist = therapistDAO.getTherapistById(therapistId);
+        if (therapist != null) {
+            return therapySessionDAO.getTherapistById(therapist.getTherapistId());
+        }else {
+            return null;
+        }
+    }
 }

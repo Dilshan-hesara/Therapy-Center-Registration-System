@@ -32,6 +32,15 @@ public class TherapySessionDTO {
 
     }
 
+    public TherapySessionDTO(String sessionId, String s, String sessionTime, String status, String therapistId, String patientId) {
+        this.sessionId = sessionId;
+        this.sessionDate = Date.valueOf(s);
+        this.sessionTime = sessionTime;
+        this.status = status;
+        this.therapistId = therapistId;
+        this.patientId = patientId;
+    }
+
 //    public TherapySessionDTO(String sessionId, String sessionDate, String sessionTime, String status, String therapistId, String patientId) {
 //        this.sessionId = sessionId;
 //        this.sessionDate = Date.valueOf(sessionDate);
