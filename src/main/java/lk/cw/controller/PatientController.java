@@ -28,10 +28,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class PatientController implements Initializable {
 
@@ -110,6 +107,33 @@ public class PatientController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    @FXML
+    void PatientProgramEnrolledOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        List<PatientDTO> patients = patientBO.getPatientsEnrolledInPrograms();
+
+        PatientTable.getItems().clear();
+
+        if (patients.isEmpty()) {
+
+            new Alert(Alert.AlertType.ERROR, "No Patients for All Programs").showAndWait();
+            loadTableData();
+        } else {
+            ObservableList<PatientTM> patientTMs = FXCollections.observableArrayList();
+
+            for (PatientDTO patientDTO : patients) {
+                PatientTM patientTM = new PatientTM(
+                        patientDTO.getPatientId(),
+                        patientDTO.getName(),
+                        patientDTO.getBirthday(),
+                        patientDTO.getContactNumber(),
+                        patientDTO.getMedicalHistory()
+                );
+                patientTMs.add(patientTM);
+            }
+            PatientTable.setItems(patientTMs);
+        }
+    }
+
 
     @FXML
     void BirthDatePickerOnAction(ActionEvent event) {

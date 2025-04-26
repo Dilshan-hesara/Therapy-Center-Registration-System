@@ -3,6 +3,7 @@ package lk.cw.bo.custom.impl;
 import lk.cw.bo.custom.PatientBO;
 import lk.cw.dao.DAOFactory;
 import lk.cw.dao.custom.PatientDAO;
+import lk.cw.dao.custom.QueryDAO;
 import lk.cw.dto.PatientDTO;
 import lk.cw.entity.Patient;
 
@@ -77,4 +78,25 @@ public class PatientBOImpl implements PatientBO {
     public int getTotalPatients() throws SQLException, ClassNotFoundException, IOException {
         return patientDAO.getTotalPatients();
     }
+
+    QueryDAO queryDAO = (QueryDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.QUERY);
+    @Override
+    public List<PatientDTO> getPatientsEnrolledInPrograms() throws IOException {
+        List<Patient> patients = queryDAO.getPatientsEnrolledInPrograms();
+        List<PatientDTO> patientDTOS = new ArrayList<>();
+
+        for (Patient patient : patients) {
+            PatientDTO patientDTO = new PatientDTO();
+            patientDTO.setPatientId(patient.getPatientId());
+            patientDTO.setName(patient.getName());
+            patientDTO.setBirthday(patient.getBirthday());
+            patientDTO.setContactNumber(patient.getContactNumber());
+            patientDTO.setMedicalHistory(patient.getMedicalHistory());
+            patientDTOS.add(patientDTO);
+
+            patientDTOS.add(patientDTO);
+        }
+        return patientDTOS;
+    }
+
 }
