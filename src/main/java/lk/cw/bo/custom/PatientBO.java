@@ -19,7 +19,7 @@ public interface PatientBO extends SuperBO {
     public ArrayList<String> getAllPatientIds() throws SQLException, ClassNotFoundException, IOException;
     public int getTotalPatients() throws SQLException, ClassNotFoundException, IOException;
 
-
+    public List<PatientDTO> getPatientsEnrolledInPrograms() throws IOException ;
 
 
     }

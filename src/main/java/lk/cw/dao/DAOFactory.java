@@ -13,7 +13,7 @@ public class DAOFactory {
     }
 
     public enum DAOTypes {
-      USER, PATIENT,THERAPIST,THERAPYOROGRAM, THERAPYSESSION,PATIENT_REG ,PAYMENT, ADDPAYMENT
+      USER, PATIENT,THERAPIST,THERAPYOROGRAM, THERAPYSESSION,PATIENT_REG ,PAYMENT, ADDPAYMENT,QUERY
     }
 
     public SuperDAO getDAO(DAOTypes types) {
@@ -41,6 +41,9 @@ public class DAOFactory {
 
                     case ADDPAYMENT:
                         return new AddPayDAOImpl();
+
+                        case QUERY:
+                            return new QueryDAOImpl();
             default:
                 return null;
         }
