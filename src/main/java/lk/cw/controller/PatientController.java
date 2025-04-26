@@ -174,8 +174,34 @@ public class PatientController implements Initializable {
         String patientId = lblid.getText();
         String name = txtname.getText();
         String birthday = lblbirthday.getText();
-        int contactNumber = Integer.parseInt(txtcontactnumber.getText());
+        String contactNumberText = txtcontactnumber.getText();
         String medicalHistory = txtmedical.getText();
+
+// Validate fields
+        if (patientId.isEmpty() || name.isEmpty() || birthday.isEmpty() || contactNumberText.isEmpty() || medicalHistory.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "All fields must be filled!").show();
+            return;
+        }
+
+// Validate contact number: only digits
+        if (!contactNumberText.matches("\\d+")) {
+            new Alert(Alert.AlertType.ERROR, "Contact number must contain only digits!").show();
+            return;
+        }
+
+// Validate name: only letters
+        if (!name.matches("[a-zA-Z ]+")) {
+            new Alert(Alert.AlertType.ERROR, "Name must contain only letters!").show();
+            return;
+        }
+
+// Validate medical history: only letters and spaces
+        if (!medicalHistory.matches("[a-zA-Z ]+")) {
+            new Alert(Alert.AlertType.ERROR, "Medical History must contain only letters!").show();
+            return;
+        }
+
+        int contactNumber = Integer.parseInt(contactNumberText);
 
         PatientDTO patientDTO = new PatientDTO(patientId, name, birthday, contactNumber, medicalHistory);
         try {
