@@ -252,6 +252,7 @@ public class TherapeySessionController implements Initializable {
                 "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM");
 
 
+        btnInvoice.setDisable(true);
         try {
             LoadNextID();
             loadTherapistIDs();
@@ -411,10 +412,8 @@ public class TherapeySessionController implements Initializable {
 
 
 
-// Debug output
         System.out.println("Amount: '" + amount + "'");
 
-// Check for null, empty, or whitespace-only
         if (amount == null || amount.trim().isEmpty()) {
             System.out.println("Validation failed: Amount is empty or null");
             new Alert(Alert.AlertType.ERROR, "Payment amount is required!").showAndWait(); // Use showAndWait()
@@ -435,7 +434,6 @@ public class TherapeySessionController implements Initializable {
         }
 
 
-// Check if amount is a valid number
         try {
             double amountValue = Double.parseDouble(amount.trim());
             if (amountValue <= 0) {
@@ -494,7 +492,6 @@ public class TherapeySessionController implements Initializable {
             return;
         }
 
-        // Validate amount value
         try {
             double amountValue = Double.parseDouble(amount);
             if (amountValue <= 0) {
@@ -542,7 +539,6 @@ public class TherapeySessionController implements Initializable {
                 return;
             }
 
-// Validate payment fields
             if (payid == null || payid.trim().isEmpty() ||
                     amount == null || amount.trim().isEmpty() ||
                     payDate == null || payDate.trim().isEmpty() ||
@@ -552,13 +548,11 @@ public class TherapeySessionController implements Initializable {
                 return;
             }
 
-// Validate amount is a valid number
             if (!amount.matches("\\d+(\\.\\d{1,2})?")) {
                 new Alert(Alert.AlertType.ERROR, "Amount must be a valid number (Example: 100 or 100.50)!").show();
                 return;
             }
 
-// Validate amount is positive
             if (Double.parseDouble(amount) <= 0) {
                 new Alert(Alert.AlertType.ERROR, "Amount must be greater than 0!").show();
                 return;
@@ -725,13 +719,9 @@ public class TherapeySessionController implements Initializable {
     void TableOnClicked(MouseEvent event) {
         TherapySessionTM therapySessionTM = SessionTable.getSelectionModel().getSelectedItem();
         if (therapySessionTM != null) {
-            lblid.setText(therapySessionTM.getSessionId());
-            lbldate.setText(String.valueOf(therapySessionTM.getSessionDate()));
-            txttime.setText(therapySessionTM.getSessionTime());
-            lblstatus.setText(therapySessionTM.getStatus());
-            combopatientid.setValue(therapySessionTM.getPatientId());
-            combotherapistId.setValue(therapySessionTM.getTherapistId());
 
+
+            btnInvoice.setDisable(false);
 
 
             btnsave.setDisable(true);

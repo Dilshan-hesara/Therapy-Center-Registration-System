@@ -157,7 +157,7 @@ public class AddPaymentConteoller implements Initializable {
     @FXML
     void SaveOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         String paymentId = lblid.getText();
-        String patientId = lblstatus.getText(); 
+        String patientId = lblstatus.getText();
         String paymentDate = lbldate.getText();
         String status = combopatientid.getValue();
         String amountText = txtamount.getText();

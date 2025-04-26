@@ -21,7 +21,7 @@
          <font>
             <Font name="System Bold Italic" size="17.0" />
          </font></Label>
-      <Button fx:id="btnAddpay" layoutX="156.0" layoutY="76.0" mnemonicParsing="false" onAction="#addPayOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="Add Payment">
+      <Button fx:id="btnAddpay" layoutX="133.0" layoutY="77.0" mnemonicParsing="false" onAction="#addPayOnAction" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #FFB8E0;" text="Add Payment">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -45,13 +45,18 @@
             <TableColumn fx:id="colstatus" prefWidth="209.60003662109375" text="Status" />
          </columns>
       </TableView>
-      <Button fx:id="invoisbtn" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#InvoiceOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
+      <Button fx:id="invoisbtn" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#InvoiceOnAction" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #FFB8E0;" text="INVOICE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField fx:id="txtsearch" layoutX="296.0" layoutY="76.0" prefHeight="31.0" prefWidth="262.0" />
-      <Button fx:id="btnsearch" layoutX="572.0" layoutY="76.0" mnemonicParsing="false" onAction="#PaymentSearchOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SEARCH">
+      <TextField fx:id="txtsearch" layoutX="250.0" layoutY="77.0" prefHeight="31.0" prefWidth="234.0" />
+      <Button fx:id="btnsearch" layoutX="500.0" layoutY="77.0" mnemonicParsing="false" onAction="#PaymentSearchOnAction" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #FFB8E0;" text="SEARCH">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="616.0" layoutY="76.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: #FFB8E0;" text="RESET">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

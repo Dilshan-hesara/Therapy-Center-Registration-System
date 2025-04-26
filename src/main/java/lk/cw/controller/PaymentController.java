@@ -44,7 +44,8 @@ public class PaymentController implements Initializable {
     @FXML
     private TableView<PaymentTM> PaymentTable;
 
-
+    @FXML
+    private Button invoisbtn;
     @FXML
     private TableColumn<PaymentTM,Double> colamount;
 
@@ -76,6 +77,7 @@ public class PaymentController implements Initializable {
         coldate.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
         colstatus.setCellValueFactory(new PropertyValueFactory<>("Status"));
 
+        invoisbtn.setDisable(true);
         System.out.println("eyyhtjy");
         try {
           //  LoadNextID();
@@ -164,8 +166,7 @@ public class PaymentController implements Initializable {
     }
 
     PatientRegDAO patientRegBO = new PatientRegDAOImpl();
-    @FXML
-    private Button invoisbtn;
+
     String av ;
     @FXML
     void InvoiceOnAction(ActionEvent event) throws IOException {
@@ -225,24 +226,40 @@ public class PaymentController implements Initializable {
 String payIDRe ;
     @FXML
     void TableOnClicked(MouseEvent event) throws IOException {
+
+        invoisbtn.setDisable(false);
+
+
         PaymentTM paymentTM = (PaymentTM) PaymentTable.getSelectionModel().getSelectedItem();
         if (paymentTM != null) {
             payIDRe=(paymentTM.getPaymentId());
            String paid = (paymentTM.getPatientId());
 
 
-                    double balance = patientRegBO.getBalanceByPatientId(paid);
-          av = (String.format("%.2f", balance));
+                //    double balance = patientRegBO.getBalanceByPatientId(paid);
+          //av = (String.format("%.2f", balance));
 //            txtamount.setText(String.valueOf(paymentTM.getAmount()));
 //            lbldate.setText(String.valueOf(paymentTM.getPaymentDate()));
 
 
 //
 //            btndelete.setDisable(false);
-//            btnsave.setDisable(true);
+            btnAddpay.setDisable(true);
+            btnsearch.setDisable(true);
+            txtsearch.setDisable(true);
 //            btnupdate.setDisable(false);
         }
     }
+
+
+    @FXML
+    void ResetOnAction(ActionEvent event) {
+        btnAddpay.setDisable(false);
+        btnsearch.setDisable(false);
+        txtsearch.setDisable(false);
+        invoisbtn.setDisable(true);
+    }
+
 
     @FXML
     private Button btnAddpay;
