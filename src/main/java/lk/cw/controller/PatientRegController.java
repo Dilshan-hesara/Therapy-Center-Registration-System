@@ -365,18 +365,18 @@ public class PatientRegController implements Initializable {
     void TableOnClicked(MouseEvent event) {
         PatientRegistrationTM patientRegistrationTM = RegistrationTable.getSelectionModel().getSelectedItem();
         if (patientRegistrationTM != null) {
-            lblid.setText(patientRegistrationTM.getRegistrationId());
-            combopatientid.setValue(patientRegistrationTM.getPatientId());
-            comboprogramId.setValue(patientRegistrationTM.getProgramId());
-            lbldate.setText(String.valueOf(patientRegistrationTM.getRegistrationDate()));
-            //lblcount.setText(String.valueOf(patientRegistrationTM.getSessionCount()));
-            txtfee.setText(String.valueOf(patientRegistrationTM.getRegisterFee()));
-
-
-
-            btndelete.setDisable(false);
-            btnsave.setDisable(true);
-            btnupdate.setDisable(false);
+//            lblid.setText(patientRegistrationTM.getRegistrationId());
+//            combopatientid.setValue(patientRegistrationTM.getPatientId());
+//            comboprogramId.setValue(patientRegistrationTM.getProgramId());
+//            lbldate.setText(String.valueOf(patientRegistrationTM.getRegistrationDate()));
+//            //lblcount.setText(String.valueOf(patientRegistrationTM.getSessionCount()));
+//            txtfee.setText(String.valueOf(patientRegistrationTM.getRegisterFee()));
+//
+//
+//
+//            btndelete.setDisable(false);
+//            btnsave.setDisable(true);
+//            btnupdate.setDisable(false);
         }
     }
 

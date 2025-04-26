@@ -117,35 +117,87 @@ public class AddPaymentConteoller implements Initializable {
 
     AddPayBO addPayBO = new AddPayBOImpl();
    // AddPayDAO addPayDAO = new AddPayDAOImpl();
+//
+//    @FXML
+//    void SaveOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
+//        String paymentId = lblid.getText();
+//        String patientId = lblstatus.getText();// Ensure this returns a valid PatientID
+//        String paymentDate = lbldate.getText();
+//        String status = combopatientid.getValue();
+//        double amount = Double.parseDouble(txtamount.getText());
+//
+//        System.out.println("Payment ID: " + paymentId);
+//        System.out.println("Patient ID: " + patientId);
+//        System.out.println("Payment Date: " + paymentDate);
+//        System.out.println("Status: " + status);
+//        System.out.println("Amount: " + amount);
+//
+//        if (patientId == null || patientId.isEmpty()) {
+//            new Alert(Alert.AlertType.ERROR, "Please select a valid patient.").show();
+//            return;
+//        }
+//
+//        PaymentDTO paymentDTO = new PaymentDTO(paymentId, patientId, amount, paymentDate, status);
+//        System.out.println("PaymentDTO Created:");
+//        System.out.println("Payment ID: " + paymentDTO.getPaymentId());
+//        System.out.println("Patient ID: " + paymentDTO.getPatientId());
+//        System.out.println("Amount: " + paymentDTO.getAmount());
+//        System.out.println("Payment Date: " + paymentDTO.getPaymentDate());
+//        System.out.println("Status: " + paymentDTO.getStatus());
+//
+//        boolean isSaved = addPayBO.save(paymentDTO);
+//        if (isSaved) {
+//            new Alert(Alert.AlertType.INFORMATION, "Payment Saved SUCCESSFULLY 😎").show();
+//        } else {
+//            new Alert(Alert.AlertType.ERROR, "PLEASE TRY AGAIN 😥").show();
+//        }
+//    }
+
 
     @FXML
     void SaveOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         String paymentId = lblid.getText();
-      //  String patientId = combopatientid.getValue(); // Ensure this returns a valid PatientID
-        String patientId = lblstatus.getText();// Ensure this returns a valid PatientID
+        String patientId = lblstatus.getText(); 
         String paymentDate = lbldate.getText();
-     //   String status = lblstatus.getText();
         String status = combopatientid.getValue();
-        double amount = Double.parseDouble(txtamount.getText());
+        String amountText = txtamount.getText();
 
-        System.out.println("Payment ID: " + paymentId);
-        System.out.println("Patient ID: " + patientId);
-        System.out.println("Payment Date: " + paymentDate);
-        System.out.println("Status: " + status);
-        System.out.println("Amount: " + amount);
 
-        if (patientId == null || patientId.isEmpty()) {
-            new Alert(Alert.AlertType.ERROR, "Please select a valid patient.").show();
+        if (paymentId == null || paymentId.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Payment ID is required!").show();
             return;
         }
 
+        if (patientId == null || patientId.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select a valid patient!").show();
+            return;
+        }
+
+        if (paymentDate == null || paymentDate.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Payment Date is required!").show();
+            return;
+        }
+
+        if (status == null || status.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Payment Status is required!").show();
+            return;
+        }
+
+        if (amountText == null || amountText.trim().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Amount is required!").show();
+            return;
+        }
+
+        if (!amountText.matches("\\d+(\\.\\d{1,2})?")) {
+            new Alert(Alert.AlertType.ERROR, "Amount must be a valid number (example: 100 or 100.50)!").show();
+            return;
+        }
+
+        double amount = Double.parseDouble(amountText);
+
+
         PaymentDTO paymentDTO = new PaymentDTO(paymentId, patientId, amount, paymentDate, status);
-        System.out.println("PaymentDTO Created:");
-        System.out.println("Payment ID: " + paymentDTO.getPaymentId());
-        System.out.println("Patient ID: " + paymentDTO.getPatientId());
-        System.out.println("Amount: " + paymentDTO.getAmount());
-        System.out.println("Payment Date: " + paymentDTO.getPaymentDate());
-        System.out.println("Status: " + paymentDTO.getStatus());
+
 
         boolean isSaved = addPayBO.save(paymentDTO);
         if (isSaved) {
