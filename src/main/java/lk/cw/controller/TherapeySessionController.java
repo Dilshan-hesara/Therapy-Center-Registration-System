@@ -32,17 +32,18 @@ import lk.cw.dto.TherapySessionDTO;
 import lk.cw.entity.Payment;
 import lk.cw.entity.Therapy_Session;
 import lk.cw.tm.TherapySessionTM;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TherapeySessionController implements Initializable {
 
@@ -130,7 +131,37 @@ public class TherapeySessionController implements Initializable {
 
     @FXML
     void InvoiecOnAction(ActionEvent event) {
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(
+                    getClass()
+                            .getResourceAsStream("/report/PaymentInvoice.jrxml"
+                            ));
 
+            Session session = FactoryConfiguration.getInstance().getSession();
+            session.beginTransaction();
+
+            Connection connection = session.doReturningWork(conn -> conn);
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("P_paymentId", "P005");
+            params.put("P_AvBlanec", "229");
+
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    jasperReport,
+                    params,
+                    connection
+            );
+
+            JasperViewer.viewReport(jasperPrint, false);
+            session.getTransaction().commit();
+            session.close();
+        } catch (JRException e) {
+            new Alert(Alert.AlertType.ERROR, "Fail to generate report...!").show();
+//           e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     private Button btnsearch;

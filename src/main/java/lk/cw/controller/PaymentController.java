@@ -164,7 +164,8 @@ public class PaymentController implements Initializable {
     }
 
     PatientRegDAO patientRegBO = new PatientRegDAOImpl();
-
+    @FXML
+    private Button invoisbtn;
     String av ;
     @FXML
     void InvoiceOnAction(ActionEvent event) throws IOException {
@@ -172,7 +173,7 @@ public class PaymentController implements Initializable {
 
      //   String av = "300";
 
-        PaymentTM paymentTM = new PaymentTM();
+      ///  PaymentTM paymentTM = new PaymentTM();
 
 
 
@@ -182,11 +183,11 @@ public class PaymentController implements Initializable {
 
         System.out.println(av);
 
-       paymentTM = PaymentTable.getSelectionModel().getSelectedItem();
+   //    paymentTM = PaymentTable.getSelectionModel().getSelectedItem();
 
-        if(paymentTM == null){
-            return;
-        }
+//        if(paymentTM == null){
+//            return;
+//        }
         try {
             JasperReport jasperReport = JasperCompileManager.compileReport(
                     getClass()
@@ -199,8 +200,8 @@ public class PaymentController implements Initializable {
             Connection connection = session.doReturningWork(conn -> conn);
 
             Map<String, Object> params = new HashMap<>();
-            params.put("P_paymentId", paymentTM.getPaymentId() );
-            params.put("P_AvBlanec", av); // Correct
+            params.put("P_paymentId", "P005");
+            params.put("P_AvBlanec", av);
 
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(
@@ -221,12 +222,12 @@ public class PaymentController implements Initializable {
     }
 
 
-
+String payIDRe ;
     @FXML
     void TableOnClicked(MouseEvent event) throws IOException {
         PaymentTM paymentTM = (PaymentTM) PaymentTable.getSelectionModel().getSelectedItem();
         if (paymentTM != null) {
-//            lblid.setText(paymentTM.getPaymentId());
+            payIDRe=(paymentTM.getPaymentId());
            String paid = (paymentTM.getPatientId());
 
 
