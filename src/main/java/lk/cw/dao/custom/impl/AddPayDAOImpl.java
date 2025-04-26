@@ -20,7 +20,7 @@ import java.util.List;
 public class AddPayDAOImpl implements AddPayDAO {
 
     @Override
-    public String getNextId() throws SQLException, IOException, java.io.IOException {
+    public String getNextId() throws SQLException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         String hql = "SELECT l.paymentId FROM Payment l ORDER BY l.paymentId DESC";
@@ -32,14 +32,16 @@ public class AddPayDAOImpl implements AddPayDAO {
         session.close();
 
         if (lastId != null) {
+            // PAY001 -> remove first 3 characters ("PAY")
             String substring = lastId.substring(3);
             int i = Integer.parseInt(substring);
             int newIdIndex = i + 1;
-            return String.format("P%03d", newIdIndex);
+            return String.format("PAY%03d", newIdIndex);
         }
 
-        return "P001";
+        return "PAY001";
     }
+
 
     @Override
     public List<Payment> getAll() throws SQLException, IOException {

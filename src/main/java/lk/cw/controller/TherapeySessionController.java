@@ -234,6 +234,10 @@ public class TherapeySessionController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Search failed due to a database error.").show();
         }
     }
+
+    @FXML
+    private ComboBox<String> selectTime;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         combostatus.getItems().addAll(Status);
@@ -243,6 +247,9 @@ public class TherapeySessionController implements Initializable {
         colstatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         coltherapist.setCellValueFactory(new PropertyValueFactory<>("therapistId"));
         colpatientid.setCellValueFactory(new PropertyValueFactory<>("patientId"));
+
+        selectTime.getItems().addAll("08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM",
+                "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM");
 
 
         try {
@@ -379,7 +386,7 @@ public class TherapeySessionController implements Initializable {
         // TAERAPEY Sesion table
         String sessionId = lblid.getText();
         String sessionDate = lbldate.getText();
-        String sessionTime = txttime.getText();
+        String sessionTime = selectTime.getValue();
         String status = combostatus.getValue();
         String therapistId = combotherapistId.getValue();
         String patientId = combopatientid.getValue();
@@ -526,7 +533,6 @@ public class TherapeySessionController implements Initializable {
 
         btnsave.setDisable(false);
 
-        txttime.setText("");
         lbldate.setText("");
         lblstatus.setText("");
         lbltherapistname.setText("");

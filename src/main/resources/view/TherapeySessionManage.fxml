@@ -74,7 +74,6 @@
             <Image url="@../../../../../../Desktop/ORM-CW6/src/main/resources/view/images/save.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txttime" layoutX="209.0" layoutY="155.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
       <Label layoutX="54.0" layoutY="198.0" prefHeight="31.0" prefWidth="111.0" text="Status">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -86,14 +85,14 @@
          </font>
       </Label>
       <DatePicker fx:id="datepicker" layoutX="209.0" layoutY="105.0" onAction="#DatePickerOnAction" style="-fx-opacity: 0.7;" />
-      <ComboBox fx:id="combostatus" layoutX="209.0" layoutY="201.0" onAction="#ComboStatusOnAction" prefWidth="150.0" style="-fx-opacity: 0.7;" />
-      <ComboBox fx:id="combotherapistId" layoutX="209.0" layoutY="284.0" onAction="#ComboTherapistIdOnAction" prefWidth="150.0" style="-fx-opacity: 0.7;" />
+      <ComboBox fx:id="combostatus" layoutX="209.0" layoutY="201.0" onAction="#ComboStatusOnAction" prefHeight="26.0" prefWidth="175.0" style="-fx-opacity: 0.7;" />
+      <ComboBox fx:id="combotherapistId" layoutX="209.0" layoutY="284.0" onAction="#ComboTherapistIdOnAction" prefHeight="26.0" prefWidth="175.0" style="-fx-opacity: 0.7;" />
       <Label fx:id="lbldate" layoutX="406.0" layoutY="102.0" prefHeight="31.0" prefWidth="162.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="combopatientid" layoutX="209.0" layoutY="243.0" onAction="#ComboPatientIdOnAction" prefWidth="150.0" style="-fx-opacity: 0.7;" />
+      <ComboBox fx:id="combopatientid" layoutX="209.0" layoutY="243.0" onAction="#ComboPatientIdOnAction" prefHeight="26.0" prefWidth="175.0" style="-fx-opacity: 0.7;" />
       <Label layoutX="52.0" layoutY="240.0" prefHeight="31.0" prefWidth="111.0" text="PatientID">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -145,5 +144,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <ComboBox fx:id="selectTime" layoutX="209.0" layoutY="154.0" prefHeight="26.0" prefWidth="175.0" />
     </children>
 </AnchorPane>
