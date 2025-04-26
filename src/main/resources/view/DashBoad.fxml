@@ -13,7 +13,7 @@
             <children>
                 <Pane prefHeight="588.0" prefWidth="208.0" style="-fx-background-color: #7A73D1;">
                     <children>
-                        <Button layoutX="28.0" layoutY="166.0" mnemonicParsing="false" onAction="#DashboardOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Dashboard" textFill="WHITE">
+                        <Button layoutX="28.0" layoutY="139.0" mnemonicParsing="false" onAction="#DashboardOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Dashboard" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
@@ -28,32 +28,12 @@
                                 <Font name="Microsoft YaHei UI Bold" size="15.0" />
                             </font>
                         </Label>
-                        <Button fx:id="TherapyBtn" layoutX="28.0" layoutY="265.0" mnemonicParsing="false" onAction="#TherapytManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Therapy Manage" textFill="WHITE">
+                        <Button layoutX="28.0" layoutY="314.0" mnemonicParsing="false" onAction="#PayementOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Payments" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </Button>
-                        <Button fx:id="TherapistBtn" layoutX="28.0" layoutY="217.0" mnemonicParsing="false" onAction="#TherapistManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Therapist Manage" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </Button>
-                        <Button layoutX="28.0" layoutY="338.0" mnemonicParsing="false" onAction="#PatientManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Patient Manage" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </Button>
-                        <Button layoutX="28.0" layoutY="388.0" mnemonicParsing="false" onAction="#TherapySessionOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Theraphy Session" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </Button>
-                        <Button layoutX="28.0" layoutY="440.0" mnemonicParsing="false" onAction="#PayementOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Payments" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="userbtn" layoutX="28.0" layoutY="495.0" mnemonicParsing="false" onAction="#UserOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="User" textFill="WHITE">
+                        <Button fx:id="userbtn" layoutX="28.0" layoutY="480.0" mnemonicParsing="false" onAction="#UserOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="User" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
@@ -63,6 +43,26 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                        <Button fx:id="TherapyBtn" layoutX="28.0" layoutY="368.0" mnemonicParsing="false" onAction="#TherapytManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Therapy Manage" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="28.0" layoutY="200.0" mnemonicParsing="false" onAction="#PatientManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Patient Manage" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="28.0" layoutY="257.0" mnemonicParsing="false" onAction="#TherapySessionOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Theraphy Session" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="TherapistBtn" layoutX="28.0" layoutY="428.0" mnemonicParsing="false" onAction="#TherapistManageOnAction" prefHeight="35.0" prefWidth="135.0" style="-fx-background-color: #211C84;" text="Therapist Manage" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
                     </children>
                 </Pane>
             </children>
