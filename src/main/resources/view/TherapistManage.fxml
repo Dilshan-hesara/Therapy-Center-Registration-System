@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="584.0" prefWidth="740.0" style="-fx-background-color: #ADB2D4;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.cw.controller.TherapistController">
    <children>
-      <TableView fx:id="TherapistTable" layoutX="24.0" layoutY="373.0" onMouseClicked="#TableOnClicked" prefHeight="192.0" prefWidth="694.0" style="-fx-opacity: 0.9;">
+      <TableView fx:id="TherapistTable" layoutX="24.0" layoutY="310.0" onMouseClicked="#TableOnClicked" prefHeight="255.0" prefWidth="694.0" style="-fx-opacity: 0.9;">
          <columns>
             <TableColumn fx:id="colid" prefWidth="75.0" text="TherapistID" />
             <TableColumn fx:id="colname" prefWidth="223.1999740600586" text="Name" />
@@ -27,55 +27,55 @@
          </image>
       </ImageView>
       <Label layoutX="265.0" layoutY="14.0" prefHeight="18.0" prefWidth="210.0" />
-      <Label layoutX="48.0" layoutY="58.0" prefHeight="31.0" prefWidth="101.0" text="TherapistID">
+      <Label layoutX="53.0" layoutY="82.0" prefHeight="31.0" prefWidth="101.0" text="TherapistID">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="48.0" layoutY="86.0" prefHeight="31.0" prefWidth="101.0" text="Name">
+      <Label layoutX="53.0" layoutY="118.0" prefHeight="31.0" prefWidth="101.0" text="Name">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="43.0" layoutY="115.0" prefHeight="31.0" prefWidth="111.0" text="Specialization">
+      <Label layoutX="48.0" layoutY="155.0" prefHeight="31.0" prefWidth="111.0" text="Specialization">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtname" layoutX="209.0" layoutY="89.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
-      <Button fx:id="btnsave" layoutX="69.0" layoutY="324.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SAVE">
+      <TextField fx:id="txtname" layoutX="211.0" layoutY="121.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
+      <Button fx:id="btnsave" layoutX="47.0" layoutY="245.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="SAVE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnupdate" layoutX="255.0" layoutY="324.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
+      <Button fx:id="btnupdate" layoutX="233.0" layoutY="245.0" mnemonicParsing="false" onAction="#UpdateOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="UPDATE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btndelete" layoutX="438.0" layoutY="321.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
+      <Button fx:id="btndelete" layoutX="416.0" layoutY="242.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="DELETE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="594.0" layoutY="324.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
+      <Button layoutX="572.0" layoutY="245.0" mnemonicParsing="false" onAction="#ResetOnAction" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #FFB8E0;" text="RESET">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="lblid" layoutX="209.0" layoutY="58.0" prefHeight="31.0" prefWidth="320.0" text="1">
+      <Label fx:id="lblid" layoutX="214.0" layoutY="82.0" prefHeight="31.0" prefWidth="320.0" text="1">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="75.0" layoutY="328.0">
+      <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="59.0" layoutY="247.0">
          <image>
             <Image url="@../../../../../../Desktop/ORM-CW2/src/main/resources/view/images/save.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtspecail" layoutX="209.0" layoutY="118.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0;" />
-      <TextField fx:id="txtavailable" layoutX="209.0" layoutY="153.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
-      <Label layoutX="43.0" layoutY="150.0" prefHeight="31.0" prefWidth="111.0" text="Availability">
+      <TextField fx:id="txtspecail" layoutX="209.0" layoutY="134.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0;" />
+      <TextField fx:id="txtavailable" layoutX="211.0" layoutY="193.0" prefHeight="25.0" prefWidth="320.0" style="-fx-opacity: 0.7;" />
+      <Label layoutX="48.0" layoutY="190.0" prefHeight="31.0" prefWidth="111.0" text="Availability">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -85,6 +85,6 @@
             <Font name="System Bold Italic" size="19.0" />
          </font>
       </Label>
-      <ComboBox fx:id="txtspec" layoutX="209.0" layoutY="118.0" onAction="#speciaOnAction" prefWidth="150.0" style="-fx-opacity: 0.7;" />
+      <ComboBox fx:id="txtspec" layoutX="214.0" layoutY="158.0" onAction="#speciaOnAction" prefWidth="150.0" style="-fx-opacity: 0.7;" />
    </children>
 </AnchorPane>
