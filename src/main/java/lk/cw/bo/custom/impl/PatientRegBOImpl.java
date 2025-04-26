@@ -212,10 +212,10 @@ public class PatientRegBOImpl implements PatientRegBO {
 
             boolean isSaved2 = addPayDAO.save(patientRegistrationDTO.getPaymentDTOS());
 
-            if (!isSaved2) {
-                transaction.rollback();
-                return false;
-            }
+//            if (!isSaved2) {
+//                transaction.rollback();
+//                return false;
+//            }
 
             transaction.commit();
             return true;

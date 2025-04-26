@@ -36,6 +36,16 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
+    public Patient getPatientByName(String name) throws SQLException, ClassNotFoundException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Patient patient = session.createQuery("FROM Patient WHERE name = :name",Patient.class).setParameter("name", name).uniqueResult();
+        transaction.commit();
+        session.close();
+        return patient;
+    }
+    @Override
     public List<Patient> getAll() throws SQLException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();

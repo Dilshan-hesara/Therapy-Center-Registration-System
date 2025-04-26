@@ -21,5 +21,6 @@ public interface PatientDAO extends CrudDAO<Patient> {
 
     public List<Object[]> getPatientsBySessionId(String sessionId) throws SQLException, ClassNotFoundException, IOException;
 
+    public Patient getPatientByName(String name) throws SQLException, ClassNotFoundException, IOException ;
     public Patient find(String id) throws SQLException, ClassNotFoundException;
 }
