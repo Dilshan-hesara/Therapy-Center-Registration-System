@@ -26,55 +26,6 @@ public class TherapySessionBOImpl implements TherapySessionBO {
    AddPayDAO addPayDAO =(AddPayDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ADDPAYMENT);
 
 
-   //    @Override
-//    public boolean save(TherapySessionDTO therapySessionDTO) throws IOException {
-//
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//
-//        try {
-//            // Therapist සහ Patient entity objects ලබා ගන්නවා
-//            Therapist therapist = session.get(Therapist.class, therapySessionDTO.getTherapistId());
-//            Patient patient = session.get(Patient.class, therapySessionDTO.getPatientId());
-//            if (therapist == null || patient == null) {
-//                return false;
-//            }
-//
-//            // Therapy_Session entity එක create කරනවා
-//            Therapy_Session therapySession = new Therapy_Session(
-//                    therapySessionDTO.getSessionId(),
-//                    Date.valueOf(therapySessionDTO.getSessionDate().toLocalDate()),
-//                    therapySessionDTO.getSessionTime(),
-//                    therapySessionDTO.getStatus(),
-//                    therapist,
-//                    patient
-//            );
-//
-//            boolean isSaved = therapySessionDAO.save(therapySession);
-//            if (!isSaved) {
-//                transaction.rollback();
-//                return false;
-//            }
-//            boolean isSaved2 = addPayDAO.save(therapySession.paymentDTOS());
-//            if (!isSaved2) {
-//                transaction.rollback();
-//                return false;
-//            }
-//
-//            transaction.commit();
-//            return true;
-//        } catch (Exception e) {
-//            transaction.rollback();
-//            e.printStackTrace();
-//            return false;
-//        } finally {
-//            session.close();
-//        }
-//
-//        return isSaved;
-//    }
-//
 PatientRegDAO patientRegistrationDAO = (PatientRegDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PATIENT_REG);
 
     @Override
@@ -222,3 +173,53 @@ PatientRegDAO patientRegistrationDAO = (PatientRegDAO) DAOFactory.getDaoFactory(
         }
     }
 }
+
+//    @Override
+//    public boolean save(TherapySessionDTO therapySessionDTO) throws IOException {
+//
+//        Session session = FactoryConfiguration.getInstance().getSession();
+//        Transaction transaction = session.beginTransaction();
+//
+//
+//        try {
+//            // Therapist සහ Patient entity objects ලබා ගන්නවා
+//            Therapist therapist = session.get(Therapist.class, therapySessionDTO.getTherapistId());
+//            Patient patient = session.get(Patient.class, therapySessionDTO.getPatientId());
+//            if (therapist == null || patient == null) {
+//                return false;
+//            }
+//
+//            // Therapy_Session entity එක create කරනවා
+//            Therapy_Session therapySession = new Therapy_Session(
+//                    therapySessionDTO.getSessionId(),
+//                    Date.valueOf(therapySessionDTO.getSessionDate().toLocalDate()),
+//                    therapySessionDTO.getSessionTime(),
+//                    therapySessionDTO.getStatus(),
+//                    therapist,
+//                    patient
+//            );
+//
+//            boolean isSaved = therapySessionDAO.save(therapySession);
+//            if (!isSaved) {
+//                transaction.rollback();
+//                return false;
+//            }
+//            boolean isSaved2 = addPayDAO.save(therapySession.paymentDTOS());
+//            if (!isSaved2) {
+//                transaction.rollback();
+//                return false;
+//            }
+//
+//            transaction.commit();
+//            return true;
+//        } catch (Exception e) {
+//            transaction.rollback();
+//            e.printStackTrace();
+//            return false;
+//        } finally {
+//            session.close();
+//        }
+//
+//        return isSaved;
+//    }
+//
