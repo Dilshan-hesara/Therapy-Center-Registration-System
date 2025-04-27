@@ -418,7 +418,7 @@ public class TherapeySessionController implements Initializable {
 //        String payDate = "22";
 //        String payPatient = combopatientid.getValue();
         String payPatient = combopatientid.getValue();
-        String States = states;
+        String States = "PAY-for Session";
 
         if (patientId == null || patientId.trim().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Patient ID is required!").show();
