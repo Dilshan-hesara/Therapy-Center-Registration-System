@@ -17,5 +17,5 @@ public interface TherapistBO extends SuperBO {
     public boolean update(TherapistDTO therapistDTO) throws IOException, SQLException;
     public boolean delete(String ID) throws SQLException, IOException;
 
-
+    public int getTotalTherapists() throws SQLException, ClassNotFoundException, IOException ;
 }

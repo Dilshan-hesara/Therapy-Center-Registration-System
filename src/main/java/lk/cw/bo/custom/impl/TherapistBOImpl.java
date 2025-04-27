@@ -55,6 +55,11 @@ public class TherapistBOImpl implements TherapistBO {
 //        return inventroyDtos;
 
     @Override
+    public int getTotalTherapists() throws SQLException, ClassNotFoundException, IOException {
+        return therapistDAO.getTotalTherapists();
+    }
+
+    @Override
     public List<TherapistDTO> getAll() throws SQLException, IOException {
         List<Therapist> therapists = therapistDAO.getAll();
         List<TherapistDTO> therapistDTOS = new ArrayList<>();
