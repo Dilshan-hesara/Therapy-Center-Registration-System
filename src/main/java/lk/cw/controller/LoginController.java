@@ -144,7 +144,6 @@ public class LoginController implements Initializable {
 
         uN = userName;
 
-        // New: First check whether username exists
         boolean isExist = userDAO.existsByUsername(userName);
 
         if (!isExist) {
@@ -160,7 +159,6 @@ public class LoginController implements Initializable {
             return;
         }
 
-        // If username and password correct
         System.out.println("Login successful for user: " + userName);
         String role = userBO.getRoleByUserName(uN);
         loggedInUser = role;
