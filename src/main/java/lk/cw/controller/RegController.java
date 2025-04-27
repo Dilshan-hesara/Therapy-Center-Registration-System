@@ -161,7 +161,7 @@ void regisOnAction(ActionEvent event) throws IOException {
 
     private void loadcmb() {
 
-        cmbRole.setItems(FXCollections.observableArrayList("Admin", "Receptionist").sorted());
+        cmbRole.setItems(FXCollections.observableArrayList( "Receptionist").sorted());
 
     }
 
