@@ -26,8 +26,10 @@ public class DashboardController implements Initializable {
     private AnchorPane ancer;
 
     @FXML
-    void DashboardOnAction(ActionEvent event) {
-
+    void DashboardOnAction(ActionEvent event) throws IOException {
+        AnchorPane load = FXMLLoader.load(getClass().getResource("/view/MainDashboard.fxml"));
+        ancer.getChildren().clear();
+        ancer.getChildren().add(load);
     }
 
     @FXML

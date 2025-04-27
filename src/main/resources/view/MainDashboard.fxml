@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="589.0" prefWidth="745.0" style="-fx-background-color: #ADB2D4;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.cw.controller.MainDashController">
+    <children>
+        <ImageView fitHeight="453.0" fitWidth="600.0" layoutX="73.0" layoutY="92.0" style="-fx-opacity: 0.1;">
+            <image>
+                <Image url="@../style/lo.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="161.0" layoutY="38.0" prefHeight="27.0" prefWidth="467.0" text="Wellcome Serenity Mental Health Therapy Center">
+            <font>
+                <Font name="System Bold Italic" size="18.0" />
+            </font></Label>
+        <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="96.0" layoutY="331.0">
+            <image>
+                <Image url="@../../../../../../Desktop/ORM-CW6/src/main/resources/view/images/save.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="lblbirthday" layoutX="405.0" layoutY="146.0" prefHeight="31.0" prefWidth="146.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblregister" layoutX="405.0" layoutY="271.0" prefHeight="31.0" prefWidth="146.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
