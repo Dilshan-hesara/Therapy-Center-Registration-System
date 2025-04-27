@@ -252,6 +252,9 @@ public class TherapeySessionController implements Initializable {
                 "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM");
 
 
+        txtAvBlance.setText(String.valueOf(0));
+
+        avm =0;
         btnInvoice.setDisable(true);
         try {
             LoadNextID();
@@ -367,7 +370,10 @@ public class TherapeySessionController implements Initializable {
         double avPy = Double.parseDouble(avPyStr);
         double amount = Double.parseDouble(amountStr);
 
+
         AVBL =avPyStr;
+
+
         double redu = avPy - amount;
 
         if (redu == 0 ) {
@@ -378,6 +384,16 @@ public class TherapeySessionController implements Initializable {
             System.out.println("B");
         }
     }
+
+    int avm;
+    private void avblance(){
+
+        String avPyStr = txtAvBlance.getText().trim();
+
+         avm = Integer.parseInt(avPyStr);
+        System.out.println(avm);
+    }
+
 
 
     @FXML
@@ -408,25 +424,41 @@ public class TherapeySessionController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Patient ID is required!").show();
             return;
         }
+        AVBL();
 
-
-
-
+        int av = avm;
+        if (av == 0) {
+            new Alert(Alert.AlertType.ERROR, "First, Register a Patient!").show();
+            return;
+        }
+        if ( amount.isEmpty()) {
+            System.out.println("Validation failed: Amount is empty or null");
+            new Alert(Alert.AlertType.ERROR, "Payment amount is required!").showAndWait();
+            return;
+        }
+        checkStates();
         System.out.println("Amount: '" + amount + "'");
 
         if (amount == null || amount.trim().isEmpty()) {
             System.out.println("Validation failed: Amount is empty or null");
-            new Alert(Alert.AlertType.ERROR, "Payment amount is required!").showAndWait(); // Use showAndWait()
+            new Alert(Alert.AlertType.ERROR, "Payment amount is required!").showAndWait();
             return;
         }
+
+
+
+
 
         String Avalablablance = AVBL;
 
 
-        checkStates();
+//        checkStates();
 
         double availableBalance = Double.parseDouble(Avalablablance);
         double enteredAmount = Double.parseDouble(amount);
+
+
+
 
         if (enteredAmount > availableBalance) {
             new Alert(Alert.AlertType.ERROR, "Entered amount cannot be greater than available balance!").show();
@@ -578,7 +610,14 @@ public class TherapeySessionController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-//
+
+    private void AVBL() {
+        avm = (int) Double.parseDouble(txtAvBlance.getText());
+        System.out.println(avm);
+    }
+
+
+    //
 //    @FXML
 //    void SaveOnAction(ActionEvent event) {
 //        try {
