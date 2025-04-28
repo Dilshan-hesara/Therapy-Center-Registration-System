@@ -18,8 +18,6 @@ public class App extends Application {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/Login.fxml"));
-//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/DashBoad.fxml"));
-//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/PationReg.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Therapy Center");
